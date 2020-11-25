@@ -97,7 +97,7 @@ app.post("/resetpassword", (req, res) => {
     if (!req.body.email) {
         res.sendStatus(400);
     } else {
-        db.addCodes(req.body.email, code, req.body.created_at)
+        db.addCodes(req.body.email, code)
             .then((value) => {
                 req.session.userId = value.rows[0].id;
                 sendMail(

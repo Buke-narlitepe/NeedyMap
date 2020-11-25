@@ -22,17 +22,20 @@ module.exports.getUserByEmail = function getUserByEmail(email) {
     return db.query("SELECT * FROM users WHERE email = $1", [email]);
 };
 
-module.exports.addCodes = function addCodes(users_email, code, created_at) {
+module.exports.addCodes = function addCodes(users_email, code) {
     return db.query(
-        `INSERT INTO secretcodes (users_email, code, created_at)
-    VALUES ($1, $2, $3)
+        `INSERT INTO secretcodes (users_email, code)
+    VALUES ($1, $2)
     RETURNING *`,
-        [users_email, code, created_at]
+        [users_email, code]
     );
 };
 
 module.exports.getCode = function getCode(code) {
-    return db.query("SELECT * FROM secretcodes WHERE code = $1", [code]);
+    return db.query(
+        "SELECT * FROM secretcodes WHERE code = $1 AND CURRENT_TIMESTAMP - created_at < INTERVAL '10 minutes'",
+        [code]
+    );
 };
 
 module.exports.updatePassword = function updatePassword(email, password) {
