@@ -64,6 +64,9 @@ export default class Login extends React.Component {
                 <Link to="/">
                     <p>Not registered yet?</p>
                 </Link>
+                <Link to="/resetpassword">
+                    <p>Bad Memory?</p>
+                </Link>
             </React.Fragment>
         );
     }
