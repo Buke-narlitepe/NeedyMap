@@ -1,0 +1,49 @@
+body {
+    background-color: white;
+    font-family: "Finger Paint", cursive;
+    color: rgb(85, 82, 82);
+}
+
+input {
+    border: 0;
+    border-bottom: 1px outset rgb(219, 18, 35);
+    outline: 0;
+    width: 40%;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    background: transparent;
+    color: rgb(85, 82, 82);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Finger Paint", cursive;
+}
+
+button,
+h2,
+h1,
+img,
+p {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+h2,
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    position: relative;
+    left: 50%;
+}
+
+button {
+    font-family: "Finger Paint", cursive;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
