@@ -73,7 +73,9 @@ export default class ResetPassword extends React.Component {
                             value={this.state.email}
                             placeholder="Email"
                         />
-                        <button type="submit">Submit</button>
+                        <button className="reset" type="submit">
+                            Submit
+                        </button>
                     </form>
                 </React.Fragment>
             );
@@ -81,9 +83,8 @@ export default class ResetPassword extends React.Component {
             return (
                 <React.Fragment>
                     <h1>
-                        Give us your Auth Code that weve sent to your email and
-                        also your new password, but probably you are going to
-                        forget it again.
+                        Give us your code that weve sent to your email and also
+                        your new password.
                     </h1>
                     <form onSubmit={this.handleAnotherSubmit}>
                         <p>Please enter the code you recieved</p>
@@ -102,7 +103,9 @@ export default class ResetPassword extends React.Component {
                             value={this.state.password}
                             placeholder="Password"
                         />
-                        <button type="submit">Submit</button>
+                        <button className="reset" type="submit">
+                            Submit
+                        </button>
                     </form>
                 </React.Fragment>
             );

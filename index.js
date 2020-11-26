@@ -8,6 +8,8 @@ const csurf = require("csurf");
 const db = require("./db.js");
 const crypto = require("crypto-random-string");
 const sendMail = require("./ses");
+const s3 = require("./middlewares/s3.js");
+const uploader = require("./middlewares/uploader.js");
 
 app.use(compression());
 app.use(bodyParser.json());
@@ -145,6 +147,27 @@ app.post("/newpassword", (req, res) => {
     } else {
         res.sendStatus(400);
     }
+});
+
+app.get("/user", function (req, res) {
+    db.getUserById(req.session.userId)
+        .then((data) => {
+            console.log(data.rows);
+            res.json(data.rows[0]);
+        })
+        .catch((err) => {
+            console.log("err in GET /user", err);
+        });
+});
+
+app.post("/upload", uploader.single("file"), s3, (req, res) => {
+    db.uploadImage(req.body.url, req.session.userId)
+        .then(() => {
+            res.json(req.body.url);
+        })
+        .catch((err) => {
+            console.log("err in POST /upload", err);
+        });
 });
 
 app.get("*", function (req, res) {

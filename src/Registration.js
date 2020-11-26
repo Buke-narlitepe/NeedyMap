@@ -7,7 +7,7 @@ export default class Registration extends React.Component {
         super();
 
         this.state = {
-            firstname: "Andi",
+            firstname: "",
             lastname: "",
             email: "",
             password: "",
@@ -46,7 +46,7 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div>
-                <img src="logo2.png" />
+                <img src="logo2.png" className="logo2" />
                 <h2>
                     Join our network to see the next and share your thoughts
                     with your friends!{" "}
@@ -83,7 +83,9 @@ export default class Registration extends React.Component {
                         value={this.state.password}
                         placeholder="Password"
                     />
-                    <button type="submit">Create Account</button>
+                    <button className="create" type="submit">
+                        Create Account
+                    </button>
                 </form>
                 <Link to="/login">
                     <p>You have already have an account?</p>

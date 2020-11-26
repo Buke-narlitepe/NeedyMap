@@ -39,7 +39,7 @@ export default class Login extends React.Component {
         return (
             <React.Fragment>
                 <h2>Login to Netflix and Chat</h2>
-                <img src="logo2.png" />
+                <img src="logo2.png" className="logo2" />
                 {this.state.error && (
                     <p>
                         Ooopss! Your password and e-mail address does not match,
@@ -52,14 +52,18 @@ export default class Login extends React.Component {
                         name="email"
                         onChange={this.handleChange}
                         value={this.state.email}
+                        placeholder="E-mail"
                     />
                     <input
                         type="password"
                         name="password"
                         onChange={this.handleChange}
                         value={this.state.password}
+                        placeholder="Password"
                     />
-                    <button type="submit">Login</button>
+                    <button type="submit" className="login">
+                        Login
+                    </button>
                 </form>
                 <Link to="/">
                     <p>Not registered yet?</p>
