@@ -302,6 +302,17 @@ app.post("/api/end-friendship/:otherId", function (req, res) {
 
 // friendships
 
+// movie api
+/*
+app.get("/api/movies", (req, res) => {
+    console.log(data);
+    res.json(data);
+});
+
+//axios.get(`https://api.themoviedb.org/3/movie/550?api_key=f3a41199ffcda690d90444803cd4f886`)
+*/
+//movie api
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");
