@@ -52,3 +52,57 @@ module.exports.uploadImage = function uploadImage(image, id) {
 module.exports.getUserById = function getUserById(id) {
     return db.query("SELECT * FROM users WHERE id=$1", [id]);
 };
+
+module.exports.uploadBio = function uploadBio(bio, id) {
+    return db.query("UPDATE users SET bio=$1 WHERE id=$2", [bio, id]);
+};
+
+module.exports.findPeople = function findPeople(val) {
+    return db.query("SELECT * FROM users WHERE firstname ILIKE $1", [
+        val + "%",
+    ]);
+};
+
+module.exports.latestUsers = function latestUsers() {
+    return db.query("SELECT * FROM users ORDER BY id DESC LIMIT 3");
+};
+
+module.exports.getFriendshipStatus = function getFriendshipStatus(
+    sender_id,
+    recipient_id
+) {
+    return db.query(
+        "SELECT * FROM friendships WHERE (sender_id = $1 AND recipient_id = $2) OR (recipient_id = $1 AND sender_id = $2)",
+        [sender_id, recipient_id]
+    );
+};
+
+module.exports.sendFriendRequest = function sendFriendRequest(
+    sender_id,
+    recipient_id
+) {
+    return db.query(
+        "INSERT INTO friendships (sender_id, recipient_id) VALUES ($1, $2) RETURNING *",
+        [sender_id, recipient_id]
+    );
+};
+
+module.exports.acceptFriendRequest = function acceptFriendRequest(
+    sender_id,
+    recipient_id
+) {
+    return db.query(
+        "UPDATE friendships SET accepted=true WHERE sender_id = $1 AND recipient_id = $2 RETURNING *",
+        [sender_id, recipient_id]
+    );
+};
+
+module.exports.deleteFriendRequest = function deleteFriendRequest(
+    sender_id,
+    recipient_id
+) {
+    return db.query(
+        "DELETE FROM friendships WHERE (sender_id = $1 AND recipient_id = $2) OR (recipient_id = $1 AND sender_id = $2)",
+        [sender_id, recipient_id]
+    );
+};

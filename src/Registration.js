@@ -22,7 +22,7 @@ export default class Registration extends React.Component {
         e.preventDefault();
 
         axios
-            .post("/register", this.state)
+            .post("/api/register", this.state)
             .then(() => {
                 location.replace("/");
             })
@@ -47,7 +47,7 @@ export default class Registration extends React.Component {
         return (
             <div>
                 <img src="logo2.png" className="logo2" />
-                <h2>
+                <h2 className="welcome">
                     Join our network to see the next and share your thoughts
                     with your friends!{" "}
                 </h2>

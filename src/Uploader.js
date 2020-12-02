@@ -15,9 +15,8 @@ export default class Uploader extends React.Component {
         e.preventDefault();
         const formData = new FormData();
         formData.append("file", this.state.image);
-        console.log(this.state.image);
         axios
-            .post("/upload", formData)
+            .post("/api/upload", formData)
             .then((res) => {
                 console.log(res);
                 this.props.setImage(res.data);
@@ -34,9 +33,11 @@ export default class Uploader extends React.Component {
     }
 
     render() {
+        let modal = this.props.uploaderVisible ? "modal" : "slide";
+        console.log(this.props.uploaderVisible);
         return (
             <div className="component">
-                <div className="modal">
+                <div className={modal}>
                     <p className="x" onClick={this.props.closeComponent}>
                         X
                     </p>
