@@ -126,6 +126,15 @@ div.modal {
     transition: left 1s linear;
 }
 
+div.links {
+    align-self: center;
+    margin-right: 0;
+    padding-right: 0;
+}
+a {
+    padding-right: 20px;
+}
+
 div.slide {
     border: 1px solid transparent;
     border-radius: 10px;
@@ -152,6 +161,8 @@ header img.avatar {
     width: 90px;
     margin: 30px;
     border-radius: 50%;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 div img {
@@ -254,6 +265,13 @@ li {
 
 img.people-pic {
     cursor: pointer;
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+img.poster {
     height: 250px;
     width: 250px;
     border-radius: 50%;

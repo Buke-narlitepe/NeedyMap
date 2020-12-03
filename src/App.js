@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import Logo from "./Logo.js";
 import axios from "./axios.js";
 import ProfilePic from "./ProfilePic.js";
@@ -7,6 +7,7 @@ import Uploader from "./Uploader.js";
 import Profile from "./Profile.js";
 import OtherProfile from "./OtherProfile";
 import FindPeople from "./FindPeople";
+import Movies from "./Movies";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -67,19 +68,24 @@ export default class App extends React.Component {
         console.log(this.state);
         return (
             <React.Fragment>
-                <header>
-                    <Logo />
-                    <ProfilePic
-                        profilePic={this.state.profilePic}
-                        toggleUploader={this.toggleUploader}
-                    />
-                </header>
-                <Uploader
-                    closeComponent={this.closeComponent}
-                    setImage={this.setImage}
-                    uploaderVisible={this.state.uploaderVisible}
-                />
                 <BrowserRouter>
+                    <header>
+                        <Logo />
+                        <div className="links">
+                            <Link to="/users">Find People</Link>
+                            <Link to="/">Your Profile</Link>
+                            <Link to="/movie/popular">Popular Movies</Link>
+                        </div>
+                        <ProfilePic
+                            profilePic={this.state.profilePic}
+                            toggleUploader={this.toggleUploader}
+                        />
+                    </header>
+                    <Uploader
+                        closeComponent={this.closeComponent}
+                        setImage={this.setImage}
+                        uploaderVisible={this.state.uploaderVisible}
+                    />
                     <React.Fragment>
                         <Route
                             exact
@@ -97,6 +103,7 @@ export default class App extends React.Component {
                         />
                         <Route path="/user/:id" component={OtherProfile} />
                         <Route path="/users" component={FindPeople} />
+                        <Route path="/movie/popular" component={Movies} />
                     </React.Fragment>
                 </BrowserRouter>
             </React.Fragment>
