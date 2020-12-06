@@ -8,6 +8,7 @@ import Profile from "./Profile.js";
 import OtherProfile from "./OtherProfile";
 import FindPeople from "./FindPeople";
 import Movies from "./Movies";
+import Friends from "./Friends";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -74,6 +75,7 @@ export default class App extends React.Component {
                         <div className="links">
                             <Link to="/users">Find People</Link>
                             <Link to="/">Your Profile</Link>
+                            <Link to="/friends-wannabes">Friends</Link>
                             <Link to="/movie/popular">Popular Movies</Link>
                         </div>
                         <ProfilePic
@@ -104,6 +106,7 @@ export default class App extends React.Component {
                         <Route path="/user/:id" component={OtherProfile} />
                         <Route path="/users" component={FindPeople} />
                         <Route path="/movie/popular" component={Movies} />
+                        <Route path="/friends-wannabes" component={Friends} />
                     </React.Fragment>
                 </BrowserRouter>
             </React.Fragment>

@@ -63,14 +63,10 @@ export default class BioEditor extends React.Component {
                             name="bio"
                             onChange={this.handleChange}
                         />
-                        <div>
-                            <button
-                                className="save"
-                                onClick={this.handleSubmit}
-                            >
-                                Save
-                            </button>
-                        </div>
+
+                        <button className="save" onClick={this.handleSubmit}>
+                            Save
+                        </button>
                     </div>
                 )}
                 {!this.props.bio && !this.state.editing && (

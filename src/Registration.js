@@ -46,7 +46,10 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div>
-                <img src="logo2.png" className="logo2" />
+                <div>
+                    <img className="logobig" src="/logo-netflix.png" />
+                </div>
+                <p className="typewriter">NETFLIX &amp; CHAT</p>
                 <h2 className="welcome">
                     Join our network to see the next and share your thoughts
                     with your friends!{" "}

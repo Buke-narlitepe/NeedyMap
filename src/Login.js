@@ -39,7 +39,7 @@ export default class Login extends React.Component {
         return (
             <React.Fragment>
                 <h2>Login to Netflix and Chat</h2>
-                <img src="logo2.png" className="logo2" />
+                <img src="logo-netflix.png" className="logo2" />
                 {this.state.error && (
                     <p>
                         Ooopss! Your password and e-mail address does not match,

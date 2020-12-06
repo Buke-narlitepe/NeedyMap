@@ -1,13 +1,13 @@
 body {
     background-color: white;
     font-family: "Finger Paint", cursive;
-    color: rgb(85, 82, 82);
+    color: #7a101c;
 }
 
-input,
-textarea {
+/* input & label & textarea */
+input {
     border: 1px solid transparent;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 025);
     border-radius: 5px;
     outline: 0;
     width: 40%;
@@ -22,13 +22,6 @@ textarea {
     transform: translateX(-50%);
     font-family: "Finger Paint", cursive;
 }
-
-textarea {
-    height: 200px;
-    width: 200px;
-    margin-left: 20px;
-}
-
 input[type="file"] {
     height: 1px;
     width: 1px;
@@ -38,7 +31,23 @@ input[type="file"] {
     overflow: hidden;
     position: absolute;
     z-index: -1;
+    margin-right: 0;
 }
+textarea {
+    border: 1px solid transparent;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    outline: 0;
+    width: 40%;
+    display: block;
+    margin-bottom: 20px;
+    background: transparent;
+    color: rgb(85, 82, 82);
+    font-family: "Finger Paint", cursive;
+    height: 200px;
+    width: 200px;
+}
+
 label.change {
     color: red;
     margin-right: 7px;
@@ -46,45 +55,60 @@ label.change {
     cursor: pointer;
 }
 
-h1,
-p {
+/* h1 & h2 & h3 & p */
+h1 {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0.9;
     text-align: center;
 }
+p.name,
+h2.otherprofile {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: left;
+}
+h2.welcome,
+p,
+h2.list,
+h2 {
+    text-align: center;
+}
 
+p.biotext {
+    text-align: left;
+}
+
+p.search {
+    padding-top: 40px;
+}
+h3.change {
+    text-align: center;
+    font-size: 15px;
+}
+p.x {
+    text-align: right;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+h2.people-name {
+    align-self: center;
+}
+
+/* buttons */
 button {
     opacity: 0.9;
     text-align: center;
 }
 
-p {
-    text-align: center;
-    position: relative;
-    left: 50%;
-}
-
 button.upload,
 button.create,
 button.login,
-button.reset {
-    font-family: "Finger Paint", cursive;
-    cursor: pointer;
-    border-radius: 10px;
-    border: 2px solid gray;
-    color: gray;
-    background-color: white;
-    padding: 8px 20px;
-    font-size: 15px;
-    font-weight: bold;
-}
-
-button.upload {
-    font-size: 12px;
-}
-
+button.reset,
+button.accept-btn,
 button.bio,
 button.add,
 button.edit,
@@ -94,11 +118,27 @@ button.friend-button {
     cursor: pointer;
     border-radius: 10px;
     border: 2px solid gray;
-    color: gray;
+    color: #7a101c;
     background-color: white;
-    padding: 2px 4px;
+    padding: 8px 20px;
     font-size: 15px;
     font-weight: bold;
+    height: 60px;
+    width: 180px;
+    justify-content: center;
+    align-self: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+button.upload {
+    font-size: 12px;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+    height: 50px;
+    width: 80px;
 }
 
 button.friend-button {
@@ -106,15 +146,21 @@ button.friend-button {
 }
 
 button.edit {
-    /* align-self: center; */
     align-self: flex-start;
     justify-self: flex-start;
 }
 
+button:hover {
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 025);
+    opacity: 1;
+}
+
+/* buttons */
+/* div */
 div.modal {
     border: 1px solid transparent;
     border-radius: 10px;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 025);
     background-color: white;
     flex-direction: column;
     width: 230px;
@@ -125,95 +171,6 @@ div.modal {
     left: 80%;
     transition: left 1s linear;
 }
-
-div.links {
-    align-self: center;
-    margin-right: 0;
-    padding-right: 0;
-}
-a {
-    padding-right: 20px;
-}
-
-div.slide {
-    border: 1px solid transparent;
-    border-radius: 10px;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
-    background-color: white;
-    flex-direction: column;
-    width: 230px;
-    height: 200px;
-    display: flex;
-    z-index: 1;
-    position: fixed;
-    left: 100%;
-    transition: left 1s linear;
-}
-
-div.component {
-    display: flex;
-    justify-content: center;
-}
-
-header img.avatar {
-    cursor: pointer;
-    height: 90px;
-    width: 90px;
-    margin: 30px;
-    border-radius: 50%;
-    margin-left: 0;
-    padding-left: 0;
-}
-
-div img {
-    cursor: pointer;
-    height: 250px;
-    width: 250px;
-    border-radius: 50%;
-    margin-right: 20px;
-}
-div.logo-part {
-    display: flex;
-    flex-direction: row;
-}
-img.logo {
-    height: 150px;
-    width: 150px;
-}
-
-img.logo2 {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    border: 0;
-    border-bottom: 1px solid rgba(196, 191, 191);
-    box-shadow: 0px 3px 3px rgba(83, 81, 81, 0.25);
-    height: 130px;
-}
-
-h3.change {
-    text-align: center;
-    font-size: 15px;
-}
-
-p.x {
-    text-align: right;
-    font-size: 20px;
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-}
-
-button:hover {
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
-    opacity: 1;
-}
-
 div.profile {
     display: flex;
     flex-direction: row;
@@ -227,40 +184,83 @@ div.biopart {
     flex-wrap: nowrap;
 }
 
-div.biop {
+div.text.area {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-items: flex-start;
 }
 
-p.name,
-h2.otherprofile {
-    font-size: 25px;
-    font-weight: bold;
-    text-align: left;
-}
-h2.welcome {
-    text-align: center;
+div.links {
+    align-self: center;
 }
 
-p.biotext {
-    text-align: left;
-}
-
-p.search {
-    padding-top: 40px;
-}
-ul {
-    display: flex;
+div.slide {
+    border: 1px solid transparent;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 025);
+    background-color: white;
     flex-direction: column;
-    justify-content: center;
+    width: 230px;
+    height: 200px;
+    display: flex;
+    z-index: 1;
+    position: fixed;
+    left: 100%;
+    transition: left 1s linear;
 }
-li {
+
+div.component,
+div.friend-part,
+div.wannabe-part {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+div.wannabeslist,
+div.friendslist {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    flex-direction: column;
+}
+
+div.friend-part,
+div.wannabe-part {
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 025);
+    padding: 20px;
+    align-self: center;
+    align-content: center;
+    width: 50%;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+div.namepart {
+    flex-direction: row;
+}
+
+div.friends {
+    flex-direction: column;
+}
+
+div.logo-part {
     display: flex;
     flex-direction: row;
-    padding: 20px;
-    justify-content: center;
+    justify-content: flex-start;
+}
+
+/* images */
+img.logo {
+    height: 125px;
+    width: 125px;
+}
+
+img.logo2 {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 img.people-pic {
@@ -278,36 +278,108 @@ img.poster {
     margin-right: 20px;
 }
 
-h2.people-name {
-    align-self: center;
+img.logobig {
+    cursor: pointer;
+    height: 250px;
+    width: 250px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
 }
+img.pic,
+div.otherprofile-pic img {
+    height: 200px;
+    width: 200px;
+    margin: 30px;
+    border-radius: 50%;
+    margin-left: 0;
+    padding-left: 0;
+}
+img.avatar {
+    cursor: pointer;
+    height: 200px;
+    width: 200px;
+    margin: 30px;
+    border-radius: 50%;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+header img.avatar {
+    cursor: pointer;
+    height: 90px;
+    width: 90px;
+    margin: 30px;
+    border-radius: 50%;
+    margin-left: 0;
+    padding-left: 0;
+}
+/* images */
+
+/* header & li & ul & a */
+header {
+    display: flex;
+    justify-content: space-between;
+    border: 0;
+    border-bottom: 1px solid rgba(196, 191, 191);
+    box-shadow: 0px 3px 3px rgba(122, 16, 28, 025);
+    height: 130px;
+}
+a {
+    padding-right: 20px;
+    text-align: center;
+    color: rgba(122, 16, 28);
+}
+a:hover {
+    color: red;
+}
+ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+li {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    align-self: center;
+    justify-content: center;
+    box-shadow: 0px 3px 3px rgba(122, 16, 28, 025);
+    width: 50%;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+/* header & li & ul & a */
+
 /* The typing effect */
 p.typewriter {
+    /* text-align: center; */
     overflow: hidden;
     border-right: 0.15em solid gray;
     white-space: nowrap;
     align-self: center;
+    font-size: 25px;
     letter-spacing: 0.15em;
-    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    animation: animated-text 4s steps(29, end) 1s 1 normal both,
+        animated-cursor 600ms steps(29, end) infinite;
 }
-
-@keyframes typing {
+@keyframes animated-text {
     from {
-        width: 0;
+        width: 0%;
     }
     to {
         width: 100%;
     }
 }
-
-@keyframes blink-caret {
-    from,
-    to {
-        border-color: transparent;
+@keyframes animated-cursor {
+    from {
+        border-right-color: gray;
     }
-    50% {
-        border-color: gray;
+    to {
+        border-right-color: transparent;
     }
 }
-
 /* The typing effect */

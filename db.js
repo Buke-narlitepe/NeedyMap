@@ -106,3 +106,14 @@ module.exports.deleteFriendRequest = function deleteFriendRequest(
         [sender_id, recipient_id]
     );
 };
+
+module.exports.getFriends = function getFriends(id) {
+    return db.query(
+        `SELECT * FROM friendships
+        JOIN users
+        ON (sender_id=users.id AND recipient_id=$1 AND accepted=false) 
+        OR (sender_id=users.id AND recipient_id=$1 AND accepted=true)
+        OR (sender_id=$1 AND recipient_id=users.id AND accepted=true);`,
+        [id]
+    );
+};

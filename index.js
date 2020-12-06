@@ -302,6 +302,21 @@ app.post("/api/end-friendship/:otherId", function (req, res) {
 
 // friendships
 
+// friend list
+
+app.get("/api/friends-wannabes", function (req, res) {
+    db.getFriends(req.session.userId)
+        .then((data) => {
+            delete data.rows[0].password;
+            res.json(data.rows);
+        })
+        .catch((e) => {
+            console.log("err in GET /friends-wannabes", e);
+        });
+});
+
+//friend list
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");
