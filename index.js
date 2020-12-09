@@ -1,5 +1,9 @@
 const express = require("express");
 const app = express();
+
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
 const compression = require("compression");
 const session = require("cookie-session");
 const bcrypt = require("bcryptjs");
@@ -7,6 +11,7 @@ const bodyParser = require("body-parser");
 const csurf = require("csurf");
 const db = require("./db.js");
 const crypto = require("crypto-random-string");
+
 const sendMail = require("./ses");
 const s3 = require("./middlewares/s3.js");
 const uploader = require("./middlewares/uploader.js");
@@ -14,12 +19,15 @@ const uploader = require("./middlewares/uploader.js");
 app.use(compression());
 app.use(bodyParser.json());
 
-app.use(
-    session({
-        secret: "hotpink is as awesome color",
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-    })
-);
+const sessionMiddleware = session({
+    secret: "hotpink is as awesome color",
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+});
+app.use(sessionMiddleware);
+
+io.use(function (socket, next) {
+    sessionMiddleware(socket.request, socket.request.res, next);
+});
 
 if (process.env.NODE_ENV != "production") {
     app.use(
@@ -157,7 +165,9 @@ app.get("/api/user", function (req, res) {
     db.getUserById(req.session.userId)
         .then((data) => {
             console.log(data.rows);
-            delete data.rows[0].password; // IMPORTANT: dont ever send password hash to client !!!!
+            data.rows.forEach((item) => {
+                delete item.password;
+            });
             res.json(data.rows[0]);
         })
         .catch((err) => {
@@ -199,12 +209,14 @@ app.get("/api/user/:id", (req, res) => {
 
     db.getUserById(req.params.id)
         .then((data) => {
-            delete data.rows[0].password;
+            data.rows.forEach((item) => {
+                delete item.password;
+            });
             res.json(data.rows[0]);
         })
         .catch((err) => {
             res.sendStatus(404);
-            console.log("err in GET /user", err);
+            console.log("(err in GET /user/:id)", err);
         });
 });
 
@@ -213,7 +225,9 @@ app.get("/api/users/:query", function (req, res) {
     db.findPeople(req.params.query)
         .then((data) => {
             console.log(data.rows);
-            delete data.rows[0].password;
+            data.rows.forEach((item) => {
+                delete item.password;
+            });
             res.json(data.rows);
         })
         .catch((err) => {
@@ -225,7 +239,9 @@ app.get("/api/users/:query", function (req, res) {
 app.get("/api/users", function (req, res) {
     db.latestUsers()
         .then((data) => {
-            delete data.rows[0].password;
+            data.rows.forEach((item) => {
+                delete item.password;
+            });
             res.json(data.rows);
         })
         .catch((err) => {
@@ -307,7 +323,10 @@ app.post("/api/end-friendship/:otherId", function (req, res) {
 app.get("/api/friends-wannabes", function (req, res) {
     db.getFriends(req.session.userId)
         .then((data) => {
-            delete data.rows[0].password;
+            data.rows.forEach((item) => {
+                delete item.password;
+            });
+
             res.json(data.rows);
         })
         .catch((e) => {
@@ -325,6 +344,41 @@ app.get("*", function (req, res) {
     }
 });
 
-app.listen(8080, function () {
+server.listen(8080, function () {
     console.log("I'm listening.");
+});
+
+io.on("connection", async function (socket) {
+    console.log("user connected", socket.id);
+
+    const userId = socket.request.session.userId;
+
+    //prevent unauthenticated users to oopen a connection to our websocket
+    if (!userId) {
+        return socket.disconnect(true);
+    }
+
+    // TODO: create new chats table in database with field: id, message, user_id, timestamp
+    // TODO: function in db.js
+    // TODO: load chat messages from db.js to load last 10 chat messages, JOIN with users table to get firstname&lastname
+    const result = await db.getTenMessages();
+    socket.emit("chatMessages", result.rows.reverse());
+
+    socket.on("chatMessage", async function (msg) {
+        const message = await db.sendMessage(msg, userId);
+        const info = await db.getUserById(userId);
+        console.log(message.rows);
+        io.emit("chatMessage", { ...message.rows[0], ...info.rows[0] });
+    });
+
+    socket.on("privateMessages", async function (otherId) {
+        const data = await db.getTenPrivateMessages(userId, otherId);
+        socket.emit("privateMessages", data.rows.reverse());
+    });
+
+    socket.on("privateMessage", async function (msg) {
+        const text = await db.sendPrivateMessage(msg, userId);
+        const userInfo = await db.getUserById(userId);
+        io.emit("privateMessage", { ...text.rows[0], ...userInfo.rows[0] });
+    });
 });

@@ -28,7 +28,9 @@ export default function Friends() {
         <React.Fragment>
             <div className="friends">
                 <div className="wannabeslist">
-                    <p className="list-text">Friend Requests</p>
+                    <p className="list-text">
+                        Friend Requests ({wannabes.length})
+                    </p>
                     {wannabes &&
                         wannabes.map((friend) => (
                             <div className="wannabe-part" key={friend.id}>
@@ -52,7 +54,7 @@ export default function Friends() {
                         ))}
                 </div>
                 <div className="friendslist">
-                    <p className="list-text">Your Friends</p>
+                    <p className="list-text">Your Friends ({friends.length})</p>
                     {friends &&
                         friends.map((friend) => (
                             <div className="friend-part" key={friend.id}>

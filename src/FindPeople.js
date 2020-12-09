@@ -51,34 +51,36 @@ export default function FindPeople() {
 
     return (
         <React.Fragment>
-            <p>Are you looking for someone?</p>
-            <input
-                type="text"
-                name="query"
-                value={query}
-                placeholder="Please type a name.."
-                onChange={(e) => setQuery(e.target.value)}
-            />
-            {!query ? (
-                <p className="search">
-                    Take a look who joined to Netflix and Chat!
-                </p>
-            ) : (
-                <p className="search">Find people</p>
-            )}
+            <div className="find">
+                <p>Are you looking for someone?</p>
+                <input
+                    type="text"
+                    name="query"
+                    value={query}
+                    placeholder="Please type a name.."
+                    onChange={(e) => setQuery(e.target.value)}
+                />
+                {!query ? (
+                    <p className="search">
+                        Take a look who joined to Netflix and Chat!
+                    </p>
+                ) : (
+                    <p className="search">Find people</p>
+                )}
 
-            <ul>
-                {users.map((user) => (
-                    <li key={user.id}>
-                        <Link to={`/user/${user.id}`}>
-                            <img className="people-pic" src={user.image} />
-                        </Link>
-                        <h2 className="people-name">
-                            {user.firstname} {user.lastname}
-                        </h2>
-                    </li>
-                ))}
-            </ul>
+                <ul>
+                    {users.map((user) => (
+                        <li key={user.id}>
+                            <Link to={`/user/${user.id}`}>
+                                <img className="people-pic" src={user.image} />
+                            </Link>
+                            <h2 className="people-name">
+                                {user.firstname} {user.lastname}
+                            </h2>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </React.Fragment>
     );
 }

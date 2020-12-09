@@ -9,6 +9,8 @@ import OtherProfile from "./OtherProfile";
 import FindPeople from "./FindPeople";
 import Movies from "./Movies";
 import Friends from "./Friends";
+import Chat from "./Chat";
+import PrivateChat from "./PrivateChat";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -73,10 +75,15 @@ export default class App extends React.Component {
                     <header>
                         <Logo />
                         <div className="links">
-                            <Link to="/users">Find People</Link>
-                            <Link to="/">Your Profile</Link>
-                            <Link to="/friends-wannabes">Friends</Link>
-                            <Link to="/movie/popular">Popular Movies</Link>
+                            <Link to="/users"> Find People</Link>
+                            <span className="space">|</span>
+                            <Link to="/"> Your Profile</Link>
+                            <span className="space">|</span>
+                            <Link to="/chat"> Chat</Link>
+                            <span className="space">|</span>
+                            <Link to="/friends-wannabes"> Friends</Link>
+                            <span className="space">|</span>
+                            <Link to="/movie/popular"> IMDB Top 250</Link>
                         </div>
                         <ProfilePic
                             profilePic={this.state.profilePic}
@@ -107,6 +114,8 @@ export default class App extends React.Component {
                         <Route path="/users" component={FindPeople} />
                         <Route path="/movie/popular" component={Movies} />
                         <Route path="/friends-wannabes" component={Friends} />
+                        <Route path="/chat" component={Chat} />
+                        <Route path="/chat/:id" component={PrivateChat} />
                     </React.Fragment>
                 </BrowserRouter>
             </React.Fragment>

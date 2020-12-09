@@ -7,7 +7,7 @@ body {
 /* input & label & textarea */
 input {
     border: 1px solid transparent;
-    box-shadow: 0px 3px 10px rgba(122, 16, 28, 025);
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
     border-radius: 5px;
     outline: 0;
     width: 40%;
@@ -48,6 +48,12 @@ textarea {
     width: 200px;
 }
 
+textarea.message-area {
+    margin-top: 10px;
+    width: 50vw;
+    height: 100px;
+}
+
 label.change {
     color: red;
     margin-right: 7px;
@@ -76,7 +82,9 @@ h2 {
     text-align: center;
 }
 
-p.biotext {
+p.biotext,
+p.score,
+p.title {
     text-align: left;
 }
 
@@ -151,7 +159,7 @@ button.edit {
 }
 
 button:hover {
-    box-shadow: 0px 3px 10px rgba(122, 16, 28, 025);
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
     opacity: 1;
 }
 
@@ -160,15 +168,16 @@ button:hover {
 div.modal {
     border: 1px solid transparent;
     border-radius: 10px;
-    box-shadow: 0px 3px 10px rgba(122, 16, 28, 025);
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
     background-color: white;
     flex-direction: column;
+    margin-top: 150px;
     width: 230px;
     height: 200px;
     display: flex;
     z-index: 1;
     position: fixed;
-    left: 80%;
+    left: 82%;
     transition: left 1s linear;
 }
 div.profile {
@@ -176,6 +185,7 @@ div.profile {
     flex-direction: row;
     flex-wrap: nowrap;
     margin: 40px;
+    margin-top: 200px;
 }
 
 div.biopart {
@@ -198,15 +208,16 @@ div.links {
 div.slide {
     border: 1px solid transparent;
     border-radius: 10px;
-    box-shadow: 0px 3px 10px rgba(122, 16, 28, 025);
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
     background-color: white;
     flex-direction: column;
+    margin-top: 150px;
     width: 230px;
     height: 200px;
     display: flex;
     z-index: 1;
     position: fixed;
-    left: 100%;
+    left: 105%;
     transition: left 1s linear;
 }
 
@@ -229,7 +240,7 @@ div.friendslist {
 div.friend-part,
 div.wannabe-part {
     border-radius: 10px;
-    box-shadow: 0px 3px 10px rgba(122, 16, 28, 025);
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
     padding: 20px;
     align-self: center;
     align-content: center;
@@ -243,12 +254,16 @@ div.namepart {
 
 div.friends {
     flex-direction: column;
+    margin-top: 200px;
 }
 
 div.logo-part {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+}
+div.find {
+    margin-top: 200px;
 }
 
 /* images */
@@ -287,6 +302,16 @@ img.logobig {
     transform: translateX(-50%);
     border-radius: 50%;
 }
+img.loading {
+    height: 250px;
+    width: 250px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    top: 400px;
+}
+
 img.pic,
 div.otherprofile-pic img {
     height: 200px;
@@ -323,22 +348,34 @@ header {
     justify-content: space-between;
     border: 0;
     border-bottom: 1px solid rgba(196, 191, 191);
-    box-shadow: 0px 3px 3px rgba(122, 16, 28, 025);
+    box-shadow: 0px 3px 3px rgba(122, 16, 28, 0.5);
     height: 130px;
+    position: fixed;
+    background-color: white;
+    width: 100vw;
 }
 a {
     padding-right: 20px;
     text-align: center;
     color: rgba(122, 16, 28);
 }
+
+div.links a {
+    text-decoration: none;
+}
 a:hover {
     color: red;
 }
 ul {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+ul.movielist {
+    margin-top: 200px;
 }
 li {
     display: flex;
@@ -346,14 +383,39 @@ li {
     padding: 20px;
     align-self: center;
     justify-content: center;
-    box-shadow: 0px 3px 3px rgba(122, 16, 28, 025);
+    box-shadow: 0px 3px 3px rgba(122, 16, 28, 0.5);
     width: 50%;
     margin-bottom: 30px;
     border-radius: 10px;
 }
 
+li.movieslist {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+span.space {
+    margin-right: 20px;
+    font-size: 25px;
+}
 /* header & li & ul & a */
 
+.chat-box {
+    margin-top: 30px;
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid transparent;
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
+    border-radius: 5px;
+    width: 50vw;
+}
+.chat-part {
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 /* The typing effect */
 p.typewriter {
     /* text-align: center; */

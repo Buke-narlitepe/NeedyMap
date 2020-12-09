@@ -117,3 +117,42 @@ module.exports.getFriends = function getFriends(id) {
         [id]
     );
 };
+
+module.exports.getTenMessages = function getTenMessages() {
+    return db.query(
+        `SELECT chat.id, chat.user_id, chat.message, chat.created_at,
+        users.firstname, users.lastname FROM chat LEFT JOIN users
+        ON users.id = chat.user_id ORDER BY chat.created_at DESC LIMIT 10`
+    );
+};
+
+module.exports.sendMessage = function sendMessage(message, user_id) {
+    return db.query(
+        `INSERT INTO chat ( message, user_id) VALUES ($1, $2) RETURNING *`,
+        [message, user_id]
+    );
+};
+
+module.exports.getTenPrivateMessages = function getTenPrivateMessages(
+    sender_id,
+    recipient_id
+) {
+    return db.query(
+        `SELECT privatemessage.id, privatemessage.sender_id, 
+        privatemessage.recipient_id, privatemessage.message, privatemessage.created_at,
+        users.firstname, users.lastname FROM privatemessage LEFT JOIN users 
+        ON users.id = privatemessage.sender_id WHERE (sender_id = $2 AND recipient_id = $1) 
+        OR (sender_id = $1 AND recipient_id = $2) ORDER BY privatemessage.created_at DESC LIMIT 10`,
+        [sender_id, recipient_id]
+    );
+};
+
+module.exports.sendPrivateMessage = function sendPrivateMessage(
+    message,
+    sender_id
+) {
+    return db.query(
+        `INSERT INTO privatemessage ( message, sender_id) VALUES ($1, $2) RETURNING *`,
+        [message, sender_id]
+    );
+};

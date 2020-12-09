@@ -5,9 +5,11 @@ import reduxPromise from "redux-promise";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import reducer from "./reducer.js";
+import { init } from "./socket.js";
 
 import Welcome from "./Welcome.js";
 import App from "./App.js";
+// import Map from "./Map.js";
 
 const store = createStore(
     reducer,
@@ -15,9 +17,11 @@ const store = createStore(
 );
 
 let component = null;
+
 if (location.pathname === "/welcome") {
     component = <Welcome />;
 } else {
+    init(store);
     component = (
         <Provider store={store}>
             <App />
@@ -26,3 +30,4 @@ if (location.pathname === "/welcome") {
 }
 
 ReactDOM.render(component, document.querySelector("main"));
+// ReactDOM.render(<Map />, document.querySelector("main"));
