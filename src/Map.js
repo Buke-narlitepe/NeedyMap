@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import GoogleMapReact from "google-map-react";
-const Marker = () => <img width={30} height={30} src="yyyyy" />;
+const Marker = ({ title }) => (
+    <div>
+        <img width={30} height={30} src="yyyyy" /> <h3>{title}</h3>
+    </div>
+);
 
 const config = {
     center: {

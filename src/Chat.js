@@ -27,13 +27,21 @@ export default function Chat() {
                 {chatMessages &&
                     chatMessages.map((message) => (
                         <div className="chat-messages" key={message.id}>
-                            <h2 className="chat-name">
-                                {message.firstname} {message.lastname} {""}
-                                {moment(message.created_at)
-                                    .startOf("minute")
-                                    .fromNow()}
-                            </h2>
-                            <p>{message.message}</p>
+                            <div className="name-time">
+                                <img
+                                    className="small"
+                                    src={message.image}
+                                ></img>
+                                <h2 className="chat-name">
+                                    {message.firstname} {message.lastname} {""}
+                                </h2>
+                                <p className="time">
+                                    {moment(message.created_at)
+                                        .startOf("minute")
+                                        .fromNow()}
+                                </p>
+                            </div>
+                            <p className="message">{message.message}</p>
                         </div>
                     ))}
             </div>

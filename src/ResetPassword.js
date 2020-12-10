@@ -112,7 +112,7 @@ export default class ResetPassword extends React.Component {
         } else {
             return (
                 <React.Fragment>
-                    <img src="logo2.png" />
+                    <img src="logo-netflix.png" />
                     <h1>Successful!</h1>
                     <Link to="/login">
                         <p>Now you can log in again</p>

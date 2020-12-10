@@ -20,7 +20,7 @@ export default function Movies() {
     }, []);
     return (
         <React.Fragment>
-            {loading && <img className="loading" src="/loading.jpg"></img>}
+            {loading && <img className="loading" src="/loading.gif"></img>}
             <ul className="movielist">
                 {movies.map((movie) => (
                     <li className="movieslist" key={movie.id}>

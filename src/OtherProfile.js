@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import axios from "./axios.js";
 import FriendButton from "./FriendButton.js";
 
@@ -51,11 +50,9 @@ export default class OtherProfile extends React.Component {
                         <img src={this.state.profilePic} />
                     </div>
                     <div className="otherprofile-info">
-                        <Link to={`/chat/${this.state.id}`}>
-                            <h2 className="otherprofile">
-                                {this.state.firstname} {this.state.lastname}
-                            </h2>
-                        </Link>
+                        <h2 className="otherprofile">
+                            {this.state.firstname} {this.state.lastname}
+                        </h2>
                         <p className="bio-text">{this.state.bio}</p>
                     </div>
                 </div>

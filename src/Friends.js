@@ -62,9 +62,11 @@ export default function Friends() {
                                     <img className="pic" src={friend.image} />
                                 </Link>
                                 <div className="namepart">
-                                    <h2 className="friends-name">
-                                        {friend.firstname} {friend.lastname}
-                                    </h2>
+                                    <Link to={`/chat/${friend.id}`}>
+                                        <h2 className="friends-name">
+                                            {friend.firstname} {friend.lastname}
+                                        </h2>
+                                    </Link>
                                     <button
                                         className="accept-btn"
                                         onClick={() =>

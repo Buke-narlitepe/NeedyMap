@@ -11,6 +11,7 @@ import Movies from "./Movies";
 import Friends from "./Friends";
 import Chat from "./Chat";
 import PrivateChat from "./PrivateChat";
+import Welcome from "./Welcome";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -66,6 +67,12 @@ export default class App extends React.Component {
         });
     }
 
+    handleClick() {
+        axios.post("/logout").then(() => {
+            location.replace("/welcome");
+        });
+    }
+
     render() {
         if (!this.state.email) return null;
         console.log(this.state);
@@ -84,6 +91,10 @@ export default class App extends React.Component {
                             <Link to="/friends-wannabes"> Friends</Link>
                             <span className="space">|</span>
                             <Link to="/movie/popular"> IMDB Top 250</Link>
+                            <span className="space">|</span>
+                            <a id="nav-link" onClick={this.handleClick}>
+                                Log out
+                            </a>
                         </div>
                         <ProfilePic
                             profilePic={this.state.profilePic}
@@ -114,7 +125,7 @@ export default class App extends React.Component {
                         <Route path="/users" component={FindPeople} />
                         <Route path="/movie/popular" component={Movies} />
                         <Route path="/friends-wannabes" component={Friends} />
-                        <Route path="/chat" component={Chat} />
+                        <Route exact path="/chat" component={Chat} />
                         <Route path="/chat/:id" component={PrivateChat} />
                     </React.Fragment>
                 </BrowserRouter>

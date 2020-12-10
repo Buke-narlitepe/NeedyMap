@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { socket } from "./socket";
 import moment from "moment";
@@ -6,7 +6,7 @@ import moment from "moment";
 export default function Chat(props) {
     const privateMessages = useSelector((store) => store.privateMessages);
     const privateContainer = useRef();
-    // const [typing, setTyping] = useState(false);
+    const [typing, setTyping] = useState(false);
 
     useEffect(() => {
         privateContainer.current.scrollTop =
@@ -19,9 +19,18 @@ export default function Chat(props) {
     }, []);
 
     const onEnterPress = (e) => {
-        if (e.keyCode === 13 && e.target.value !== "") {
+        if (e.keyCode !== 13 && e.target.value !== "") {
+            socket.emit("typingstart", props.match.params.id);
+            const timeout = setTimeout(setTyping(true), 3000);
+            clearInterval(timeout);
+        } else if (e.keyCode === 13 && e.target.value !== "") {
             e.preventDefault();
-            socket.emit("privateMessage", e.target.value);
+            setTyping(false);
+            socket.emit(
+                "privateMessage",
+                e.target.value,
+                props.match.params.id
+            );
             e.target.value = "";
         }
     };
@@ -31,14 +40,23 @@ export default function Chat(props) {
             <div className="private-box" ref={privateContainer}>
                 {privateMessages &&
                     privateMessages.map((message) => (
-                        <div className="private-messages" key={message.id}>
-                            <h2 className="private-name">
-                                {message.firstname} {message.lastname} {""}
-                                {moment(message.created_at)
-                                    .startOf("minute")
-                                    .fromNow()}
-                            </h2>
-                            <p>{message.message}</p>
+                        <div className="chat-messages" key={message.id}>
+                            <div className="name-time">
+                                <img
+                                    className="small"
+                                    src={message.image}
+                                ></img>
+                                <h2 className="chat-name">
+                                    {message.firstname} {message.lastname} {""}
+                                </h2>
+                                <p className="time">
+                                    {moment(message.created_at)
+                                        .startOf("minute")
+                                        .fromNow()}
+                                </p>
+                            </div>
+                            <p className="message">{message.message}</p>
+                            {typing && <p>{message.firstname} is typing...</p>}
                         </div>
                     ))}
             </div>

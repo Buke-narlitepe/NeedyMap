@@ -303,13 +303,12 @@ img.logobig {
     border-radius: 50%;
 }
 img.loading {
-    height: 250px;
-    width: 250px;
+    height: 150px;
+    width: 150px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 50%;
-    top: 400px;
+    top: 300px;
 }
 
 img.pic,
@@ -360,6 +359,10 @@ a {
     color: rgba(122, 16, 28);
 }
 
+#nav-link {
+    cursor: pointer;
+}
+
 div.links a {
     text-decoration: none;
 }
@@ -399,15 +402,26 @@ span.space {
     font-size: 25px;
 }
 /* header & li & ul & a */
-
+/* chat-part*/
 .chat-box {
     margin-top: 30px;
+    height: 300px;
     max-height: 500px;
     overflow-y: auto;
     border: 1px solid transparent;
-    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
+    box-shadow: 0px 3px 10pxrgba (122, 16, 28, 0.5);
     border-radius: 5px;
     width: 50vw;
+}
+
+.chat-messages {
+    background-color: rgba(122, 16, 28, 0.2);
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.message {
+    margin-top: 0;
 }
 .chat-part {
     margin-top: 150px;
@@ -416,6 +430,47 @@ span.space {
     align-items: center;
     flex-direction: column;
 }
+.private-box {
+    margin-top: 30px;
+    max-height: 500px;
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid transparent;
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
+    border-radius: 5px;
+    width: 50vw;
+}
+.private-part {
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.name-time {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-name {
+    font-size: 15px;
+}
+.time {
+    font-size: 12px;
+    font-weight: lighter;
+    font-style: italic;
+    margin-left: 10px;
+}
+
+.small {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+/* chat-part*/
 /* The typing effect */
 p.typewriter {
     /* text-align: center; */

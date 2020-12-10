@@ -56,6 +56,7 @@ app.get("/welcome", (req, res) => {
     }
 });
 
+//register
 app.post("/api/register", (req, res) => {
     bcrypt
         .hash(req.body.password, 10)
@@ -77,6 +78,7 @@ app.post("/api/register", (req, res) => {
         });
 });
 
+//login
 app.post("/api/login", (req, res) => {
     if (req.body.email) {
         db.getUserByEmail(req.body.email)
@@ -102,7 +104,15 @@ app.post("/api/login", (req, res) => {
     }
 });
 
-//password part
+// logout
+
+app.post("/logout", (req, res) => {
+    req.session = null;
+    console.log(req.session);
+    res.redirect("/welcome");
+});
+
+// password part
 
 app.post("/api/resetpassword", (req, res) => {
     const code = crypto({ length: 10 });
@@ -114,7 +124,7 @@ app.post("/api/resetpassword", (req, res) => {
                 req.session.userId = value.rows[0].id;
                 sendMail(
                     "bukemihci@gmail.com",
-                    `You can use this code to reset your password: + ${code}`,
+                    `You can use this code to reset your password:  ${code}`,
                     "YOUR NEW PASSWORD"
                 )
                     .then(() => {
@@ -159,7 +169,7 @@ app.post("/api/newpassword", (req, res) => {
     }
 });
 
-//passwordpart
+//user profile
 
 app.get("/api/user", function (req, res) {
     db.getUserById(req.session.userId)
@@ -175,6 +185,7 @@ app.get("/api/user", function (req, res) {
         });
 });
 
+//upload avatar
 app.post("/api/upload", uploader.single("file"), s3, (req, res) => {
     db.uploadImage(req.body.url, req.session.userId)
         .then(() => {
@@ -185,6 +196,7 @@ app.post("/api/upload", uploader.single("file"), s3, (req, res) => {
         });
 });
 
+// bio editor
 app.post("/api/bio", (req, res) => {
     db.uploadBio(req.body.bio, req.session.userId)
         .then(() => {
@@ -195,6 +207,7 @@ app.post("/api/bio", (req, res) => {
         });
 });
 
+//other profiles
 app.get("/api/user/:id", (req, res) => {
     // TODO: first check if user is logged in, if not send 401
     if (!req.session.userId) return res.sendStatus(401);
@@ -248,8 +261,6 @@ app.get("/api/users", function (req, res) {
             console.log("err in GET /users", err);
         });
 });
-
-//find & search people
 
 // friendships
 app.get("/api/friendshipstatus/:otherId", function (req, res) {
@@ -316,8 +327,6 @@ app.post("/api/end-friendship/:otherId", function (req, res) {
         });
 });
 
-// friendships
-
 // friend list
 
 app.get("/api/friends-wannabes", function (req, res) {
@@ -334,7 +343,7 @@ app.get("/api/friends-wannabes", function (req, res) {
         });
 });
 
-//friend list
+//important route- do no delete !
 
 app.get("*", function (req, res) {
     if (!req.session.userId) {
@@ -344,23 +353,25 @@ app.get("*", function (req, res) {
     }
 });
 
+// because of using sockets, we changed app to server
 server.listen(8080, function () {
     console.log("I'm listening.");
 });
 
+// real time chat with sockets
+// connectedOnes is an object for private messages
+const connectedOnes = {};
 io.on("connection", async function (socket) {
     console.log("user connected", socket.id);
 
     const userId = socket.request.session.userId;
+    connectedOnes[userId] = socket.id;
 
     //prevent unauthenticated users to oopen a connection to our websocket
     if (!userId) {
         return socket.disconnect(true);
     }
 
-    // TODO: create new chats table in database with field: id, message, user_id, timestamp
-    // TODO: function in db.js
-    // TODO: load chat messages from db.js to load last 10 chat messages, JOIN with users table to get firstname&lastname
     const result = await db.getTenMessages();
     socket.emit("chatMessages", result.rows.reverse());
 
@@ -373,12 +384,34 @@ io.on("connection", async function (socket) {
 
     socket.on("privateMessages", async function (otherId) {
         const data = await db.getTenPrivateMessages(userId, otherId);
-        socket.emit("privateMessages", data.rows.reverse());
+        io.emit("privateMessages", data.rows.reverse());
+        console.log(data.rows);
     });
 
-    socket.on("privateMessage", async function (msg) {
-        const text = await db.sendPrivateMessage(msg, userId);
+    socket.on("privateMessage", async function (privatemsg, otherId) {
+        const text = await db.sendPrivateMessage(privatemsg, userId, otherId);
         const userInfo = await db.getUserById(userId);
-        io.emit("privateMessage", { ...text.rows[0], ...userInfo.rows[0] });
+        console.log(privatemsg);
+        console.log(text.rows);
+
+        io.to(socket.id).emit("privateMessage", {
+            ...text.rows[0],
+            ...userInfo.rows[0],
+        });
+
+        if (connectedOnes[otherId]) {
+            io.to(connectedOnes[otherId]).emit("privateMessage", {
+                ...text.rows[0],
+                ...userInfo.rows[0],
+            });
+        }
+    });
+
+    socket.on("typingstart", (otherId) => {
+        io.to(connectedOnes[otherId]).emit("typingstart", socket.id);
+    });
+
+    socket.on("typingend", (otherId) => {
+        io.to(socket.id).emit("typingend", otherId);
     });
 });

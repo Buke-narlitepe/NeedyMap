@@ -19,10 +19,10 @@ export function init(store) {
         console.log("chatMessage", msg);
         store.dispatch(setChatMessage(msg));
     });
-    socket.on("privateMessages", (msgs) => {
-        store.dispatch(setPrivateMessages(msgs));
+    socket.on("privateMessages", (privatemsgs) => {
+        store.dispatch(setPrivateMessages(privatemsgs));
     });
-    socket.on("privateMessage", (msg) => {
-        store.dispatch(setPrivateMessage(msg));
+    socket.on("privateMessage", (privatemsg) => {
+        store.dispatch(setPrivateMessage(privatemsg));
     });
 }
