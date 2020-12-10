@@ -353,11 +353,6 @@ app.get("*", function (req, res) {
     }
 });
 
-// because of using sockets, we changed app to server
-server.listen(8080, function () {
-    console.log("I'm listening.");
-});
-
 // real time chat with sockets
 // connectedOnes is an object for private messages
 const connectedOnes = {};
@@ -414,4 +409,9 @@ io.on("connection", async function (socket) {
     socket.on("typingend", (otherId) => {
         io.to(socket.id).emit("typingend", otherId);
     });
+});
+
+// because of using sockets, we changed app to server
+server.listen(process.env.PORT || 8080, function () {
+    console.log("I'm listening.");
 });
