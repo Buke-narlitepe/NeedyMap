@@ -401,7 +401,7 @@ io.on("connection", async function (socket) {
             });
         }
     });
-
+    /*
     socket.on("typingstart", (otherId) => {
         io.to(connectedOnes[otherId]).emit("typingstart", socket.id);
     });
@@ -409,6 +409,7 @@ io.on("connection", async function (socket) {
     socket.on("typingend", (otherId) => {
         io.to(socket.id).emit("typingend", otherId);
     });
+    */
 });
 
 // because of using sockets, we changed app to server

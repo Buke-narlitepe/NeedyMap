@@ -1,7 +1,18 @@
 body {
-    background-color: white;
+    /* background-color: white; */
+    background: url("popcorn1.jpg") no-repeat right fixed;
+    margin: 0;
+    padding: 0;
     font-family: "Finger Paint", cursive;
+    background-size: cover;
     color: #7a101c;
+    height: 100%;
+    width: 100vw;
+}
+
+html {
+    padding: 0;
+    margin: 0;
 }
 
 /* input & label & textarea */
@@ -127,7 +138,7 @@ button.friend-button {
     border-radius: 10px;
     border: 2px solid gray;
     color: #7a101c;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.2);
     padding: 8px 20px;
     font-size: 15px;
     font-weight: bold;
@@ -350,7 +361,7 @@ header {
     box-shadow: 0px 3px 3px rgba(122, 16, 28, 0.5);
     height: 130px;
     position: fixed;
-    background-color: white;
+    background: url("popcorn.jpg") no-repeat right fixed;
     width: 100vw;
 }
 a {

@@ -6,7 +6,7 @@ import moment from "moment";
 export default function Chat(props) {
     const privateMessages = useSelector((store) => store.privateMessages);
     const privateContainer = useRef();
-    const [typing, setTyping] = useState(false);
+    // const [typing, setTyping] = useState(false);
 
     useEffect(() => {
         privateContainer.current.scrollTop =
@@ -20,12 +20,10 @@ export default function Chat(props) {
 
     const onEnterPress = (e) => {
         if (e.keyCode !== 13 && e.target.value !== "") {
-            socket.emit("typingstart", props.match.params.id);
-            const timeout = setTimeout(setTyping(true), 3000);
-            clearInterval(timeout);
+            // socket.emit("typingstart", props.match.params.id);
         } else if (e.keyCode === 13 && e.target.value !== "") {
             e.preventDefault();
-            setTyping(false);
+            // setTyping(false);
             socket.emit(
                 "privateMessage",
                 e.target.value,
@@ -56,7 +54,7 @@ export default function Chat(props) {
                                 </p>
                             </div>
                             <p className="message">{message.message}</p>
-                            {typing && <p>{message.firstname} is typing...</p>}
+                            {/* {typing && <p>{message.firstname} is typing...</p>} */}
                         </div>
                     ))}
             </div>

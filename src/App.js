@@ -11,7 +11,6 @@ import Movies from "./Movies";
 import Friends from "./Friends";
 import Chat from "./Chat";
 import PrivateChat from "./PrivateChat";
-import Welcome from "./Welcome";
 
 export default class App extends React.Component {
     constructor(props) {
