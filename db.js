@@ -2,7 +2,7 @@ const spicedPg = require("spiced-pg");
 
 const db = spicedPg(
     process.env.DATABASE_URL ||
-        "postgres:buke:buke@localhost:5432/socialnetwork"
+        "postgres:buke:buke@localhost:5432/needymap"
 );
 
 //TODO: use optional lastImage
@@ -28,6 +28,15 @@ module.exports.addCodes = function addCodes(users_email, code) {
     VALUES ($1, $2)
     RETURNING *`,
         [users_email, code]
+    );
+};
+
+module.exports.addContactForm = function addContactForm(firstname, lastname, email, phone, message) {
+    return db.query(
+        `INSERT INTO contact (firstname, lastname, email, phone, message)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *`,
+        [firstname, lastname, email, phone, message]
     );
 };
 

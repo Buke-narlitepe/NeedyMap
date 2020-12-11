@@ -7,7 +7,6 @@ import Uploader from "./Uploader.js";
 import Profile from "./Profile.js";
 import OtherProfile from "./OtherProfile";
 import FindPeople from "./FindPeople";
-import Movies from "./Movies";
 import Friends from "./Friends";
 import Chat from "./Chat";
 import PrivateChat from "./PrivateChat";
@@ -122,7 +121,6 @@ export default class App extends React.Component {
                         />
                         <Route path="/user/:id" component={OtherProfile} />
                         <Route path="/users" component={FindPeople} />
-                        <Route path="/movie/popular" component={Movies} />
                         <Route path="/friends-wannabes" component={Friends} />
                         <Route exact path="/chat" component={Chat} />
                         <Route path="/chat/:id" component={PrivateChat} />

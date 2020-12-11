@@ -12,7 +12,7 @@ const csurf = require("csurf");
 const db = require("./db.js");
 const crypto = require("crypto-random-string");
 
-const sendMail = require("./ses");
+const sendEmail = require("./ses");
 const s3 = require("./middlewares/s3.js");
 const uploader = require("./middlewares/uploader.js");
 
@@ -112,8 +112,38 @@ app.post("/logout", (req, res) => {
     res.redirect("/welcome");
 });
 
-// password part
 
+
+//contact form
+app.post("/api/contact", (req, res) => {
+     db.addContactForm(req.body.firstname, req.body.lastname, req.body.email, req.body.phone, req.body.message)
+            .then(() => {
+                // req.session.userId = value.rows[0].id;
+                sendEmail(
+                    "bukemihci@gmail.com",
+                    `Name:  ${req.body.firstname}
+                    Lastname: ${req.body.lastname}
+                    Email: ${req.body.email}
+                    Phone: ${req.body.phone}
+                    Message: ${req.body.message}`,
+                    "CONTACT FORM"
+                )
+                    .then(() => {
+                        res.json({});
+                    })
+                    .catch((e) => {
+                        console.log("ERROR on sending email", e);
+                        res.sendStatus(400);
+                    });
+            })
+            .catch((err) => {
+                console.log("error in POST /contact", err);
+                res.sendStatus(400);
+            });
+
+});
+
+// password part
 app.post("/api/resetpassword", (req, res) => {
     const code = crypto({ length: 10 });
     if (!req.body.email) {

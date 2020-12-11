@@ -1,7 +1,8 @@
--- createdb socialnetwork
--- psql -d socialnetwork -f socialnetwork.sql
+-- createdb needymap
+-- psql -d needymap -f needymap.sql
+DROP TABLE IF EXISTS privatemessage;
 DROP TABLE IF EXISTS chat;
-DROP TABLE IF EXISTS friendships;
+DROP TABLE IF EXISTS contact;
 DROP TABLE IF EXISTS secretcodes;
 DROP TABLE IF EXISTS users;
 
@@ -22,12 +23,15 @@ CREATE TABLE secretcodes (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE friendships(
-   id SERIAL PRIMARY KEY,
-   sender_id INT REFERENCES users(id) NOT NULL,
-   recipient_id INT REFERENCES users(id) NOT NULL,
-   accepted BOOLEAN DEFAULT false
- );
+CREATE TABLE contact (
+    id SERIAL PRIMARY KEY,
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    phone VARCHAR(100) NOT NULL,
+    message TEXT
+);
+
 
  CREATE TABLE chat(
      id SERIAL PRIMARY KEY,
