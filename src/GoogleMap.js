@@ -120,7 +120,7 @@ export default function SimpleMap() {
     );
 }
 
-//search box for finding your location
+//finding your current position
 function Locate({ panTo }) {
     return (
         <button

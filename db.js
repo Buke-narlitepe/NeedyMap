@@ -1,11 +1,11 @@
 const spicedPg = require("spiced-pg");
 
 const db = spicedPg(
-    process.env.DATABASE_URL ||
-        "postgres:buke:buke@localhost:5432/needymap"
+    process.env.DATABASE_URL || "postgres:buke:buke@localhost:5432/needymap"
 );
 
-//TODO: use optional lastImage
+//       Creating user & Getting user          //
+
 module.exports.createUser = function createUser(
     firstname,
     lastname,
@@ -22,21 +22,79 @@ module.exports.getUserByEmail = function getUserByEmail(email) {
     return db.query("SELECT * FROM users WHERE email = $1", [email]);
 };
 
+module.exports.getUserById = function getUserById(id) {
+    return db.query("SELECT * FROM users WHERE id=$1", [id]);
+};
+
+//                Contact Form                  //
+module.exports.addContactForm = function addContactForm(
+    firstname,
+    lastname,
+    email,
+    phone,
+    message
+) {
+    return db.query(
+        `INSERT INTO contact (firstname, lastname, email, phone, message)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *`,
+        [firstname, lastname, email, phone, message]
+    );
+};
+
+//            Storing pins from Maps                  //
+module.exports.addMarkers = function addMarkers(latitude, longitude) {
+    return db.query(
+        `INSERT INTO markers (latitude, longitude)
+    VALUES ($1, $2)
+    RETURNING *`,
+        [latitude, longitude]
+    );
+};
+
+//           Creating Need-Form & Donate-Form                   //
+
+module.exports.addNeedForm = function addNeedForm(
+    needer_id,
+    category,
+    description
+) {
+    return db.query(
+        `INSERT INTO needs (needer_id, category, description)
+    VALUES ($1, $2, $3)
+    RETURNING *`,
+        [needer_id, category, description]
+    );
+};
+
+module.exports.getNeedFormById = function getNeedFormById(id) {
+    return db.query("SELECT * FROM needs WHERE id=$1", [id]);
+};
+
+module.exports.addDonateForm = function addDonateForm(
+    donator_id,
+    category,
+    description
+) {
+    return db.query(
+        `INSERT INTO donation (needer_id, category, description)
+    VALUES ($1, $2, $3)
+    RETURNING *`,
+        [donator_id, category, description]
+    );
+};
+
+module.exports.getDonateFormById = function getDonateFormById(id) {
+    return db.query("SELECT * FROM donation WHERE id=$1", [id]);
+};
+
+//        Reset Password & Create New One             //
 module.exports.addCodes = function addCodes(users_email, code) {
     return db.query(
         `INSERT INTO secretcodes (users_email, code)
     VALUES ($1, $2)
     RETURNING *`,
         [users_email, code]
-    );
-};
-
-module.exports.addContactForm = function addContactForm(firstname, lastname, email, phone, message) {
-    return db.query(
-        `INSERT INTO contact (firstname, lastname, email, phone, message)
-    VALUES ($1, $2, $3, $4, $5)
-    RETURNING *`,
-        [firstname, lastname, email, phone, message]
     );
 };
 
@@ -54,78 +112,12 @@ module.exports.updatePassword = function updatePassword(email, password) {
     ]);
 };
 
+//             Upload an image                       //
 module.exports.uploadImage = function uploadImage(image, id) {
     return db.query("UPDATE users SET image=$1 WHERE id=$2", [image, id]);
 };
 
-module.exports.getUserById = function getUserById(id) {
-    return db.query("SELECT * FROM users WHERE id=$1", [id]);
-};
-
-module.exports.uploadBio = function uploadBio(bio, id) {
-    return db.query("UPDATE users SET bio=$1 WHERE id=$2", [bio, id]);
-};
-
-module.exports.findPeople = function findPeople(val) {
-    return db.query("SELECT * FROM users WHERE firstname ILIKE $1", [
-        val + "%",
-    ]);
-};
-
-module.exports.latestUsers = function latestUsers() {
-    return db.query("SELECT * FROM users ORDER BY id DESC LIMIT 3");
-};
-
-module.exports.getFriendshipStatus = function getFriendshipStatus(
-    sender_id,
-    recipient_id
-) {
-    return db.query(
-        "SELECT * FROM friendships WHERE (sender_id = $1 AND recipient_id = $2) OR (recipient_id = $1 AND sender_id = $2)",
-        [sender_id, recipient_id]
-    );
-};
-
-module.exports.sendFriendRequest = function sendFriendRequest(
-    sender_id,
-    recipient_id
-) {
-    return db.query(
-        "INSERT INTO friendships (sender_id, recipient_id) VALUES ($1, $2) RETURNING *",
-        [sender_id, recipient_id]
-    );
-};
-
-module.exports.acceptFriendRequest = function acceptFriendRequest(
-    sender_id,
-    recipient_id
-) {
-    return db.query(
-        "UPDATE friendships SET accepted=true WHERE sender_id = $1 AND recipient_id = $2 RETURNING *",
-        [sender_id, recipient_id]
-    );
-};
-
-module.exports.deleteFriendRequest = function deleteFriendRequest(
-    sender_id,
-    recipient_id
-) {
-    return db.query(
-        "DELETE FROM friendships WHERE (sender_id = $1 AND recipient_id = $2) OR (recipient_id = $1 AND sender_id = $2)",
-        [sender_id, recipient_id]
-    );
-};
-
-module.exports.getFriends = function getFriends(id) {
-    return db.query(
-        `SELECT * FROM friendships
-        JOIN users
-        ON (sender_id=users.id AND recipient_id=$1 AND accepted=false) 
-        OR (sender_id=users.id AND recipient_id=$1 AND accepted=true)
-        OR (sender_id=$1 AND recipient_id=users.id AND accepted=true);`,
-        [id]
-    );
-};
+//        Getting & Sending Messages            //
 
 module.exports.getTenMessages = function getTenMessages() {
     return db.query(

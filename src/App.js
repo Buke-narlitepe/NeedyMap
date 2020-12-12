@@ -5,13 +5,9 @@ import axios from "./axios.js";
 import ProfilePic from "./ProfilePic.js";
 import Uploader from "./Uploader.js";
 import Profile from "./Profile.js";
-import OtherProfile from "./OtherProfile";
-import FindPeople from "./FindPeople";
-import Friends from "./Friends";
 import Chat from "./Chat";
 import PrivateChat from "./PrivateChat";
 import GoogleMap from "./GoogleMap";
-// import Map from "./Map";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -82,15 +78,9 @@ export default class App extends React.Component {
                     <header>
                         <Logo />
                         <div className="links">
-                            <Link to="/users"> Find People</Link>
-                            <span className="space">|</span>
                             <Link to="/"> Your Profile</Link>
                             <span className="space">|</span>
                             <Link to="/chat"> Chat</Link>
-                            <span className="space">|</span>
-                            <Link to="/friends-wannabes"> Friends</Link>
-                            <span className="space">|</span>
-                            <Link to="/movie/popular"> IMDB Top 250</Link>
                             <span className="space">|</span>
                             <a id="nav-link" onClick={this.handleClick}>
                                 Log out
@@ -130,9 +120,6 @@ export default class App extends React.Component {
                                 />
                             )}
                         />
-                        <Route path="/user/:id" component={OtherProfile} />
-                        <Route path="/users" component={FindPeople} />
-                        <Route path="/friends-wannabes" component={Friends} />
                         <Route exact path="/chat" component={Chat} />
                         <Route path="/chat/:id" component={PrivateChat} />
                     </React.Fragment>

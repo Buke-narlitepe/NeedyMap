@@ -9,7 +9,6 @@ import { init } from "./socket.js";
 
 import Welcome from "./Welcome.js";
 import App from "./App.js";
-// import Map from "./Map.js";
 
 const store = createStore(
     reducer,
@@ -30,4 +29,3 @@ if (location.pathname === "/welcome") {
 }
 
 ReactDOM.render(component, document.querySelector("main"));
-// ReactDOM.render(<Map />, document.querySelector("main"));
