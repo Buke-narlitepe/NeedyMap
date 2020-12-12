@@ -4,15 +4,16 @@ import Logo from "./Logo.js";
 import axios from "./axios.js";
 import ProfilePic from "./ProfilePic.js";
 import Uploader from "./Uploader.js";
-import Profile from "./Profile.js";
+// import Profile from "./Profile.js";
 import Chat from "./Chat";
 import PrivateChat from "./PrivateChat";
-import GoogleMap from "./GoogleMap";
+import Map from "./Map";
+import NeedyForm from "./NeedyForm";
+import DonateForm from "./DonateForm";
 
 export default class App extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             email: "",
             firstname: "",
@@ -104,24 +105,26 @@ export default class App extends React.Component {
                         setImage={this.setImage}
                         uploaderVisible={this.state.uploaderVisible}
                     />
-                    <GoogleMap />
                     <React.Fragment>
                         <Route
                             exact
                             path="/"
-                            render={() => (
-                                <Profile
-                                    firstname={this.state.firstname}
-                                    lastname={this.state.lastname}
-                                    bio={this.state.bio}
-                                    profilePic={this.state.profilePic}
-                                    toggleUploader={this.toggleUploader}
-                                    setBio={this.setBio}
-                                />
-                            )}
+                            component={Map}
+                            // render={() => (
+                            //     <Profile
+                            //         firstname={this.state.firstname}
+                            //         lastname={this.state.lastname}
+                            //         bio={this.state.bio}
+                            //         profilePic={this.state.profilePic}
+                            //         toggleUploader={this.toggleUploader}
+                            //         setBio={this.setBio}
+                            //     />
+                            // )}
                         />
                         <Route exact path="/chat" component={Chat} />
                         <Route path="/chat/:id" component={PrivateChat} />
+                        <Route path="/needs" component={NeedyForm} />
+                        <Route path="/donation" component={DonateForm} />
                     </React.Fragment>
                 </BrowserRouter>
             </React.Fragment>

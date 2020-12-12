@@ -42,28 +42,20 @@ module.exports.addContactForm = function addContactForm(
     );
 };
 
-//            Storing pins from Maps                  //
-module.exports.addMarkers = function addMarkers(latitude, longitude) {
-    return db.query(
-        `INSERT INTO markers (latitude, longitude)
-    VALUES ($1, $2)
-    RETURNING *`,
-        [latitude, longitude]
-    );
-};
-
 //           Creating Need-Form & Donate-Form                   //
 
 module.exports.addNeedForm = function addNeedForm(
     needer_id,
     category,
-    description
+    description,
+    latitude,
+    longitude
 ) {
     return db.query(
-        `INSERT INTO needs (needer_id, category, description)
-    VALUES ($1, $2, $3)
+        `INSERT INTO needs (needer_id, category, description, latitude, longitude)
+    VALUES ($1, $2, $3, $4, $5)
     RETURNING *`,
-        [needer_id, category, description]
+        [needer_id, category, description, latitude, longitude]
     );
 };
 
@@ -74,13 +66,15 @@ module.exports.getNeedFormById = function getNeedFormById(id) {
 module.exports.addDonateForm = function addDonateForm(
     donator_id,
     category,
-    description
+    description,
+    latitude,
+    longitude
 ) {
     return db.query(
-        `INSERT INTO donation (needer_id, category, description)
-    VALUES ($1, $2, $3)
+        `INSERT INTO donation (donater_id, category, description, latitude, longitude)
+    VALUES ($1, $2, $3, $4, $5)
     RETURNING *`,
-        [donator_id, category, description]
+        [donator_id, category, description, latitude, longitude]
     );
 };
 

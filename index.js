@@ -122,7 +122,6 @@ app.post("/api/contact", (req, res) => {
         req.body.message
     )
         .then(() => {
-            // req.session.userId = value.rows[0].id;
             sendEmail(
                 "bukemihci@gmail.com",
                 `Name:  ${req.body.firstname}
@@ -142,6 +141,43 @@ app.post("/api/contact", (req, res) => {
         })
         .catch((err) => {
             console.log("error in POST /contact", err);
+            res.sendStatus(400);
+        });
+});
+//needy form
+
+app.post("/api/needs", (req, res) => {
+    db.addNeedForm(
+        req.session.userId,
+        req.body.category,
+        req.body.description,
+        req.body.latitude,
+        req.body.longitude
+    )
+        .then(() => {
+            res.sendStatus(200);
+        })
+        .catch((e) => {
+            console.log("ERROR on post /api/needs", e);
+            res.sendStatus(400);
+        });
+});
+
+// donate form
+
+app.post("/api/donation", (req, res) => {
+    db.addDonateForm(
+        req.session.userId,
+        req.body.category,
+        req.body.description,
+        req.body.latitude,
+        req.body.longitude
+    )
+        .then(() => {
+            res.sendStatus(200);
+        })
+        .catch((e) => {
+            console.log("ERROR on post /api/donation", e);
             res.sendStatus(400);
         });
 });
@@ -229,17 +265,6 @@ app.post("/api/upload", uploader.single("file"), s3, (req, res) => {
         });
 });
 
-// bio editor
-app.post("/api/bio", (req, res) => {
-    db.uploadBio(req.body.bio, req.session.userId)
-        .then(() => {
-            res.json(req.body.bio);
-        })
-        .catch((e) => {
-            console.log("error in POST /bio", e);
-        });
-});
-
 //other profiles
 app.get("/api/user/:id", (req, res) => {
     // TODO: first check if user is logged in, if not send 401
@@ -263,116 +288,6 @@ app.get("/api/user/:id", (req, res) => {
         .catch((err) => {
             res.sendStatus(404);
             console.log("(err in GET /user/:id)", err);
-        });
-});
-
-//find & search people
-app.get("/api/users/:query", function (req, res) {
-    db.findPeople(req.params.query)
-        .then((data) => {
-            console.log(data.rows);
-            data.rows.forEach((item) => {
-                delete item.password;
-            });
-            res.json(data.rows);
-        })
-        .catch((err) => {
-            res.sendStatus(404);
-            console.log("err in GET /users/:query", err);
-        });
-});
-
-app.get("/api/users", function (req, res) {
-    db.latestUsers()
-        .then((data) => {
-            data.rows.forEach((item) => {
-                delete item.password;
-            });
-            res.json(data.rows);
-        })
-        .catch((err) => {
-            console.log("err in GET /users", err);
-        });
-});
-
-// friendships
-app.get("/api/friendshipstatus/:otherId", function (req, res) {
-    db.getFriendshipStatus(req.session.userId, req.params.otherId)
-        .then((data) => {
-            if (data.rows.length === 0) {
-                res.json({
-                    button: "Send Friend Request",
-                });
-            } else {
-                if (data.rows[0].accepted) {
-                    res.json({
-                        button: "Unfriend",
-                    });
-                } else if (data.rows[0].sender_id == req.params.otherId) {
-                    res.json({
-                        button: "Accept Friend Request",
-                    });
-                } else {
-                    res.json({
-                        button: "Cancel Friend Request",
-                    });
-                }
-            }
-        })
-        .catch((e) => {
-            console.log("Error on checking friendship status", e);
-        });
-});
-
-app.post("/api/send-friend-request/:otherId", function (req, res) {
-    db.sendFriendRequest(req.session.userId, req.params.otherId)
-        .then(() => {
-            res.json({
-                button: "Cancel Friend Request",
-            });
-        })
-        .catch((e) => {
-            console.log("Error on sending friend request", e);
-        });
-});
-
-app.post("/api/accept-friend-request/:otherId", function (req, res) {
-    db.acceptFriendRequest(req.params.otherId, req.session.userId)
-        .then(() => {
-            res.json({
-                button: "Unfriend",
-            });
-        })
-        .catch((e) => {
-            console.log("Error on accepting friend request", e);
-        });
-});
-
-app.post("/api/end-friendship/:otherId", function (req, res) {
-    db.deleteFriendRequest(req.params.otherId, req.session.userId)
-        .then(() => {
-            res.json({
-                button: "Send Friend Request",
-            });
-        })
-        .catch((e) => {
-            console.log("Error on ending friendship", e);
-        });
-});
-
-// friend list
-
-app.get("/api/friends-wannabes", function (req, res) {
-    db.getFriends(req.session.userId)
-        .then((data) => {
-            data.rows.forEach((item) => {
-                delete item.password;
-            });
-
-            res.json(data.rows);
-        })
-        .catch((e) => {
-            console.log("err in GET /friends-wannabes", e);
         });
 });
 
