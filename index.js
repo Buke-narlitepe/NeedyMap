@@ -112,35 +112,38 @@ app.post("/logout", (req, res) => {
     res.redirect("/welcome");
 });
 
-
-
 //contact form
 app.post("/api/contact", (req, res) => {
-     db.addContactForm(req.body.firstname, req.body.lastname, req.body.email, req.body.phone, req.body.message)
-            .then(() => {
-                // req.session.userId = value.rows[0].id;
-                sendEmail(
-                    "bukemihci@gmail.com",
-                    `Name:  ${req.body.firstname}
+    db.addContactForm(
+        req.body.firstname,
+        req.body.lastname,
+        req.body.email,
+        req.body.phone,
+        req.body.message
+    )
+        .then(() => {
+            // req.session.userId = value.rows[0].id;
+            sendEmail(
+                "bukemihci@gmail.com",
+                `Name:  ${req.body.firstname}
                     Lastname: ${req.body.lastname}
                     Email: ${req.body.email}
                     Phone: ${req.body.phone}
                     Message: ${req.body.message}`,
-                    "CONTACT FORM"
-                )
-                    .then(() => {
-                        res.json({});
-                    })
-                    .catch((e) => {
-                        console.log("ERROR on sending email", e);
-                        res.sendStatus(400);
-                    });
-            })
-            .catch((err) => {
-                console.log("error in POST /contact", err);
-                res.sendStatus(400);
-            });
-
+                "CONTACT FORM"
+            )
+                .then(() => {
+                    res.json({});
+                })
+                .catch((e) => {
+                    console.log("ERROR on sending email", e);
+                    res.sendStatus(400);
+                });
+        })
+        .catch((err) => {
+            console.log("error in POST /contact", err);
+            res.sendStatus(400);
+        });
 });
 
 // password part
@@ -152,7 +155,7 @@ app.post("/api/resetpassword", (req, res) => {
         db.addCodes(req.body.email, code)
             .then((value) => {
                 req.session.userId = value.rows[0].id;
-                sendMail(
+                sendEmail(
                     "bukemihci@gmail.com",
                     `You can use this code to reset your password:  ${code}`,
                     "YOUR NEW PASSWORD"

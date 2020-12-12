@@ -10,6 +10,8 @@ import FindPeople from "./FindPeople";
 import Friends from "./Friends";
 import Chat from "./Chat";
 import PrivateChat from "./PrivateChat";
+import GoogleMap from "./GoogleMap";
+// import Map from "./Map";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -99,11 +101,20 @@ export default class App extends React.Component {
                             toggleUploader={this.toggleUploader}
                         />
                     </header>
+                    <Link to="/needs">
+                        {" "}
+                        <button className="needy">Enter Needs</button>
+                    </Link>
+                    <Link to="/donation">
+                        {" "}
+                        <button className="needy">Enter Donation</button>
+                    </Link>
                     <Uploader
                         closeComponent={this.closeComponent}
                         setImage={this.setImage}
                         uploaderVisible={this.state.uploaderVisible}
                     />
+                    <GoogleMap />
                     <React.Fragment>
                         <Route
                             exact
