@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -7,10 +7,12 @@ import {
     Marker,
     InfoWindow,
 } from "@react-google-maps/api";
+
 import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
 } from "use-places-autocomplete";
+
 import {
     Combobox,
     ComboboxInput,
@@ -18,7 +20,7 @@ import {
     ComboboxList,
     ComboboxOption,
 } from "@reach/combobox";
-// import { formatRelative } from "date-fns";
+
 // import "@reach/combobox/styles.css";
 
 import mapStyles from "./mapStyles";
@@ -43,26 +45,25 @@ export default function SimpleMap() {
         googleMapsApiKey: "AIzaSyAJzF3Im06VQbktvf0WwRwrf9B7-jMK5Xw",
         libraries,
     });
-    const [markers, setMarkers] = React.useState([]);
-    const [selected, setSelected] = React.useState(null);
+    const [markers, setMarkers] = useState([]);
+    const [selected, setSelected] = useState(null);
 
-    const onMapClick = React.useCallback((e) => {
+    const onMapClick = useCallback((e) => {
         setMarkers((current) => [
             ...current,
             {
                 lat: e.latLng.lat(),
                 lng: e.latLng.lng(),
-                time: new Date(),
             },
         ]);
     }, []);
 
-    const mapRef = React.useRef();
-    const onMapLoad = React.useCallback((map) => {
+    const mapRef = useRef();
+    const onMapLoad = useCallback((map) => {
         mapRef.current = map;
     }, []);
 
-    const panTo = React.useCallback(({ lat, lng }) => {
+    const panTo = useCallback(({ lat, lng }) => {
         mapRef.current.panTo({ lat, lng });
         mapRef.current.setZoom(14);
     }, []);
@@ -72,11 +73,8 @@ export default function SimpleMap() {
 
     return (
         <div>
-            <h1>NeedyMap</h1>
-
             <Locate panTo={panTo} />
             <Search panTo={panTo} />
-
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
@@ -122,6 +120,7 @@ export default function SimpleMap() {
     );
 }
 
+//search box for finding your location
 function Locate({ panTo }) {
     return (
         <button
