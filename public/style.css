@@ -132,7 +132,8 @@ button.bio,
 button.add,
 button.edit,
 button.save,
-button.friend-button {
+button.friend-button,
+button.needy {
     font-family: "Finger Paint", cursive;
     cursor: pointer;
     border-radius: 10px;
@@ -191,6 +192,11 @@ div.modal {
     left: 82%;
     transition: left 1s linear;
 }
+
+div.main {
+    display: flex;
+    flex-direction: column;
+}
 div.profile {
     display: flex;
     flex-direction: row;
@@ -232,49 +238,20 @@ div.slide {
     transition: left 1s linear;
 }
 
-div.component,
-div.friend-part,
-div.wannabe-part {
+div.component {
     display: flex;
     justify-content: center;
     align-self: center;
 }
 
-div.wannabeslist,
-div.friendslist {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    flex-direction: column;
-}
-
-div.friend-part,
-div.wannabe-part {
-    border-radius: 10px;
-    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
-    padding: 20px;
-    align-self: center;
-    align-content: center;
-    width: 50%;
-    margin-bottom: 30px;
-    border-radius: 10px;
-}
 div.namepart {
     flex-direction: row;
-}
-
-div.friends {
-    flex-direction: column;
-    margin-top: 200px;
 }
 
 div.logo-part {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-}
-div.find {
-    margin-top: 200px;
 }
 
 /* images */
@@ -287,21 +264,6 @@ img.logo2 {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-}
-
-img.people-pic {
-    cursor: pointer;
-    height: 250px;
-    width: 250px;
-    border-radius: 50%;
-    margin-right: 20px;
-}
-
-img.poster {
-    height: 250px;
-    width: 250px;
-    border-radius: 50%;
-    margin-right: 20px;
 }
 
 img.logobig {
@@ -413,10 +375,6 @@ ul {
     justify-content: center;
     flex-wrap: wrap;
 }
-
-ul.movielist {
-    margin-top: 200px;
-}
 li {
     display: flex;
     flex-direction: row;
@@ -427,12 +385,6 @@ li {
     width: 50%;
     margin-bottom: 30px;
     border-radius: 10px;
-}
-
-li.movieslist {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
 }
 span.space {
     margin-right: 20px;

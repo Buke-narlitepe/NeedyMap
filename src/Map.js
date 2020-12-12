@@ -40,7 +40,7 @@ const center = {
     lng: 9.183333,
 };
 
-export default function SimpleMap() {
+export default function SimpleMap(props) {
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: "AIzaSyAJzF3Im06VQbktvf0WwRwrf9B7-jMK5Xw",
         libraries,
@@ -56,6 +56,9 @@ export default function SimpleMap() {
                 lng: e.latLng.lng(),
             },
         ]);
+        if (props.handleClick) {
+            props.handleClick(e.latLng.lat(), e.latLng.lng());
+        }
     }, []);
 
     const mapRef = useRef();

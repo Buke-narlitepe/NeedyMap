@@ -92,40 +92,51 @@ export default class App extends React.Component {
                             toggleUploader={this.toggleUploader}
                         />
                     </header>
-                    <Link to="/needs">
-                        {" "}
-                        <button className="needy">Enter Needs</button>
-                    </Link>
-                    <Link to="/donation">
-                        {" "}
-                        <button className="needy">Enter Donation</button>
-                    </Link>
-                    <Uploader
-                        closeComponent={this.closeComponent}
-                        setImage={this.setImage}
-                        uploaderVisible={this.state.uploaderVisible}
-                    />
-                    <React.Fragment>
-                        <Route
-                            exact
-                            path="/"
-                            component={Map}
-                            // render={() => (
-                            //     <Profile
-                            //         firstname={this.state.firstname}
-                            //         lastname={this.state.lastname}
-                            //         bio={this.state.bio}
-                            //         profilePic={this.state.profilePic}
-                            //         toggleUploader={this.toggleUploader}
-                            //         setBio={this.setBio}
-                            //     />
-                            // )}
+                    <div className="main">
+                        <div>
+                            <Link to="/needs">
+                                {" "}
+                                <button className="needy">Enter Needs</button>
+                            </Link>
+                            <Link to="/donation">
+                                {" "}
+                                <button className="needy">
+                                    Enter Donation
+                                </button>
+                            </Link>
+                        </div>
+
+                        <Uploader
+                            closeComponent={this.closeComponent}
+                            setImage={this.setImage}
+                            uploaderVisible={this.state.uploaderVisible}
                         />
-                        <Route exact path="/chat" component={Chat} />
-                        <Route path="/chat/:id" component={PrivateChat} />
-                        <Route path="/needs" component={NeedyForm} />
-                        <Route path="/donation" component={DonateForm} />
-                    </React.Fragment>
+                        <React.Fragment>
+                            <Route
+                                exact
+                                path="/"
+                                component={Map}
+                                // render={() => (
+                                //     <Profile
+                                //         firstname={this.state.firstname}
+                                //         lastname={this.state.lastname}
+                                //         bio={this.state.bio}
+                                //         profilePic={this.state.profilePic}
+                                //         toggleUploader={this.toggleUploader}
+                                //         setBio={this.setBio}
+                                //     />
+                                // )}
+                            />
+                            <Route exact path="/chat" component={Chat} />
+                            <Route path="/chat/:id" component={PrivateChat} />
+                            <Route path="/needs" component={NeedyForm} />
+                            <Route path="/donation" component={DonateForm} />
+                        </React.Fragment>
+                        <div>
+                            <p>Number of Needs</p>
+                            <p>Number of Donations</p>
+                        </div>
+                    </div>
                 </BrowserRouter>
             </React.Fragment>
         );

@@ -49,7 +49,11 @@ export default function NeedyForm() {
                     onChange={handleChange}
                     value={form.description}
                 />
-                <Map />
+                <Map
+                    handleClick={(latitude, longitude) => {
+                        setForm({ ...form, latitude, longitude });
+                    }}
+                />
                 <button type="submit">Submit</button>
             </form>
         </div>
