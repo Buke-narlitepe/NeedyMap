@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "./axios.js";
 import { Link } from "react-router-dom";
+import Logo from "./Logo.js";
 
 export default class Registration extends React.Component {
     constructor() {
@@ -46,14 +47,8 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div>
-                <div>
-                    <img className="logobig" src="/logo-netflix.png" />
-                </div>
-                <p className="typewriter">NETFLIX &amp; CHAT</p>
-                <h2 className="welcome">
-                    Join our network to see the next and share your thoughts
-                    with your friends!{" "}
-                </h2>
+                <Logo />
+                <h2 className="welcome">Please create your account</h2>
                 {this.state.error && (
                     <p>Ooopss! Something missing, please try agin.</p>
                 )}
@@ -93,6 +88,9 @@ export default class Registration extends React.Component {
                 <Link to="/login">
                     <p>You have already have an account?</p>
                 </Link>
+                <div className="downlink">
+                    <Link to="/contact"> Contact Us</Link>
+                </div>
             </div>
         );
     }

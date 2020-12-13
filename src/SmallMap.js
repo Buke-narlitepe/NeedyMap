@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -24,7 +24,6 @@ import {
 // import "@reach/combobox/styles.css";
 
 import mapStyles from "./mapStyles";
-import axios from "./axios.js";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -48,11 +47,6 @@ export default function SimpleMap(props) {
     });
     const [markers, setMarkers] = useState([]);
     const [selected, setSelected] = useState(null);
-
-    useEffect(() => {
-        console.log("oh look a new chat message, lets scroll to the bottom");
-        axios.get();
-    }, []);
 
     const onMapClick = useCallback((e) => {
         setMarkers((current) => [

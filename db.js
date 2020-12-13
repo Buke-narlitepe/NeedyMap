@@ -82,6 +82,14 @@ module.exports.getDonationForm = function getDonationForm() {
     return db.query("SELECT * FROM donation");
 };
 
+module.exports.getDonationNumbers = function getDonationNumbers() {
+    return db.query("SELECT COUNT (*) FROM donation");
+};
+
+module.exports.getNeedNumbers = function getNeedNumbers() {
+    return db.query("SELECT COUNT (*) FROM needs");
+};
+
 //        Reset Password & Create New One             //
 module.exports.addCodes = function addCodes(users_email, code) {
     return db.query(

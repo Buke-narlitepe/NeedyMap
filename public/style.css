@@ -1,13 +1,20 @@
 body {
     /* background-color: white; */
-    /* background: url("popcorn1.jpg") no-repeat right fixed; */
+    background: url("background4.jpg") no-repeat center fixed;
     margin: 0;
     padding: 0;
-    font-family: "Finger Paint", cursive;
+    font-family: "Titillium Web", sans-serif;
+    font-size: 25px;
+    font-weight: 600;
     background-size: cover;
-    color: #7a101c;
+    color: rgb(71, 69, 69);
     height: 100%;
     width: 100vw;
+}
+
+@font-face {
+    font-family: "MyWebFont";
+    src: url("Amatemora.ttf");
 }
 
 html {
@@ -33,6 +40,7 @@ input {
     transform: translateX(-50%);
     font-family: "Finger Paint", cursive;
 }
+
 input[type="file"] {
     height: 1px;
     width: 1px;
@@ -99,6 +107,10 @@ p.title {
     text-align: left;
 }
 
+p.app-name {
+    margin-left: 0;
+}
+
 p.search {
     padding-top: 40px;
 }
@@ -132,13 +144,12 @@ button.bio,
 button.add,
 button.edit,
 button.save,
-button.friend-button,
-button.needy {
-    font-family: "Finger Paint", cursive;
+button.submit {
     cursor: pointer;
     border-radius: 10px;
-    border: 2px solid gray;
-    color: #7a101c;
+    color: rgb(85, 82, 82);
+    border: 1px solid transparent;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
     background-color: rgba(255, 255, 255, 0.2);
     padding: 8px 20px;
     font-size: 15px;
@@ -198,19 +209,69 @@ div.map {
     left: 50%;
     transform: translateX(-50%);
 }
+div.downlink {
+    padding-top: 70px;
+}
+div.uplink {
+    width: 300px;
+    display: flex;
+    justify-content: space-around;
+}
+
+div.slogan,
+div.about-part {
+    position: relative;
+    left: 50%;
+    top: 300px;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 50vw;
+    height: 30vh;
+}
 div#map {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
 }
-
-div.form-buttons {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 200px;
+div.needy,
+div.donation {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
+}
+div.numbers {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+div.need-number,
+div.donate-number {
+    display: flex;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
+    width: 200px;
+    height: 250px;
+    margin: 20px;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
+div.form-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 100px;
+    text-align: center;
+}
+
+div.welcoming {
+    margin-top: 170px;
+    text-align: center;
+}
+
 div.main {
     display: flex;
     flex-direction: column;
@@ -270,12 +331,27 @@ div.logo-part {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
+    font-family: MyWebfont;
+    font-size: 33px;
+}
+
+div.actual-logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* images */
 img.logo {
-    height: 125px;
-    width: 125px;
+    height: 150px;
+    width: 150px;
+}
+img.donation,
+img.needy {
+    width: 190px;
+    height: 250px;
 }
 
 img.logo2 {
@@ -336,9 +412,6 @@ header img.avatar {
 header {
     display: flex;
     justify-content: space-between;
-    border: 0;
-    border-bottom: 1px solid rgba(196, 191, 191);
-    box-shadow: 0px 3px 3px rgba(122, 16, 28, 0.5);
     height: 130px;
     position: fixed;
     /* background: url("popcorn.jpg") no-repeat right fixed; */
@@ -347,20 +420,20 @@ header {
 
 footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     bottom: 0;
     border: 0;
     border-bottom: 1px solid rgba(196, 191, 191);
     box-shadow: 0px 3px 3px rgba(122, 16, 28, 0.5);
     height: 130px;
     position: fixed;
-    /* background: url("popcorn.jpg") no-repeat right fixed; */
     width: 100vw;
 }
 a {
-    padding-right: 20px;
+    /* padding-right: 20px; */
     text-align: center;
-    color: rgba(122, 16, 28);
+    color: rgb(85, 82, 82);
+    text-decoration: none;
 }
 
 #nav-link {
@@ -374,7 +447,7 @@ div.links a {
 .locate {
     position: relative;
     margin-left: 25%;
-    top: 130px;
+    top: 70px;
     right: 1rem;
     background: none;
     border: none;
@@ -408,6 +481,10 @@ li {
 span.space {
     margin-right: 20px;
     font-size: 25px;
+}
+
+span.app {
+    font-family: MyWebfont;
 }
 /* header & li & ul & a */
 /* chat-part*/
@@ -479,32 +556,3 @@ span.space {
     margin-right: 10px;
 }
 /* chat-part*/
-/* The typing effect */
-p.typewriter {
-    /* text-align: center; */
-    overflow: hidden;
-    border-right: 0.15em solid gray;
-    white-space: nowrap;
-    align-self: center;
-    font-size: 25px;
-    letter-spacing: 0.15em;
-    animation: animated-text 4s steps(29, end) 1s 1 normal both,
-        animated-cursor 600ms steps(29, end) infinite;
-}
-@keyframes animated-text {
-    from {
-        width: 0%;
-    }
-    to {
-        width: 100%;
-    }
-}
-@keyframes animated-cursor {
-    from {
-        border-right-color: gray;
-    }
-    to {
-        border-right-color: transparent;
-    }
-}
-/* The typing effect */

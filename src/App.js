@@ -10,6 +10,7 @@ import PrivateChat from "./PrivateChat";
 import BigMap from "./BigMap";
 import NeedyForm from "./NeedyForm";
 import DonateForm from "./DonateForm";
+import AboutUs from "./AboutUs";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -19,6 +20,10 @@ export default class App extends React.Component {
             firstname: "",
             lastname: "",
             bio: "",
+            category: "",
+            description: "",
+            needynumber: "",
+            donationnumber: "",
             profilePic: undefined,
             uploaderVisible: false,
         };
@@ -70,6 +75,23 @@ export default class App extends React.Component {
         });
     }
 
+    handleNeedClick() {
+        axios.get("/api/numberofneeds").then((data) => {
+            console.log(data.data[0]);
+            this.setState({
+                needynumber: data.data[0].count,
+            });
+        });
+    }
+
+    handleDonateClick() {
+        axios.get("/api/numberofdonation").then((data) => {
+            this.setState({
+                donationnumber: data.data[0].count,
+            });
+        });
+    }
+
     render() {
         if (!this.state.email) return null;
         console.log(this.state);
@@ -81,7 +103,7 @@ export default class App extends React.Component {
                         <div className="links">
                             <Link to="/"> Your Profile</Link>
                             <span className="space">|</span>
-                            <Link to="/chat"> Chat</Link>
+                            <Link to="/about-us"> About Us</Link>
                             <span className="space">|</span>
                             <a id="nav-link" onClick={this.handleClick}>
                                 Log out
@@ -93,16 +115,27 @@ export default class App extends React.Component {
                         />
                     </header>
                     <div className="main">
+                        <div className="welcoming">
+                            Happiness is contagious, and we can touch other
+                            people’s lives by our small acts of kindness.{" "}
+                        </div>
                         <div className="form-buttons">
                             <Link to="/needs">
                                 {" "}
-                                <button className="needy">Enter Needs</button>
+                                <div className="needy">
+                                    <img src="/needy.png" className="needy" />
+                                    Enter Needs
+                                </div>
                             </Link>
                             <Link to="/donation">
                                 {" "}
-                                <button className="needy">
+                                <div className="donation">
+                                    <img
+                                        src="/donation.png"
+                                        className="donation"
+                                    />
                                     Enter Donation
-                                </button>
+                                </div>
                             </Link>
                         </div>
 
@@ -131,11 +164,25 @@ export default class App extends React.Component {
                             <Route path="/chat/:id" component={PrivateChat} />
                             <Route path="/needs" component={NeedyForm} />
                             <Route path="/donation" component={DonateForm} />
+                            <Route path="/about-us" component={AboutUs} />
                         </React.Fragment>
-                        <div>
-                            <p>Number of Needs</p>
-                            <p>Number of Donations</p>
+                        <div className="numbers">
+                            <div
+                                className="need-number"
+                                onClick={this.handleNeedClick}
+                            >
+                                Number of Needs: {this.state.needynumber}
+                            </div>
+                            <div
+                                className="donate-number"
+                                onClick={this.handleDonateClick}
+                            >
+                                Number of Donations: {this.state.donationnumber}
+                            </div>
                         </div>
+                    </div>
+                    <div className="downlink">
+                        <Link to="/contact"> Contact Us</Link>
                     </div>
                 </BrowserRouter>
             </React.Fragment>

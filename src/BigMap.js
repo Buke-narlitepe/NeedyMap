@@ -54,29 +54,23 @@ export default function SimpleMap(props) {
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
     }, []);
-    /*
+
     useEffect(() => {
-        console.log("oh look a new chat message, lets scroll to the bottom");
-        axios.get("api/needsform").then((data) => {
-            console.log(data, "needsform");
-            setMarkers({
-                category: data.data.category,
-                description: data.data.description,
-                latitude: data.data.latitude,
-                longitude: data.data.longitude,
-            });
+        const promise1 = axios.get("/api/needsform");
+        const promise2 = axios.get("/api/donationform");
+        Promise.all([promise1, promise2]).then((data) => {
+            const mergedArr = [...data[0].data, ...data[1].data];
+            setMarkers(
+                mergedArr.map((element) => ({
+                    lat: element.latitude,
+                    lng: element.longitude,
+                    category: element.category,
+                    description: element.description,
+                }))
+            );
+            console.log(mergedArr);
         });
-        axios.get("api/donationform").then((data) => {
-            console.log(data, "donationform");
-            setMarkers([
-                {
-                    lat: data.data.category,
-                    lng: data.data.description,
-                },
-            ]);
-        });
-    }, [markers]);
-    */
+    }, []);
 
     const onMapClick = useCallback((e) => {
         setMarkers((current) => [
@@ -112,18 +106,24 @@ export default function SimpleMap(props) {
                 onClick={onMapClick}
                 onLoad={onMapLoad}
             >
-                <Marker
-                    position={{ lat: props.latitude, lng: props.longitude }}
-                    onClick={() => {
-                        setSelected(true);
-                    }}
-                    icon={{
-                        url: `/logo-netflix.png`,
-                        origin: new window.google.maps.Point(0, 0),
-                        anchor: new window.google.maps.Point(15, 15),
-                        scaledSize: new window.google.maps.Size(30, 30),
-                    }}
-                />
+                {markers.map((marker) => (
+                    <Marker
+                        key={`${marker.lat}-${marker.lng}`}
+                        position={{
+                            lat: marker.lat,
+                            lng: marker.lng,
+                        }}
+                        onClick={() => {
+                            setSelected(marker);
+                        }}
+                        icon={{
+                            url: `/logo-netflix.png`,
+                            origin: new window.google.maps.Point(0, 0),
+                            anchor: new window.google.maps.Point(15, 15),
+                            scaledSize: new window.google.maps.Size(30, 30),
+                        }}
+                    />
+                ))}
 
                 {selected ? (
                     <InfoWindow
@@ -209,6 +209,7 @@ function Search({ panTo }) {
             <Combobox onSelect={handleSelect}>
                 <ComboboxInput
                     value={value}
+                    className="search"
                     onChange={handleInput}
                     disabled={!ready}
                     placeholder="Search your location"

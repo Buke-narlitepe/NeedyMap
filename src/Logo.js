@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 export default function Logo() {
     return (
         <div className="logo-part">
-            <Link to="/">
-                <img className="logo" src="/logo-netflix.png" />
-            </Link>
+            <div className="actual-logo">
+                <Link to="/">
+                    <img className="logo" src="/logo.png" />
+                </Link>
+                <p className="app-name">NeedyMap</p>
+            </div>
         </div>
     );
 }

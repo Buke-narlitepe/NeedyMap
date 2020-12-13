@@ -56,7 +56,9 @@ export default function NeedyForm() {
                         setForm({ ...form, latitude, longitude });
                     }}
                 />
-                <button type="submit">Submit</button>
+                <button className="submit" type="submit">
+                    Submit
+                </button>
             </form>
         </div>
     );

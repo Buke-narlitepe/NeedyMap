@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "./axios.js";
 import { Link } from "react-router-dom";
+import Logo from "./Logo.js";
 
 export default class Login extends React.Component {
     constructor() {
@@ -38,8 +39,8 @@ export default class Login extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h2>Login to Netflix and Chat</h2>
-                <img src="logo-netflix.png" className="logo2" />
+                <Logo />
+                <h2>Login to your account</h2>
                 {this.state.error && (
                     <p>
                         Ooopss! Your password and e-mail address does not match,
@@ -65,12 +66,15 @@ export default class Login extends React.Component {
                         Login
                     </button>
                 </form>
-                <Link to="/">
+                <Link to="/registration">
                     <p>Not registered yet?</p>
                 </Link>
                 <Link to="/resetpassword">
                     <p>Bad Memory?</p>
                 </Link>
+                <div className="downlink">
+                    <Link to="/contact"> Contact Us</Link>
+                </div>
             </React.Fragment>
         );
     }
