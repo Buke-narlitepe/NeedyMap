@@ -19,6 +19,10 @@ export default class App extends React.Component {
             firstname: "",
             lastname: "",
             bio: "",
+            category: "",
+            description: "",
+            latitude: "",
+            longitude: "",
             profilePic: undefined,
             uploaderVisible: false,
         };
@@ -40,6 +44,24 @@ export default class App extends React.Component {
             });
         });
         console.log("FORM SUBMITTED", this.state);
+        axios.get("api/needsform").then((data) => {
+            console.log(data, "needsform");
+            this.setState({
+                category: data.data.category,
+                description: data.data.description,
+                latitude: data.data.latitude,
+                longitude: data.data.longitude,
+            });
+        });
+        axios.get("api/donationform").then((data) => {
+            console.log(data, "donationform");
+            this.setState({
+                category: data.data.category,
+                description: data.data.description,
+                latitude: data.data.latitude,
+                longitude: data.data.longitude,
+            });
+        });
     }
 
     toggleUploader() {
@@ -93,7 +115,7 @@ export default class App extends React.Component {
                         />
                     </header>
                     <div className="main">
-                        <div>
+                        <div className="form-buttons">
                             <Link to="/needs">
                                 {" "}
                                 <button className="needy">Enter Needs</button>
@@ -115,7 +137,14 @@ export default class App extends React.Component {
                             <Route
                                 exact
                                 path="/"
-                                component={Map}
+                                render={() => (
+                                    <Map
+                                        category={this.state.category}
+                                        description={this.state.category}
+                                        latitude={this.state.category}
+                                        longitude={this.state.category}
+                                    />
+                                )}
                                 // render={() => (
                                 //     <Profile
                                 //         firstname={this.state.firstname}

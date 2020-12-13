@@ -78,7 +78,7 @@ module.exports.addDonateForm = function addDonateForm(
     );
 };
 
-module.exports.getDonateFormById = function getDonateFormById(id) {
+module.exports.getDonationFormById = function getDonationFormById(id) {
     return db.query("SELECT * FROM donation WHERE id=$1", [id]);
 };
 

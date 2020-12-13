@@ -148,6 +148,7 @@ button.needy {
     justify-content: center;
     align-self: center;
 }
+
 form {
     display: flex;
     flex-direction: column;
@@ -192,7 +193,24 @@ div.modal {
     left: 82%;
     transition: left 1s linear;
 }
+div.map {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+div#map {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
+div.form-buttons {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 200px;
+    text-align: center;
+}
 div.main {
     display: flex;
     flex-direction: column;
@@ -355,6 +373,7 @@ div.links a {
 
 .locate {
     position: relative;
+    margin-left: 25%;
     top: 130px;
     right: 1rem;
     background: none;

@@ -14,6 +14,7 @@ export default function NeedyForm() {
 
     const handleChange = (e) => {
         e.preventDefault();
+        console.log(form);
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
@@ -29,6 +30,7 @@ export default function NeedyForm() {
                 console.log(e);
                 // setError(true);
             });
+        console.log(form);
     };
 
     return (
