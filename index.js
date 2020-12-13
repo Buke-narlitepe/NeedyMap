@@ -183,10 +183,10 @@ app.post("/api/donation", (req, res) => {
 });
 
 app.get("/api/needsform", function (req, res) {
-    db.getNeedFormById(req.session.userId)
+    db.getNeedForm()
         .then((data) => {
             console.log(data.rows);
-            res.json(data.rows[0]);
+            res.json(data.rows);
         })
         .catch((err) => {
             console.log("err in GET /needsform", err);
@@ -194,10 +194,10 @@ app.get("/api/needsform", function (req, res) {
 });
 
 app.get("/api/donationform", function (req, res) {
-    db.getDonationFormById(req.session.userId)
+    db.getDonationForm()
         .then((data) => {
             console.log(data.rows);
-            res.json(data.rows[0]);
+            res.json(data.rows);
         })
         .catch((err) => {
             console.log("err in GET /donationform", err);

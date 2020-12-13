@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "./axios.js";
-import Map from "./Map";
+import SmallMap from "./SmallMap";
 
 export default function NeedyForm() {
     const [form, setForm] = useState({
@@ -51,7 +51,7 @@ export default function NeedyForm() {
                     onChange={handleChange}
                     value={form.description}
                 />
-                <Map
+                <SmallMap
                     handleClick={(latitude, longitude) => {
                         setForm({ ...form, latitude, longitude });
                     }}

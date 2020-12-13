@@ -7,7 +7,7 @@ import Uploader from "./Uploader.js";
 // import Profile from "./Profile.js";
 import Chat from "./Chat";
 import PrivateChat from "./PrivateChat";
-import Map from "./Map";
+import BigMap from "./BigMap";
 import NeedyForm from "./NeedyForm";
 import DonateForm from "./DonateForm";
 
@@ -19,10 +19,6 @@ export default class App extends React.Component {
             firstname: "",
             lastname: "",
             bio: "",
-            category: "",
-            description: "",
-            latitude: "",
-            longitude: "",
             profilePic: undefined,
             uploaderVisible: false,
         };
@@ -44,24 +40,6 @@ export default class App extends React.Component {
             });
         });
         console.log("FORM SUBMITTED", this.state);
-        axios.get("api/needsform").then((data) => {
-            console.log(data, "needsform");
-            this.setState({
-                category: data.data.category,
-                description: data.data.description,
-                latitude: data.data.latitude,
-                longitude: data.data.longitude,
-            });
-        });
-        axios.get("api/donationform").then((data) => {
-            console.log(data, "donationform");
-            this.setState({
-                category: data.data.category,
-                description: data.data.description,
-                latitude: data.data.latitude,
-                longitude: data.data.longitude,
-            });
-        });
     }
 
     toggleUploader() {
@@ -137,14 +115,7 @@ export default class App extends React.Component {
                             <Route
                                 exact
                                 path="/"
-                                render={() => (
-                                    <Map
-                                        category={this.state.category}
-                                        description={this.state.category}
-                                        latitude={this.state.category}
-                                        longitude={this.state.category}
-                                    />
-                                )}
+                                component={BigMap}
                                 // render={() => (
                                 //     <Profile
                                 //         firstname={this.state.firstname}

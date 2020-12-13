@@ -96,7 +96,7 @@ export default function SimpleMap(props) {
                 {markers.map((marker) => (
                     <Marker
                         key={`${marker.lat}-${marker.lng}`}
-                        position={{ lat: props.latitude, lng: props.longitude }}
+                        position={{ lat: marker.lat, lng: marker.lng }}
                         onClick={() => {
                             setSelected(marker);
                         }}
@@ -118,8 +118,6 @@ export default function SimpleMap(props) {
                     >
                         <div>
                             <h2>Need Details</h2>
-                            <p>{props.category}</p>
-                            <p>{props.description}</p>
                             <p>
                                 Product text <Link to={`/chat`}>Contact</Link>
                             </p>

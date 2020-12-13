@@ -59,8 +59,8 @@ module.exports.addNeedForm = function addNeedForm(
     );
 };
 
-module.exports.getNeedFormById = function getNeedFormById(id) {
-    return db.query("SELECT * FROM needs WHERE id=$1", [id]);
+module.exports.getNeedForm = function getNeedForm() {
+    return db.query("SELECT * FROM needs");
 };
 
 module.exports.addDonateForm = function addDonateForm(
@@ -78,8 +78,8 @@ module.exports.addDonateForm = function addDonateForm(
     );
 };
 
-module.exports.getDonationFormById = function getDonationFormById(id) {
-    return db.query("SELECT * FROM donation WHERE id=$1", [id]);
+module.exports.getDonationForm = function getDonationForm() {
+    return db.query("SELECT * FROM donation");
 };
 
 //        Reset Password & Create New One             //
