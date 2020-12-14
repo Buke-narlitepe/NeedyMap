@@ -1,4 +1,3 @@
-// import { render } from "@testing-library/react";
 import React, { useState } from "react";
 import axios from "./axios.js";
 import SmallMap from "./SmallMap";

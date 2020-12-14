@@ -43,7 +43,7 @@ const center = {
 
 export default function SimpleMap(props) {
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: "AIzaSyAJzF3Im06VQbktvf0WwRwrf9B7-jMK5Xw",
+        googleMapsApiKey: "AIzaSyCctLDWpNtuKU8O-9POBCAVUXgzowa_ZZY",
         libraries,
     });
 
@@ -62,6 +62,8 @@ export default function SimpleMap(props) {
             const mergedArr = [...data[0].data, ...data[1].data];
             setMarkers(
                 mergedArr.map((element) => ({
+                    needer_id: element.needer_id,
+                    donator_id: element.donator_id,
                     lat: element.latitude,
                     lng: element.longitude,
                     category: element.category,
@@ -95,6 +97,22 @@ export default function SimpleMap(props) {
 
     return (
         <div className="map">
+            <div className="form-buttons">
+                <Link to="/needs">
+                    {" "}
+                    <div className="needy">
+                        <img src="/needy.png" className="needy" />
+                        Enter Needs
+                    </div>
+                </Link>
+                <Link to="/donation">
+                    {" "}
+                    <div className="donation">
+                        <img src="/donation.png" className="donation" />
+                        Enter Donation
+                    </div>
+                </Link>
+            </div>
             <Locate panTo={panTo} />
             <Search panTo={panTo} />
             <GoogleMap
@@ -117,7 +135,9 @@ export default function SimpleMap(props) {
                             setSelected(marker);
                         }}
                         icon={{
-                            url: `/logo-netflix.png`,
+                            url: marker.needer_id
+                                ? `/needy-pin.png`
+                                : `/donator-pin.png`,
                             origin: new window.google.maps.Point(0, 0),
                             anchor: new window.google.maps.Point(15, 15),
                             scaledSize: new window.google.maps.Size(30, 30),
@@ -133,9 +153,13 @@ export default function SimpleMap(props) {
                         }}
                     >
                         <div>
-                            <h2>Details</h2>
-                            <p>{props.category}</p>
-                            <p>{props.description}</p>
+                            <h2>
+                                {selected.needer_id
+                                    ? "Needs Details"
+                                    : "Donation Details"}
+                            </h2>
+                            <p>{selected.category}</p>
+                            <p>{selected.description}</p>
                             <p>
                                 Product text <Link to={`/chat`}>Contact</Link>
                             </p>

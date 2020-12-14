@@ -193,28 +193,6 @@ app.get("/api/needsform", function (req, res) {
         });
 });
 
-app.get("/api/numberofneeds", function (req, res) {
-    db.getNeedNumbers()
-        .then((data) => {
-            console.log(data.rows[0]);
-            res.json(data.rows[0]);
-        })
-        .catch((err) => {
-            console.log("err in GET /needsform", err);
-        });
-});
-
-app.get("/api/numberofdonation", function (req, res) {
-    db.getDonationNumbers()
-        .then((data) => {
-            console.log(data.rows[0]);
-            res.json(data.rows[0]);
-        })
-        .catch((err) => {
-            console.log("err in GET /needsform", err);
-        });
-});
-
 app.get("/api/donationform", function (req, res) {
     db.getDonationForm()
         .then((data) => {

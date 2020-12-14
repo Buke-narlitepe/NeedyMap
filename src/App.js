@@ -4,13 +4,16 @@ import Logo from "./Logo.js";
 import axios from "./axios.js";
 import ProfilePic from "./ProfilePic.js";
 import Uploader from "./Uploader.js";
-// import Profile from "./Profile.js";
+import Profile from "./Profile.js";
 import Chat from "./Chat";
 import PrivateChat from "./PrivateChat";
 import BigMap from "./BigMap";
 import NeedyForm from "./NeedyForm";
 import DonateForm from "./DonateForm";
 import AboutUs from "./AboutUs";
+import Needs from "./Needs";
+import Donations from "./Donations";
+// import ContactUs from "./ContactUs";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -75,23 +78,6 @@ export default class App extends React.Component {
         });
     }
 
-    handleNeedClick() {
-        axios.get("/api/numberofneeds").then((data) => {
-            console.log(data.data[0]);
-            this.setState({
-                needynumber: data.data[0].count,
-            });
-        });
-    }
-
-    handleDonateClick() {
-        axios.get("/api/numberofdonation").then((data) => {
-            this.setState({
-                donationnumber: data.data[0].count,
-            });
-        });
-    }
-
     render() {
         if (!this.state.email) return null;
         console.log(this.state);
@@ -101,10 +87,14 @@ export default class App extends React.Component {
                     <header>
                         <Logo />
                         <div className="links">
-                            <Link to="/"> Your Profile</Link>
-                            <span className="space">|</span>
+                            <Link to="/user"> Your Profile</Link>
+                            <span className="space"></span>
                             <Link to="/about-us"> About Us</Link>
-                            <span className="space">|</span>
+                            <span className="space"></span>
+                            <Link to="/numberofneeds"> Needs</Link>
+                            <span className="space"></span>
+                            <Link to="/numberofdonations"> Donations</Link>
+                            <span className="space"></span>
                             <a id="nav-link" onClick={this.handleClick}>
                                 Log out
                             </a>
@@ -118,25 +108,6 @@ export default class App extends React.Component {
                         <div className="welcoming">
                             Happiness is contagious, and we can touch other
                             people’s lives by our small acts of kindness.{" "}
-                        </div>
-                        <div className="form-buttons">
-                            <Link to="/needs">
-                                {" "}
-                                <div className="needy">
-                                    <img src="/needy.png" className="needy" />
-                                    Enter Needs
-                                </div>
-                            </Link>
-                            <Link to="/donation">
-                                {" "}
-                                <div className="donation">
-                                    <img
-                                        src="/donation.png"
-                                        className="donation"
-                                    />
-                                    Enter Donation
-                                </div>
-                            </Link>
                         </div>
 
                         <Uploader
@@ -160,26 +131,31 @@ export default class App extends React.Component {
                                 //     />
                                 // )}
                             />
+                            <Route
+                                exact
+                                path="/user"
+                                render={() => (
+                                    <Profile
+                                        firstname={this.state.firstname}
+                                        lastname={this.state.lastname}
+                                        bio={this.state.bio}
+                                        profilePic={this.state.profilePic}
+                                        toggleUploader={this.toggleUploader}
+                                        setBio={this.setBio}
+                                    />
+                                )}
+                            />
                             <Route exact path="/chat" component={Chat} />
                             <Route path="/chat/:id" component={PrivateChat} />
                             <Route path="/needs" component={NeedyForm} />
                             <Route path="/donation" component={DonateForm} />
                             <Route path="/about-us" component={AboutUs} />
+                            <Route path="/numberofneeds" component={Needs} />
+                            <Route
+                                path="/numberofdonations"
+                                component={Donations}
+                            />
                         </React.Fragment>
-                        <div className="numbers">
-                            <div
-                                className="need-number"
-                                onClick={this.handleNeedClick}
-                            >
-                                Number of Needs: {this.state.needynumber}
-                            </div>
-                            <div
-                                className="donate-number"
-                                onClick={this.handleDonateClick}
-                            >
-                                Number of Donations: {this.state.donationnumber}
-                            </div>
-                        </div>
                     </div>
                     <div className="downlink">
                         <Link to="/contact"> Contact Us</Link>
