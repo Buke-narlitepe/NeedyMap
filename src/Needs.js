@@ -13,17 +13,19 @@ export default function Needs() {
     }, []);
 
     return (
-        <div className="needs-table">
-            <p>{needs.length}</p>
-            {needs.map((need) => (
-                <div key={need.id}>
-                    <p>{need.category}</p>
-                    <p>{need.description}</p>
-                    <Link to={`/chat/${need.needer_id}`}>
-                        <h2 className="contact">Contact</h2>
-                    </Link>
-                </div>
-            ))}
+        <div>
+            <h2 className="length">Number of Needs: {needs.length}</h2>
+            <div className="needs-table">
+                {needs.map((need) => (
+                    <div className="need-item" key={need.id}>
+                        <p>{need.category}</p>
+                        <p>{need.description}</p>
+                        <Link to={`/chat/${need.needer_id}`}>
+                            <img src="/chat.png" className="chat"></img>
+                        </Link>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

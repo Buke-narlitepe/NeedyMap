@@ -276,6 +276,49 @@ app.get("/api/user", function (req, res) {
         });
 });
 
+//delete user
+app.post("/api/deleteuser", (req, res) => {
+    if (!req.session.userId) {
+        return res.sendStatus(401);
+    }
+    db.deleteUser(req.session.userId)
+        .then(() => {
+            req.session = null;
+            res.sendStatus(200);
+        })
+        .catch((e) => {
+            console.log(e);
+            res.sendStatus(500);
+        });
+});
+
+//delete need
+app.post("/api/delete-need", (req, res) => {
+    console.log(req.body);
+    db.deleteNeed(req.body.id)
+        .then(() => {
+            res.sendStatus(200);
+        })
+        .catch((e) => {
+            console.log(e);
+            res.sendStatus(500);
+        });
+});
+
+// delete donation
+
+app.post("/api/delete-donation", (req, res) => {
+    console.log(req.body);
+    db.deleteDonation(req.body.id)
+        .then(() => {
+            res.sendStatus(200);
+        })
+        .catch((e) => {
+            console.log(e);
+            res.sendStatus(500);
+        });
+});
+
 //upload avatar
 app.post("/api/upload", uploader.single("file"), s3, (req, res) => {
     db.uploadImage(req.body.url, req.session.userId)

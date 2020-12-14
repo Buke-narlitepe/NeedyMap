@@ -3,7 +3,7 @@ body {
     background: url("background4.jpg") no-repeat center fixed;
     margin: 0;
     padding: 0;
-    font-family: "Titillium Web", sans-serif;
+    font-family: "MyFont";
     font-size: 25px;
     font-weight: 600;
     background-size: cover;
@@ -11,10 +11,18 @@ body {
     height: 100%;
     width: 100vw;
 }
-
+@font-face {
+    font-family: "MyFont";
+    src: url("Fox\ &\ Cat.ttf");
+}
 @font-face {
     font-family: "MyWebFont";
     src: url("Amatemora.ttf");
+}
+
+@font-face {
+    font-family: "Welcoming";
+    src: url("journal.ttf");
 }
 
 html {
@@ -38,7 +46,7 @@ input {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    font-family: "Finger Paint", cursive;
+    font-family: "MyFont";
 }
 
 input[type="file"] {
@@ -62,7 +70,7 @@ textarea {
     margin-bottom: 20px;
     background: transparent;
     color: rgb(85, 82, 82);
-    font-family: "Finger Paint", cursive;
+    font-family: "MyFont";
     height: 200px;
     width: 200px;
 }
@@ -101,6 +109,10 @@ h2 {
     text-align: center;
 }
 
+h2.length {
+    margin-top: 150px;
+}
+
 p.biotext,
 p.score,
 p.title {
@@ -133,6 +145,7 @@ h2.people-name {
 button {
     opacity: 0.9;
     text-align: center;
+    font-family: "MyFont";
 }
 
 button.upload,
@@ -199,11 +212,42 @@ div.modal {
     width: 230px;
     height: 200px;
     display: flex;
+    font-size: 17px;
     z-index: 1;
     position: fixed;
     left: 82%;
     transition: left 1s linear;
 }
+
+div.modal a:hover {
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.2);
+}
+
+div.needs-table,
+div.donations-table {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: space-around;
+}
+
+div.need-item,
+div.donation-item {
+    border: 1px solid transparent;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
+}
+
+.need-item,
+.donation-item:hover {
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 1);
+}
+
+.need-item:hover {
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 1);
+}
+
 div.map {
     position: relative;
     left: 50%;
@@ -211,10 +255,12 @@ div.map {
 }
 div.downlink {
     padding-top: 70px;
+    text-align: center;
 }
 div.uplink {
     width: 300px;
     display: flex;
+    align-items: center;
     justify-content: space-around;
 }
 
@@ -222,11 +268,17 @@ div.slogan,
 div.about-part {
     position: relative;
     left: 50%;
-    top: 300px;
+    top: 130px;
+
     transform: translateX(-50%);
     text-align: center;
     width: 50vw;
     height: 30vh;
+}
+
+div.slogan {
+    top: 250px;
+    font-size: 28px;
 }
 div#map {
     position: relative;
@@ -259,6 +311,12 @@ div.donate-number {
     align-items: center;
     text-align: center;
 }
+
+div.donate-part,
+div.needs-part {
+    position: relative;
+    margin-top: 130px;
+}
 div.form-buttons {
     display: flex;
     flex-direction: row;
@@ -270,6 +328,8 @@ div.form-buttons {
 div.welcoming {
     margin-top: 170px;
     text-align: center;
+    font-family: "Welcoming";
+    font-size: 38px;
 }
 
 div.main {
@@ -311,6 +371,7 @@ div.slide {
     width: 230px;
     height: 200px;
     display: flex;
+    font-size: 17px;
     z-index: 1;
     position: fixed;
     left: 105%;
@@ -354,6 +415,16 @@ img.needy {
     height: 250px;
 }
 
+img.bin {
+    width: 25px;
+    height: 25px;
+    position: fixed;
+    top: 5px;
+}
+img.chat {
+    width: 40px;
+    height: 40px;
+}
 img.logo2 {
     position: relative;
     left: 50%;
@@ -414,8 +485,9 @@ header {
     justify-content: space-between;
     height: 130px;
     position: fixed;
-    background-color: rgb(247, 225, 210, 0.5);
+    background: url("background4.jpg") no-repeat center fixed;
     width: 100vw;
+    z-index: 1;
 }
 
 footer {
@@ -470,14 +542,20 @@ ul {
 li {
     display: flex;
     flex-direction: row;
+    font-size: 13px;
     padding: 20px;
     align-self: center;
     justify-content: center;
+    background-color: white;
     box-shadow: 0px 3px 3px rgba(122, 16, 28, 0.5);
-    width: 50%;
+    width: 70%;
+    height: 30px;
     margin-bottom: 30px;
     border-radius: 10px;
+    z-index: 5;
+    cursor: pointer;
 }
+
 span.space {
     margin-right: 20px;
     font-size: 25px;

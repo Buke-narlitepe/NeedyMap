@@ -62,6 +62,7 @@ export default function SimpleMap(props) {
             const mergedArr = [...data[0].data, ...data[1].data];
             setMarkers(
                 mergedArr.map((element) => ({
+                    id: element.id,
                     needer_id: element.needer_id,
                     donator_id: element.donator_id,
                     lat: element.latitude,
@@ -74,18 +75,30 @@ export default function SimpleMap(props) {
         });
     }, []);
 
-    const onMapClick = useCallback((e) => {
-        setMarkers((current) => [
-            ...current,
-            {
-                lat: e.latLng.lat(),
-                lng: e.latLng.lng(),
-            },
-        ]);
-        if (props.handleClick) {
-            props.handleClick(e.latLng.lat(), e.latLng.lng());
+    const deleteMarker = () => {
+        if (selected.needer_id) {
+            axios.post("/api/delete-need", selected).then(() => {
+                location.replace("/");
+            });
+        } else if (selected.donator_id) {
+            axios.post("/api/delete-donation", selected).then(() => {
+                location.replace("/");
+            });
         }
-    }, []);
+    };
+
+    // const onMapClick = useCallback((e) => {
+    //     setMarkers((current) => [
+    //         ...current,
+    //         {
+    //             lat: e.latLng.lat(),
+    //             lng: e.latLng.lng(),
+    //         },
+    //     ]);
+    //     if (props.handleClick) {
+    //         props.handleClick(e.latLng.lat(), e.latLng.lng());
+    //     }
+    // }, []);
 
     const panTo = useCallback(({ lat, lng }) => {
         mapRef.current.panTo({ lat, lng });
@@ -93,10 +106,14 @@ export default function SimpleMap(props) {
     }, []);
 
     if (loadError) return "Error";
-    if (!isLoaded) return "Loading...";
+    if (!isLoaded) return <img src="loading.gif" />;
 
     return (
         <div className="map">
+            <div className="welcoming">
+                &quot; Happiness is contagious, and we can touch other people’s
+                lives by our small acts of kindness. &quot;{" "}
+            </div>
             <div className="form-buttons">
                 <Link to="/needs">
                     {" "}
@@ -121,7 +138,6 @@ export default function SimpleMap(props) {
                 zoom={8}
                 center={center}
                 options={options}
-                onClick={onMapClick}
                 onLoad={onMapLoad}
             >
                 {markers.map((marker) => (
@@ -153,6 +169,11 @@ export default function SimpleMap(props) {
                         }}
                     >
                         <div>
+                            <img
+                                src="/delete-bin.png"
+                                className="bin"
+                                onClick={deleteMarker}
+                            />
                             <h2>
                                 {selected.needer_id
                                     ? "Needs Details"
@@ -161,12 +182,23 @@ export default function SimpleMap(props) {
                             <p>{selected.category}</p>
                             <p>{selected.description}</p>
                             <p>
-                                Product text <Link to={`/chat`}>Contact</Link>
+                                <Link
+                                    to={
+                                        selected.needer_id
+                                            ? `/chat/${selected.needer_id}`
+                                            : `/chat/${selected.needer_id}`
+                                    }
+                                >
+                                    <img src="/chat.png" className="chat"></img>
+                                </Link>
                             </p>
                         </div>
                     </InfoWindow>
                 ) : null}
             </GoogleMap>
+            <div className="downlink">
+                <Link to="/contact"> Contact Us</Link>
+            </div>
         </div>
     );
 }
@@ -239,7 +271,7 @@ function Search({ panTo }) {
                     placeholder="Search your location"
                 />
                 <ComboboxPopover>
-                    <ComboboxList>
+                    <ComboboxList className="list">
                         {status === "OK" &&
                             data.map(({ id, description }) => (
                                 <ComboboxOption key={id} value={description} />

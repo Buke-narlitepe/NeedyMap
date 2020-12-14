@@ -87,17 +87,11 @@ export default class App extends React.Component {
                     <header>
                         <Logo />
                         <div className="links">
-                            <Link to="/user"> Your Profile</Link>
-                            <span className="space"></span>
                             <Link to="/about-us"> About Us</Link>
                             <span className="space"></span>
                             <Link to="/numberofneeds"> Needs</Link>
                             <span className="space"></span>
                             <Link to="/numberofdonations"> Donations</Link>
-                            <span className="space"></span>
-                            <a id="nav-link" onClick={this.handleClick}>
-                                Log out
-                            </a>
                         </div>
                         <ProfilePic
                             profilePic={this.state.profilePic}
@@ -105,11 +99,6 @@ export default class App extends React.Component {
                         />
                     </header>
                     <div className="main">
-                        <div className="welcoming">
-                            Happiness is contagious, and we can touch other
-                            people’s lives by our small acts of kindness.{" "}
-                        </div>
-
                         <Uploader
                             closeComponent={this.closeComponent}
                             setImage={this.setImage}
@@ -156,9 +145,6 @@ export default class App extends React.Component {
                                 component={Donations}
                             />
                         </React.Fragment>
-                    </div>
-                    <div className="downlink">
-                        <Link to="/contact"> Contact Us</Link>
                     </div>
                 </BrowserRouter>
             </React.Fragment>

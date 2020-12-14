@@ -13,17 +13,19 @@ export default function Needs() {
     }, []);
 
     return (
-        <div className="donations-table">
-            <p>{donations.length}</p>
-            {donations.map((donation) => (
-                <div key={donation.id}>
-                    <p>{donation.category}</p>
-                    <p>{donation.description}</p>
-                    <Link to={`/chat/${donation.donator_id}`}>
-                        <h2 className="contact">Contact</h2>
-                    </Link>
-                </div>
-            ))}
+        <div>
+            <h2 className="length">Number of Donations:{donations.length}</h2>
+            <div className="donations-table">
+                {donations.map((donation) => (
+                    <div className="donation-item" key={donation.id}>
+                        <p>{donation.category}</p>
+                        <p>{donation.description}</p>
+                        <Link to={`/chat/${donation.donator_id}`}>
+                            <img src="/chat.png" className="chat"></img>
+                        </Link>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

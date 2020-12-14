@@ -95,7 +95,7 @@ export default function SimpleMap(props) {
                             setSelected(marker);
                         }}
                         icon={{
-                            url: `/logo-netflix.png`,
+                            url: `/needy-pin.png`,
                             origin: new window.google.maps.Point(0, 0),
                             anchor: new window.google.maps.Point(15, 15),
                             scaledSize: new window.google.maps.Size(30, 30),

@@ -22,6 +22,7 @@ export default class Profile extends React.Component {
                     <p className="name">
                         {this.props.firstname} {this.props.lastname}
                     </p>
+                    <p className="name">{this.props.bio}</p>
                 </div>
             </div>
         );

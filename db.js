@@ -26,6 +26,10 @@ module.exports.getUserById = function getUserById(id) {
     return db.query("SELECT * FROM users WHERE id=$1", [id]);
 };
 
+module.exports.deleteUser = function deleteUser(id) {
+    return db.query("DELETE FROM users WHERE id=$1", [id]);
+};
+
 //                Contact Form                  //
 module.exports.addContactForm = function addContactForm(
     firstname,
@@ -63,6 +67,14 @@ module.exports.getNeedForm = function getNeedForm() {
     return db.query("SELECT * FROM needs");
 };
 
+module.exports.deleteNeed = function deleteNeed(id) {
+    return db.query("DELETE FROM needs WHERE id=$1", [id]);
+};
+
+module.exports.deleteDonation = function deleteDonation(id) {
+    return db.query("DELETE FROM donation WHERE id=$1", [id]);
+};
+
 module.exports.addDonateForm = function addDonateForm(
     donator_id,
     category,
@@ -71,7 +83,7 @@ module.exports.addDonateForm = function addDonateForm(
     longitude
 ) {
     return db.query(
-        `INSERT INTO donation (donater_id, category, description, latitude, longitude)
+        `INSERT INTO donation (donator_id, category, description, latitude, longitude)
     VALUES ($1, $2, $3, $4, $5)
     RETURNING *`,
         [donator_id, category, description, latitude, longitude]

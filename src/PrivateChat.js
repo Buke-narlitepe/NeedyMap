@@ -45,7 +45,7 @@ export default function Chat(props) {
                                     src={message.image}
                                 ></img>
                                 <h2 className="chat-name">
-                                    {message.firstname} {message.lastname} {""}
+                                    {message.firstname} {message.lastname}
                                 </h2>
                                 <p className="time">
                                     {moment(message.created_at)
@@ -54,7 +54,6 @@ export default function Chat(props) {
                                 </p>
                             </div>
                             <p className="message">{message.message}</p>
-                            {/* {typing && <p>{message.firstname} is typing...</p>} */}
                         </div>
                     ))}
             </div>

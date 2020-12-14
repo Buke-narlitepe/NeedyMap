@@ -14,6 +14,7 @@ export default function DonateForm() {
 
     const handleChange = (e) => {
         e.preventDefault();
+        console.log(form);
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
