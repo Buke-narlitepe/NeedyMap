@@ -14,15 +14,14 @@ export default class Profile extends React.Component {
             <div className="profile">
                 <div className="profilepic">
                     <ProfilePic
-                        profilePic={this.props.profilePic}
+                        firstname={this.props.firstname}
                         toggleUploader={this.props.toggleUploader}
                     />
                 </div>
                 <div className="biopart">
-                    <p className="name">
-                        {this.props.firstname} {this.props.lastname}
-                    </p>
-                    <p className="name">{this.props.bio}</p>
+                    <p className="name">Firstname: {this.props.firstname}</p>
+                    <p className="name">Lastname: {this.props.lastname}</p>
+                    <p className="name">Email: {this.props.email}</p>
                 </div>
             </div>
         );

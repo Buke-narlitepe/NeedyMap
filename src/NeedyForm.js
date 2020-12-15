@@ -6,6 +6,8 @@ export default function NeedyForm() {
     const [form, setForm] = useState({
         category: "",
         description: "",
+        city: "",
+        address: "",
         latitude: "",
         longitude: "",
     });
@@ -50,6 +52,20 @@ export default function NeedyForm() {
                     placeholder="Product Description"
                     onChange={handleChange}
                     value={form.description}
+                />
+                <input
+                    type="text"
+                    name="city"
+                    placeholder="City"
+                    onChange={handleChange}
+                    value={form.city}
+                />
+                <input
+                    type="text"
+                    name="address"
+                    placeholder="Address"
+                    onChange={handleChange}
+                    value={form.address}
                 />
                 <SmallMap
                     handleClick={(latitude, longitude) => {

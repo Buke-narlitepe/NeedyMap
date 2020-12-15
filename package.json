@@ -41,6 +41,7 @@
         "react-router": "^5.0.1",
         "react-router-dom": "^5.0.1",
         "react-test-renderer": "^16.6.0",
+        "react-toastify": "^6.2.0",
         "redux": "^3.7.1",
         "redux-devtools-extension": "^2.13.2",
         "redux-promise": "^0.5.3",
@@ -59,5 +60,9 @@
     },
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "devDependencies": {
+        "css-loader": "^5.0.1",
+        "style-loader": "^2.0.0"
+    }
 }

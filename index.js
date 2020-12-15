@@ -151,6 +151,8 @@ app.post("/api/needs", (req, res) => {
         req.session.userId,
         req.body.category,
         req.body.description,
+        req.body.city,
+        req.body.address,
         req.body.latitude,
         req.body.longitude
     )
@@ -170,6 +172,8 @@ app.post("/api/donation", (req, res) => {
         req.session.userId,
         req.body.category,
         req.body.description,
+        req.body.city,
+        req.body.address,
         req.body.latitude,
         req.body.longitude
     )
@@ -373,8 +377,11 @@ io.on("connection", async function (socket) {
     console.log("user connected", socket.id);
 
     const userId = socket.request.session.userId;
-    connectedOnes[userId] = socket.id;
-
+    if (!connectedOnes[userId]) {
+        connectedOnes[userId] = [socket.id];
+    } else {
+        connectedOnes[userId].push(socket.id);
+    }
     //prevent unauthenticated users to oopen a connection to our websocket
     if (!userId) {
         return socket.disconnect(true);
@@ -406,23 +413,41 @@ io.on("connection", async function (socket) {
             ...text.rows[0],
             ...userInfo.rows[0],
         });
-
-        if (connectedOnes[otherId]) {
-            io.to(connectedOnes[otherId]).emit("privateMessage", {
+        console.log(otherId, connectedOnes);
+        connectedOnes[otherId].forEach((element) => {
+            io.to(element).emit("privateMessage", {
                 ...text.rows[0],
                 ...userInfo.rows[0],
+                notification: true,
             });
-        }
+        });
     });
     /*
-    socket.on("typingstart", (otherId) => {
-        io.to(connectedOnes[otherId]).emit("typingstart", socket.id);
-    });
+    socket.on("privateImage", async function (privateimg, otherId) {
+        const text = await db.sendPrivateMessage(privateimg, userId, otherId);
+        const userInfo = await db.getUserById(userId);
+        console.log(privateimg);
+        console.log(text.rows);
 
-    socket.on("typingend", (otherId) => {
-        io.to(socket.id).emit("typingend", otherId);
+        io.to(socket.id).emit("privateImage", {
+            ...text.rows[0],
+            ...userInfo.rows[0],
+        });
+        console.log(otherId, connectedOnes);
+        connectedOnes[otherId].forEach((element) => {
+            io.to(element).emit("privateMessage", {
+                ...text.rows[0],
+                ...userInfo.rows[0],
+                notification: true,
+            });
+        });
     });
     */
+    socket.on("disconnected", function () {
+        connectedOnes[userId] = connectedOnes[userId].filter(
+            (i) => i !== socket.id
+        );
+    });
 });
 
 // because of using sockets, we changed app to server

@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import Logo from "./Logo.js";
+import Logo from "./Logo.js";
 
 export default function AboutUs() {
     return (
         <div>
-            {/* <header>
+            <div className="header">
                 <Logo />
-                <div className="uplink">
+                {/* <div className="uplink">
                     <Link to="/registration"> Register</Link>
-                </div>
-            </header> */}
+                </div> */}
+            </div>
             <div className="about-part">
                 <h2>
                     How does <span className="app">NeedyMap</span> work?
@@ -31,11 +31,20 @@ export default function AboutUs() {
                     form.
                 </p>
             </div>
-            <footer>
-                <div className="downlink">
+            <div className="copyright-icons-about">
+                <div className="copyright">
+                    Copyright 2020 <span className="app">NeedyMap</span>.
+                    <span className="space">|</span>Terms &amp; Conditions
+                    <span className="space">|</span> Privacy
+                    <span className="space">|</span>
                     <Link to="/contact"> Contact Us</Link>
                 </div>
-            </footer>
+                <div className="icons">
+                    <img src="/facebook.png"></img>
+                    <img src="/instagram.png"></img>
+                    <img src="/twitter.png"></img>
+                </div>
+            </div>
         </div>
     );
 }

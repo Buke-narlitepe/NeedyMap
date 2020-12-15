@@ -47,6 +47,7 @@ input {
     left: 50%;
     transform: translateX(-50%);
     font-family: "MyFont";
+    font-size: 23px;
 }
 
 input[type="file"] {
@@ -60,19 +61,22 @@ input[type="file"] {
     z-index: -1;
     margin-right: 0;
 }
+
 textarea {
     border: 1px solid transparent;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     outline: 0;
     width: 40%;
-    display: block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     margin-bottom: 20px;
     background: transparent;
     color: rgb(85, 82, 82);
     font-family: "MyFont";
     height: 200px;
-    width: 200px;
+    font-size: 23px;
 }
 
 textarea.message-area {
@@ -109,6 +113,13 @@ h2 {
     text-align: center;
 }
 
+h2 {
+    margin-top: 50px;
+}
+
+h2.contact {
+    margin-top: 200px;
+}
 h2.length {
     margin-top: 150px;
 }
@@ -125,6 +136,12 @@ p.app-name {
 
 p.search {
     padding-top: 40px;
+}
+
+p.prof-welcome {
+    font-family: "MyWebFont";
+    margin-top: 40px;
+    margin-bottom: 0;
 }
 h3.change {
     text-align: center;
@@ -157,7 +174,8 @@ button.bio,
 button.add,
 button.edit,
 button.save,
-button.submit {
+button.submit,
+button.contact {
     cursor: pointer;
     border-radius: 10px;
     color: rgb(85, 82, 82);
@@ -165,7 +183,7 @@ button.submit {
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
     background-color: rgba(255, 255, 255, 0.2);
     padding: 8px 20px;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: bold;
     height: 60px;
     width: 180px;
@@ -176,6 +194,10 @@ button.submit {
 form {
     display: flex;
     flex-direction: column;
+}
+form.register-form {
+    position: relative;
+    top: 50%;
 }
 button.upload {
     font-size: 12px;
@@ -238,7 +260,12 @@ div.donation-item {
     border-radius: 10px;
     box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
 }
-
+div.need-item p,
+div.donation-item p {
+    text-align: left;
+    margin-left: 20px;
+    font-size: 19px;
+}
 .need-item,
 .donation-item:hover {
     box-shadow: 0px 3px 10px rgba(122, 16, 28, 1);
@@ -253,9 +280,14 @@ div.map {
     left: 50%;
     transform: translateX(-50%);
 }
+
+div.search {
+    margin-top: 80px;
+}
 div.downlink {
-    padding-top: 70px;
+    /* padding-top: 70px; */
     text-align: center;
+    /* margin-top: 100px; */
 }
 div.uplink {
     width: 300px;
@@ -264,22 +296,98 @@ div.uplink {
     justify-content: space-around;
 }
 
-div.slogan,
-div.about-part {
+div.header {
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    background: url("background4.jpg") no-repeat center fixed;
+    height: 130px;
+    position: fixed;
+    width: 100vw;
+    z-index: 1;
+}
+
+div.slogan {
     position: relative;
     left: 50%;
-    top: 130px;
-
+    top: 250px;
+    font-size: 28px;
     transform: translateX(-50%);
     text-align: center;
     width: 50vw;
     height: 30vh;
 }
 
-div.slogan {
-    top: 250px;
-    font-size: 28px;
+div.about-part {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 50vw;
+    height: 30vh;
+    margin-top: 150px;
 }
+
+div.copyright-icons {
+    display: flex;
+    margin-top: 200px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+div.copyright-icons-about {
+    display: flex;
+    margin-top: 400px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+div.copyright-icons-contact {
+    display: flex;
+    margin-top: 400px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+div.copyright-icons-home {
+    display: flex;
+    margin-top: 400px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+div.copyright-icons-password {
+    display: flex;
+    margin-top: 400px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+div.copyright {
+    align-items: center;
+    font-size: 18px;
+}
+
+div.icons img {
+    height: 30px;
+    width: 30px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+div.icons {
+    margin-left: 100px;
+
+    justify-content: end;
+}
+
 div#map {
     position: relative;
     left: 50%;
@@ -343,7 +451,27 @@ div.profile {
     margin: 40px;
     margin-top: 200px;
 }
+div.profile-pic {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 15px;
+    align-items: center;
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
+    border-radius: 50%;
+    height: 90px;
+    width: 90px;
+    margin-right: 30px;
+    margin-top: 20px;
+    cursor: pointer;
+}
 
+div.profile-pic p {
+    margin-top: 10px;
+}
 div.biopart {
     display: flex;
     flex-direction: column;
@@ -421,6 +549,12 @@ img.bin {
     position: fixed;
     top: 5px;
 }
+
+img.bin-need {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
 img.chat {
     width: 40px;
     height: 40px;
@@ -441,12 +575,12 @@ img.logobig {
     border-radius: 50%;
 }
 img.loading {
-    height: 150px;
-    width: 150px;
+    height: 400px;
+    width: 400px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    top: 300px;
+    top: 200px;
 }
 
 img.pic,
@@ -494,11 +628,7 @@ footer {
     display: flex;
     justify-content: center;
     bottom: 0;
-    border: 0;
-    border-bottom: 1px solid rgba(196, 191, 191);
-    box-shadow: 0px 3px 3px rgba(122, 16, 28, 0.5);
-    height: 130px;
-    position: fixed;
+    /* position: fixed; */
     width: 100vw;
 }
 a {
@@ -517,10 +647,9 @@ div.links a {
 }
 
 .locate {
-    position: relative;
+    position: absolute;
     margin-left: 25%;
-    top: 70px;
-    right: 1rem;
+    margin-top: 10%;
     background: none;
     border: none;
     z-index: 10;
@@ -543,24 +672,30 @@ li {
     display: flex;
     flex-direction: row;
     font-size: 13px;
-    padding: 20px;
+    padding: 10px;
     align-self: center;
     justify-content: center;
     background-color: white;
     box-shadow: 0px 3px 3px rgba(122, 16, 28, 0.5);
     width: 70%;
-    height: 30px;
-    margin-bottom: 30px;
+    height: 20px;
+    margin-bottom: 10px;
     border-radius: 10px;
     z-index: 5;
     cursor: pointer;
 }
-
+li:hover {
+    background-color: rgb(209, 130, 139);
+    color: white;
+}
 span.space {
     margin-right: 20px;
+    margin-left: 20px;
     font-size: 25px;
 }
-
+span.label {
+    font-size: 25px;
+}
 span.app {
     font-family: MyWebfont;
 }

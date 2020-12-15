@@ -13,7 +13,10 @@ import DonateForm from "./DonateForm";
 import AboutUs from "./AboutUs";
 import Needs from "./Needs";
 import Donations from "./Donations";
-// import ContactUs from "./ContactUs";
+import Contact from "./Contact";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -96,6 +99,7 @@ export default class App extends React.Component {
                         <ProfilePic
                             profilePic={this.state.profilePic}
                             toggleUploader={this.toggleUploader}
+                            firstname={this.state.firstname}
                         />
                     </header>
                     <div className="main">
@@ -105,21 +109,7 @@ export default class App extends React.Component {
                             uploaderVisible={this.state.uploaderVisible}
                         />
                         <React.Fragment>
-                            <Route
-                                exact
-                                path="/"
-                                component={BigMap}
-                                // render={() => (
-                                //     <Profile
-                                //         firstname={this.state.firstname}
-                                //         lastname={this.state.lastname}
-                                //         bio={this.state.bio}
-                                //         profilePic={this.state.profilePic}
-                                //         toggleUploader={this.toggleUploader}
-                                //         setBio={this.setBio}
-                                //     />
-                                // )}
-                            />
+                            <Route exact path="/" component={BigMap} />
                             <Route
                                 exact
                                 path="/user"
@@ -127,6 +117,7 @@ export default class App extends React.Component {
                                     <Profile
                                         firstname={this.state.firstname}
                                         lastname={this.state.lastname}
+                                        email={this.state.email}
                                         bio={this.state.bio}
                                         profilePic={this.state.profilePic}
                                         toggleUploader={this.toggleUploader}
@@ -139,12 +130,14 @@ export default class App extends React.Component {
                             <Route path="/needs" component={NeedyForm} />
                             <Route path="/donation" component={DonateForm} />
                             <Route path="/about-us" component={AboutUs} />
+                            <Route path="/contact" component={Contact} />
                             <Route path="/numberofneeds" component={Needs} />
                             <Route
                                 path="/numberofdonations"
                                 component={Donations}
                             />
                         </React.Fragment>
+                        <ToastContainer />
                     </div>
                 </BrowserRouter>
             </React.Fragment>

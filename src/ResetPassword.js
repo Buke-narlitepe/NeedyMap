@@ -77,14 +77,29 @@ export default class ResetPassword extends React.Component {
                             Submit
                         </button>
                     </form>
+                    <div className="copyright-icons-password">
+                        <div className="copyright">
+                            Copyright 2020 <span className="app">NeedyMap</span>
+                            .<span className="space">|</span>Terms &amp;
+                            Conditions
+                            <span className="space">|</span> Privacy
+                            <span className="space">|</span>
+                            <Link to="/contact"> Contact Us</Link>
+                        </div>
+                        <div className="icons">
+                            <img src="/facebook.png"></img>
+                            <img src="/instagram.png"></img>
+                            <img src="/twitter.png"></img>
+                        </div>
+                    </div>
                 </React.Fragment>
             );
         } else if (this.state.step === 1) {
             return (
                 <React.Fragment>
                     <h1>
-                        Give us your code that weve sent to your email and also
-                        your new password.
+                        Give us your code that we have sent to your email and
+                        also your new password.
                     </h1>
                     <form onSubmit={this.handleAnotherSubmit}>
                         <p>Please enter the code you recieved</p>
@@ -107,6 +122,21 @@ export default class ResetPassword extends React.Component {
                             Submit
                         </button>
                     </form>
+                    <div className="copyright-icons-password">
+                        <div className="copyright">
+                            Copyright 2020 <span className="app">NeedyMap</span>
+                            .<span className="space">|</span>Terms &amp;
+                            Conditions
+                            <span className="space">|</span> Privacy
+                            <span className="space">|</span>
+                            <Link to="/contact"> Contact Us</Link>
+                        </div>
+                        <div className="icons">
+                            <img src="/facebook.png"></img>
+                            <img src="/instagram.png"></img>
+                            <img src="/twitter.png"></img>
+                        </div>
+                    </div>
                 </React.Fragment>
             );
         } else {
@@ -117,6 +147,21 @@ export default class ResetPassword extends React.Component {
                     <Link to="/login">
                         <p>Now you can log in again</p>
                     </Link>
+                    <div className="copyright-icons-password">
+                        <div className="copyright">
+                            Copyright 2020 <span className="app">NeedyMap</span>
+                            .<span className="space">|</span>Terms &amp;
+                            Conditions
+                            <span className="space">|</span> Privacy
+                            <span className="space">|</span>
+                            <Link to="/contact"> Contact Us</Link>
+                        </div>
+                        <div className="icons">
+                            <img src="/facebook.png"></img>
+                            <img src="/instagram.png"></img>
+                            <img src="/twitter.png"></img>
+                        </div>
+                    </div>
                 </React.Fragment>
             );
         }

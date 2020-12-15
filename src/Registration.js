@@ -48,11 +48,11 @@ export default class Registration extends React.Component {
         return (
             <div>
                 <Logo />
-                <h2 className="welcome">Please create your account</h2>
                 {this.state.error && (
                     <p>Ooopss! Something missing, please try agin.</p>
                 )}
-                <form onSubmit={this.handleSubmit}>
+                <p>Please create your account</p>
+                <form className="register-form" onSubmit={this.handleSubmit}>
                     <input
                         type="text"
                         name="firstname"
@@ -88,8 +88,19 @@ export default class Registration extends React.Component {
                 <Link to="/login">
                     <p>You have already have an account?</p>
                 </Link>
-                <div className="downlink">
-                    <Link to="/contact"> Contact Us</Link>
+                <div className="copyright-icons">
+                    <div className="copyright">
+                        Copyright 2020 <span className="app">NeedyMap</span>.
+                        <span className="space">|</span>Terms &amp; Conditions
+                        <span className="space">|</span> Privacy
+                        <span className="space">|</span>
+                        <Link to="/contact"> Contact Us</Link>
+                    </div>
+                    <div className="icons">
+                        <img src="/facebook.png"></img>
+                        <img src="/instagram.png"></img>
+                        <img src="/twitter.png"></img>
+                    </div>
                 </div>
             </div>
         );

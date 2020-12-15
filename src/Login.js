@@ -72,8 +72,19 @@ export default class Login extends React.Component {
                 <Link to="/resetpassword">
                     <p>Bad Memory?</p>
                 </Link>
-                <div className="downlink">
-                    <Link to="/contact"> Contact Us</Link>
+                <div className="copyright-icons">
+                    <div className="copyright">
+                        Copyright 2020 <span className="app">NeedyMap</span>.
+                        <span className="space">|</span>Terms &amp; Conditions
+                        <span className="space">|</span> Privacy
+                        <span className="space">|</span>
+                        <Link to="/contact"> Contact Us</Link>
+                    </div>
+                    <div className="icons">
+                        <img src="/facebook.png"></img>
+                        <img src="/instagram.png"></img>
+                        <img src="/twitter.png"></img>
+                    </div>
                 </div>
             </React.Fragment>
         );

@@ -56,12 +56,12 @@ export default class Uploader extends React.Component {
                     <p className="x" onClick={this.props.closeComponent}>
                         X
                     </p>
-                    <Link to="/user"> Your Profile</Link>
+                    <Link to="/user"> Profile</Link>
                     <a id="nav-link" onClick={this.handleClick}>
                         Log out
                     </a>
                     <a id="nav-link" onClick={this.handleAnotherClick}>
-                        Delete your Account
+                        Delete Account
                     </a>
                     <form onSubmit={this.handleSubmit}>
                         <h3 className="change">

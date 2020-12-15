@@ -35,12 +35,14 @@ export default function Contact() {
 
     return (
         <div className="contact-part">
-            <Logo />
-            <div className="uplink">
-                <Link to="/about-us"> About Us</Link>
-                <Link to="/registration"> Register</Link>
+            <div className="header">
+                <Logo />
+                <div className="uplink">
+                    <Link to="/about-us"> About Us</Link>
+                    <Link to="/registration"> Register</Link>
+                </div>
             </div>
-            <h2>Contact Us</h2>
+            <h2 className="contact">Contact Us</h2>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -70,15 +72,30 @@ export default function Contact() {
                     onChange={handleChange}
                     value={form.phone}
                 />
-                <input
-                    type="text"
-                    name="message"
-                    placeholder="Message"
-                    onChange={handleChange}
+                <textarea
                     value={form.message}
+                    name="message"
+                    onChange={handleChange}
+                    placeholder="Message"
                 />
-                <button type="submit">Submit</button>
+                <button type="submit" className="contact">
+                    Submit
+                </button>
             </form>
+            <div className="copyright-icons">
+                <div className="copyright">
+                    Copyright 2020 <span className="app">NeedyMap</span>.
+                    <span className="space">|</span>Terms &amp; Conditions
+                    <span className="space">|</span> Privacy
+                    <span className="space">|</span>
+                    <Link to="/contact"> Contact Us</Link>
+                </div>
+                <div className="icons">
+                    <img src="/facebook.png"></img>
+                    <img src="/instagram.png"></img>
+                    <img src="/twitter.png"></img>
+                </div>
+            </div>
         </div>
     );
 }

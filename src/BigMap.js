@@ -65,6 +65,8 @@ export default function SimpleMap(props) {
                     id: element.id,
                     needer_id: element.needer_id,
                     donator_id: element.donator_id,
+                    city: element.city,
+                    address: element.address,
                     lat: element.latitude,
                     lng: element.longitude,
                     category: element.category,
@@ -76,6 +78,7 @@ export default function SimpleMap(props) {
     }, []);
 
     const deleteMarker = () => {
+        console.log(selected.needer_id);
         if (selected.needer_id) {
             axios.post("/api/delete-need", selected).then(() => {
                 location.replace("/");
@@ -87,26 +90,13 @@ export default function SimpleMap(props) {
         }
     };
 
-    // const onMapClick = useCallback((e) => {
-    //     setMarkers((current) => [
-    //         ...current,
-    //         {
-    //             lat: e.latLng.lat(),
-    //             lng: e.latLng.lng(),
-    //         },
-    //     ]);
-    //     if (props.handleClick) {
-    //         props.handleClick(e.latLng.lat(), e.latLng.lng());
-    //     }
-    // }, []);
-
     const panTo = useCallback(({ lat, lng }) => {
         mapRef.current.panTo({ lat, lng });
         mapRef.current.setZoom(14);
     }, []);
 
     if (loadError) return "Error";
-    if (!isLoaded) return <img src="loading.gif" />;
+    if (!isLoaded) return <img src="loading.gif" className="loading" />;
 
     return (
         <div className="map">
@@ -179,14 +169,14 @@ export default function SimpleMap(props) {
                                     ? "Needs Details"
                                     : "Donation Details"}
                             </h2>
-                            <p>{selected.category}</p>
-                            <p>{selected.description}</p>
+                            <p>Product: {selected.category}</p>
+                            <p>Description: {selected.description}</p>
                             <p>
                                 <Link
                                     to={
                                         selected.needer_id
                                             ? `/chat/${selected.needer_id}`
-                                            : `/chat/${selected.needer_id}`
+                                            : `/chat/${selected.donator_id}`
                                     }
                                 >
                                     <img src="/chat.png" className="chat"></img>
@@ -196,8 +186,19 @@ export default function SimpleMap(props) {
                     </InfoWindow>
                 ) : null}
             </GoogleMap>
-            <div className="downlink">
-                <Link to="/contact"> Contact Us</Link>
+            <div className="copyright-icons">
+                <div className="copyright">
+                    Copyright 2020 <span className="app">NeedyMap</span>.
+                    <span className="space">|</span>Terms &amp; Conditions
+                    <span className="space">|</span> Privacy
+                    <span className="space">|</span>
+                    <Link to="/contact"> Contact Us</Link>
+                </div>
+                <div className="icons">
+                    <img src="/facebook.png"></img>
+                    <img src="/instagram.png"></img>
+                    <img src="/twitter.png"></img>
+                </div>
             </div>
         </div>
     );

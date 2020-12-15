@@ -20,11 +20,20 @@ export default function Home() {
                 one.
             </div>
             <div className="register-link"></div>
-            <footer>
-                <div className="downlink">
+            <div className="copyright-icons-home">
+                <div className="copyright">
+                    Copyright 2020 <span className="app">NeedyMap</span>.
+                    <span className="space">|</span>Terms &amp; Conditions
+                    <span className="space">|</span> Privacy
+                    <span className="space">|</span>
                     <Link to="/contact"> Contact Us</Link>
                 </div>
-            </footer>
+                <div className="icons">
+                    <img src="/facebook.png"></img>
+                    <img src="/instagram.png"></img>
+                    <img src="/twitter.png"></img>
+                </div>
+            </div>
         </React.Fragment>
     );
 }

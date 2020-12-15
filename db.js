@@ -52,14 +52,16 @@ module.exports.addNeedForm = function addNeedForm(
     needer_id,
     category,
     description,
+    city,
+    address,
     latitude,
     longitude
 ) {
     return db.query(
-        `INSERT INTO needs (needer_id, category, description, latitude, longitude)
-    VALUES ($1, $2, $3, $4, $5)
+        `INSERT INTO needs (needer_id, category, description, city, address, latitude, longitude)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *`,
-        [needer_id, category, description, latitude, longitude]
+        [needer_id, category, description, city, address, latitude, longitude]
     );
 };
 
@@ -79,27 +81,21 @@ module.exports.addDonateForm = function addDonateForm(
     donator_id,
     category,
     description,
+    city,
+    address,
     latitude,
     longitude
 ) {
     return db.query(
-        `INSERT INTO donation (donator_id, category, description, latitude, longitude)
-    VALUES ($1, $2, $3, $4, $5)
+        `INSERT INTO donation (donator_id, category, description, city, address, latitude, longitude)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *`,
-        [donator_id, category, description, latitude, longitude]
+        [donator_id, category, description, city, address, latitude, longitude]
     );
 };
 
 module.exports.getDonationForm = function getDonationForm() {
     return db.query("SELECT * FROM donation");
-};
-
-module.exports.getDonationNumbers = function getDonationNumbers() {
-    return db.query("SELECT COUNT (*) FROM donation");
-};
-
-module.exports.getNeedNumbers = function getNeedNumbers() {
-    return db.query("SELECT COUNT (*) FROM needs");
 };
 
 //        Reset Password & Create New One             //
@@ -172,3 +168,12 @@ module.exports.sendPrivateMessage = function sendPrivateMessage(
         [message, sender_id, recipient_id]
     );
 };
+
+/*
+module.exports.sendPrivateImage = function sendPrivateImage(image, id) {
+    return db.query("UPDATE privatemessage SET image=$1 WHERE id=$2", [
+        image,
+        id,
+    ]);
+};
+*/

@@ -4,10 +4,14 @@ export default function ProfilePic(props) {
     console.log(props);
 
     return (
-        <img
-            className="avatar"
-            src={props.profilePic || "/avatar.png"}
-            onClick={props.toggleUploader}
-        />
+        <div onClick={props.toggleUploader} className="profile-pic">
+            <p className="prof-welcome">Welcome</p>
+            <p>{props.firstname}</p>
+        </div>
+        // <img
+        //     className="avatar"
+        //     src={props.profilePic || "/avatar.png"}
+        //     onClick={props.toggleUploader}
+        // />
     );
 }
