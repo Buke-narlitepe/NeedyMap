@@ -80,12 +80,8 @@ export default function Chat(props) {
                     privateMessages.map((message) => (
                         <div className="chat-messages" key={message.id}>
                             <div className="name-time">
-                                <img
-                                    className="small"
-                                    src={message.image}
-                                ></img>
                                 {message.own ? (
-                                    <h2 className="chat-name">You</h2>
+                                    <h2 className="chat-own">You</h2>
                                 ) : (
                                     <h2 className="chat-name">
                                         {message.firstname} {message.lastname}
@@ -97,35 +93,61 @@ export default function Chat(props) {
                                         .fromNow()}
                                 </p>
                             </div>
-                            {!message.message && message.photo ? (
-                                <img src={message.photo} />
+                            {message.own ? (
+                                <div className="right">
+                                    {!message.message && message.photo ? (
+                                        <img src={message.photo} />
+                                    ) : (
+                                        <p className="message">
+                                            {message.message}
+                                        </p>
+                                    )}
+                                </div>
                             ) : (
-                                <p className="message">{message.message}</p>
+                                <div className="left">
+                                    {!message.message && message.photo ? (
+                                        <img src={message.photo} />
+                                    ) : (
+                                        <p className="message">
+                                            {message.message}
+                                        </p>
+                                    )}
+                                </div>
                             )}
-                            {}
                         </div>
                     ))}
             </div>
-            <textarea
-                className="messagearea"
-                placeholder="Typing..."
-                onKeyDown={onEnterPress}
-            />
-            <form onSubmit={handleSubmit}>
-                <label className="choose" htmlFor="upload">
-                    Choose Image
-                </label>
-                <input
-                    type="file"
-                    name="file"
-                    id="upload"
-                    accept="image/*"
-                    onChange={handleChange}
+            <div className="send-part">
+                <textarea
+                    className="messagearea"
+                    placeholder="Typing..."
+                    onKeyDown={onEnterPress}
                 />
-                <button className="upload-image" type="submit">
-                    Upload
-                </button>
-            </form>
+                <form onSubmit={handleSubmit} className="send-image">
+                    <label className="choose" htmlFor="upload">
+                        <img
+                            src="/choose.png"
+                            className="choose"
+                            alt="Choose a file"
+                            title="Choose a file"
+                        ></img>
+                    </label>
+                    <input
+                        type="file"
+                        name="file"
+                        id="upload"
+                        accept="image/*"
+                        onChange={handleChange}
+                    />
+                    <button className="upload-image" type="submit">
+                        <img
+                            src="/upload.png"
+                            alt="Upload"
+                            title="Upload"
+                        ></img>
+                    </button>
+                </form>
+            </div>
             <div className="copyright-icons-chat">
                 <div className="copyright">
                     Copyright 2020 <span className="app">NeedyMap</span>.

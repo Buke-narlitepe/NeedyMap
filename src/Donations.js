@@ -18,11 +18,22 @@ export default function Needs() {
             <div className="donations-table">
                 {donations.map((donation) => (
                     <div className="donation-item" key={donation.id}>
-                        <img src="/delete-bin.png" className="bin" />
-                        <p>{donation.category}</p>
-                        <p>{donation.description}</p>
-                        <p>{donation.city}</p>
-                        <p>{donation.address}</p>
+                        <p>
+                            <span className="label">Product:</span>
+                            {donation.category}
+                        </p>
+                        <p>
+                            <span className="label">Description:</span>
+                            {donation.description}
+                        </p>
+                        <p>
+                            <span className="label">City:</span>
+                            {donation.city}
+                        </p>
+                        <p>
+                            <span className="label">Address:</span>
+                            {donation.address}
+                        </p>
                         <Link to={`/chat/${donation.donator_id}`}>
                             <img
                                 src="/chat.png"

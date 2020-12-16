@@ -1,6 +1,6 @@
 body {
     /* background-color: white; */
-    background: url("background4.jpg") no-repeat center fixed;
+    background: url("background4.jpg") no-repeat fixed;
     margin: 0;
     padding: 0;
     font-family: "MyFont";
@@ -62,6 +62,13 @@ input[type="file"] {
     margin-right: 0;
 }
 
+input:focus {
+    box-shadow: 0px 3px 10px rgba(122, 16, 28);
+}
+div.search input {
+    margin-bottom: 0;
+    font-size: 20px;
+}
 textarea {
     border: 1px solid transparent;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
@@ -120,13 +127,15 @@ h2 {
     margin-top: 50px;
 }
 
-h2.contact {
-    margin-top: 200px;
-}
 h2.length {
     margin-top: 150px;
 }
-
+h2.chat-own {
+    float: right;
+}
+h2.chat-name {
+    float: left;
+}
 p.biotext,
 p.score,
 p.title {
@@ -154,7 +163,9 @@ p.x {
     text-align: right;
     font-size: 20px;
     cursor: pointer;
-    margin: 0;
+    margin-right: 5px;
+    margin-bottom: 0;
+    margin-top: 0;
     padding: 0;
 }
 h2.people-name {
@@ -193,7 +204,22 @@ button.contact {
     justify-content: center;
     align-self: center;
 }
-
+button.submitform {
+    cursor: pointer;
+    border-radius: 10px;
+    color: rgb(85, 82, 82);
+    border: 1px solid transparent;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 8px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    height: 60px;
+    width: 180px;
+    margin-top: 20px;
+    justify-content: center;
+    align-self: center;
+}
 form {
     display: flex;
     flex-direction: column;
@@ -210,7 +236,15 @@ button.upload {
     height: 50px;
     width: 80px;
 }
-
+.upload-image {
+    border: 0;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
+.upload.image:hover {
+    box-shadow: 0px 3px 10px rgba(122, 16, 28);
+}
 button.friend-button {
     margin-left: 80px;
 }
@@ -231,21 +265,21 @@ div.modal {
     border: 1px solid transparent;
     border-radius: 10px;
     box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
-    background-color: white;
     flex-direction: column;
-    margin-top: 150px;
-    width: 230px;
+    margin-top: 140px;
+    width: 150px;
     height: 200px;
     display: flex;
     font-size: 17px;
     z-index: 1;
     position: fixed;
-    left: 82%;
-    transition: left 1s linear;
+    left: 88%;
+    transition: left 0.5s linear;
+    justify-content: space-around;
 }
 
 div.modal a:hover {
-    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.2);
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
 }
 
 div.needs-table,
@@ -284,7 +318,15 @@ div.map {
     transform: translateX(-50%);
 }
 
+div.send-part {
+    display: flex;
+    flex-direction: row;
+}
+
 div.search {
+    margin-top: 20px;
+}
+div.search-big {
     margin-top: 80px;
 }
 div.downlink {
@@ -299,11 +341,16 @@ div.uplink {
     justify-content: space-around;
 }
 
+div.links a:hover {
+    border-bottom: 1px solid rgba(122, 16, 28, 0.5);
+}
+
 div.header {
     top: 0;
     display: flex;
     justify-content: space-between;
-    background: url("background4.jpg") no-repeat center fixed;
+    background: url("background4.jpg") no-repeat fixed;
+    background-size: cover;
     height: 130px;
     position: fixed;
     width: 100vw;
@@ -328,7 +375,7 @@ div.about-part {
     display: flex;
     flex-direction: column;
     text-align: center;
-    width: 50vw;
+    width: 70vw;
     height: 30vh;
     margin-top: 150px;
 }
@@ -355,6 +402,10 @@ div.copyright-icons-contact {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
+}
+
+div.contact-part {
+    margin-top: 150px;
 }
 
 div.copyright-icons-home {
@@ -409,8 +460,15 @@ div.donation {
     display: flex;
     flex-direction: column;
     border: 1px solid transparent;
+    margin-right: 90px;
+    margin-left: 90px;
     border-radius: 10px;
     box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
+}
+
+div.needy:hover,
+div.donation:hover {
+    box-shadow: 0px 3px 10px rgba(122, 16, 28);
 }
 div.numbers {
     display: flex;
@@ -439,7 +497,7 @@ div.needs-part {
 div.form-buttons {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     margin-top: 100px;
     text-align: center;
 }
@@ -483,6 +541,10 @@ div.profile-pic {
 div.profile-pic p {
     margin-top: 10px;
 }
+
+div.profile-pic:hover {
+    box-shadow: 0px 3px 10px rgba(122, 16, 28);
+}
 div.biopart {
     display: flex;
     flex-direction: column;
@@ -504,17 +566,17 @@ div.slide {
     border: 1px solid transparent;
     border-radius: 10px;
     box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
-    background-color: white;
     flex-direction: column;
-    margin-top: 150px;
-    width: 230px;
+    margin-top: 140px;
+    width: 150px;
     height: 200px;
     display: flex;
     font-size: 17px;
     z-index: 1;
     position: fixed;
-    left: 105%;
-    transition: left 1s linear;
+    justify-content: space-around;
+    left: 100%;
+    transition: left 0.5s linear;
 }
 
 div.component {
@@ -534,6 +596,16 @@ div.logo-part {
     align-items: center;
     font-family: MyWebfont;
     font-size: 33px;
+}
+
+div.left {
+    float: left;
+    background: rgb(136, 136, 236, 0.5);
+}
+
+div.right {
+    float: right;
+    background: rgba(122, 16, 28, 0.5);
 }
 
 div.actual-logo {
@@ -613,6 +685,15 @@ img.avatar {
     padding-left: 0;
 }
 
+img.choose {
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+}
+img.choose:hover {
+    box-shadow: 0px 3px 10px rgba(122, 16, 28);
+}
+
 header img.avatar {
     cursor: pointer;
     height: 90px;
@@ -631,6 +712,7 @@ header {
     height: 130px;
     position: fixed;
     background: url("background4.jpg") no-repeat center fixed;
+    background-size: cover;
     width: 100vw;
     z-index: 1;
 }
@@ -639,11 +721,9 @@ footer {
     display: flex;
     justify-content: center;
     bottom: 0;
-    /* position: fixed; */
     width: 100vw;
 }
 a {
-    /* padding-right: 20px; */
     text-align: center;
     color: rgb(85, 82, 82);
     text-decoration: none;
@@ -660,12 +740,25 @@ div.links a {
 .locate {
     position: absolute;
     margin-left: 25%;
+    margin-top: 5%;
+    background: none;
+    border: none;
+    z-index: 10;
+}
+.locate-big {
+    position: absolute;
+    margin-left: 25%;
     margin-top: 10%;
     background: none;
     border: none;
     z-index: 10;
 }
 
+.locate:hover,
+.locate-big:hover {
+    box-shadow: 0px 3px 10px rgba(122, 16, 28);
+    border-radius: 10px;
+}
 div.register-link {
     text-align: center;
 }
@@ -718,13 +811,12 @@ span.app {
     max-height: 500px;
     overflow-y: auto;
     border: 1px solid transparent;
-    box-shadow: 0px 3px 10pxrgba (122, 16, 28, 0.5);
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
     border-radius: 5px;
     width: 50vw;
 }
 
 .chat-messages {
-    background-color: rgba(122, 16, 28, 0.2);
     margin: 10px;
     border-radius: 5px;
 }
@@ -780,3 +872,45 @@ span.app {
     margin-right: 10px;
 }
 /* chat-part*/
+
+@media (max-width: 865px) {
+    div.links {
+        font-size: 17px;
+    }
+    div.copyright {
+        font-size: 13px;
+    }
+
+    div.actual-logo {
+        width: 200px;
+        height: 130px;
+    }
+    p.app-name {
+        font-size: 17px;
+    }
+
+    div.profile-pic {
+        width: 70px;
+        height: 70px;
+    }
+
+    div.profile-pic p {
+        font-size: 13px;
+    }
+
+    .locate-big {
+        margin-top: 20%;
+    }
+    .locate {
+        margin-top: 7%;
+    }
+}
+
+@media (min-width: 865px) and (max-width: 1000px) {
+    .locate-big {
+        margin-top: 15%;
+    }
+    .locate {
+        margin-top: 7%;
+    }
+}

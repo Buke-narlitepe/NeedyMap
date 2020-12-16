@@ -70,7 +70,9 @@ export default function DonateForm() {
                         setForm({ ...form, latitude, longitude });
                     }}
                 />
-                <button type="submit">Submit</button>
+                <button className="submitform" type="submit">
+                    Submit
+                </button>
             </form>
         </div>
     );

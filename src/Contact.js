@@ -34,7 +34,7 @@ export default function Contact() {
     };
 
     return (
-        <div className="contact-part">
+        <div>
             <div className="header">
                 <Logo />
                 <div className="uplink">
@@ -42,59 +42,61 @@ export default function Contact() {
                     <Link to="/registration"> Register</Link>
                 </div>
             </div>
-            <h2 className="contact">Contact Us</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="firstname"
-                    placeholder="Firstname"
-                    onChange={handleChange}
-                    value={form.firstname}
-                />
-                <input
-                    type="text"
-                    name="lastname"
-                    placeholder="Lastname"
-                    onChange={handleChange}
-                    value={form.lastname}
-                />
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    onChange={handleChange}
-                    value={form.email}
-                />
-                <input
-                    type="text"
-                    name="phone"
-                    placeholder="Phone"
-                    onChange={handleChange}
-                    value={form.phone}
-                />
-                <textarea
-                    value={form.message}
-                    className="contact"
-                    name="message"
-                    onChange={handleChange}
-                    placeholder="Message"
-                />
-                <button type="submit" className="contact">
-                    Submit
-                </button>
-            </form>
-            <div className="copyright-icons">
-                <div className="copyright">
-                    Copyright 2020 <span className="app">NeedyMap</span>.
-                    <span className="space">|</span>Terms &amp; Conditions
-                    <span className="space">|</span> Privacy
-                    <span className="space">|</span>
-                    <Link to="/contact"> Contact Us</Link>
-                </div>
-                <div className="icons">
-                    <img src="/facebook.png"></img>
-                    <img src="/instagram.png"></img>
-                    <img src="/twitter.png"></img>
+            <div className="contact-part">
+                <h2 className="contact">Contact Us</h2>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        name="firstname"
+                        placeholder="Firstname"
+                        onChange={handleChange}
+                        value={form.firstname}
+                    />
+                    <input
+                        type="text"
+                        name="lastname"
+                        placeholder="Lastname"
+                        onChange={handleChange}
+                        value={form.lastname}
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        onChange={handleChange}
+                        value={form.email}
+                    />
+                    <input
+                        type="text"
+                        name="phone"
+                        placeholder="Phone"
+                        onChange={handleChange}
+                        value={form.phone}
+                    />
+                    <textarea
+                        value={form.message}
+                        className="contact"
+                        name="message"
+                        onChange={handleChange}
+                        placeholder="Message"
+                    />
+                    <button type="submit" className="contact">
+                        Submit
+                    </button>
+                </form>
+                <div className="copyright-icons">
+                    <div className="copyright">
+                        Copyright 2020 <span className="app">NeedyMap</span>.
+                        <span className="space">|</span>Terms &amp; Conditions
+                        <span className="space">|</span> Privacy
+                        <span className="space">|</span>
+                        <Link to="/contact"> Contact Us</Link>
+                    </div>
+                    <div className="icons">
+                        <img src="/facebook.png"></img>
+                        <img src="/instagram.png"></img>
+                        <img src="/twitter.png"></img>
+                    </div>
                 </div>
             </div>
         </div>

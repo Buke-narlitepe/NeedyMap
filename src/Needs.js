@@ -12,23 +12,12 @@ export default function Needs() {
         });
     }, []);
 
-    const deleteMarker = () => {
-        axios.post("/api/delete-need", needs.needer_id).then(() => {
-            location.replace("/");
-        });
-    };
-
     return (
         <div>
             <h2 className="length">Needs entered so far: {needs.length}</h2>
             <div className="needs-table">
                 {needs.map((need) => (
                     <div className="need-item" key={need.id}>
-                        <img
-                            src="/delete-bin.png"
-                            className="bin-need"
-                            onClick={deleteMarker}
-                        />
                         <p>
                             <span className="label">Product:</span>
                             {need.category}

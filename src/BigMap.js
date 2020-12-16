@@ -21,7 +21,7 @@ import {
     ComboboxOption,
 } from "@reach/combobox";
 
-import "@reach/combobox/styles.css";
+// import "@reach/combobox/styles.css";
 
 import mapStyles from "./mapStyles";
 import axios from "./axios.js";
@@ -208,7 +208,7 @@ export default function SimpleMap(props) {
 function Locate({ panTo }) {
     return (
         <button
-            className="locate"
+            className="locate-big"
             onClick={() => {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -262,7 +262,7 @@ function Search({ panTo }) {
     };
 
     return (
-        <div className="search">
+        <div className="search-big">
             <Combobox onSelect={handleSelect}>
                 <ComboboxInput
                     value={value}

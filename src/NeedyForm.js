@@ -72,7 +72,7 @@ export default function NeedyForm() {
                         setForm({ ...form, latitude, longitude });
                     }}
                 />
-                <button className="submit" type="submit">
+                <button className="submitform" type="submit">
                     Submit
                 </button>
             </form>

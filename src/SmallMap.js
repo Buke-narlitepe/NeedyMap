@@ -42,7 +42,7 @@ const center = {
 
 export default function SimpleMap(props) {
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: "AIzaSyAJzF3Im06VQbktvf0WwRwrf9B7-jMK5Xw",
+        googleMapsApiKey: "AIzaSyCctLDWpNtuKU8O-9POBCAVUXgzowa_ZZY",
         libraries,
     });
     const [markers, setMarkers] = useState([]);
@@ -72,7 +72,7 @@ export default function SimpleMap(props) {
     }, []);
 
     if (loadError) return "Error";
-    if (!isLoaded) return "Loading...";
+    if (!isLoaded) return <img src="loading.gif" className="loading" />;
 
     return (
         <div className="map">
@@ -95,7 +95,7 @@ export default function SimpleMap(props) {
                             setSelected(marker);
                         }}
                         icon={{
-                            url: `/needy-pin.png`,
+                            url: `/donator-pin.png`,
                             origin: new window.google.maps.Point(0, 0),
                             anchor: new window.google.maps.Point(15, 15),
                             scaledSize: new window.google.maps.Size(30, 30),
