@@ -131,11 +131,14 @@ h2.length {
     margin-top: 150px;
 }
 h2.chat-own {
-    float: right;
+    margin: 10px;
+    font-size: 19px;
 }
 h2.chat-name {
-    float: left;
+    margin: 10px;
+    font-size: 19px;
 }
+
 p.biotext,
 p.score,
 p.title {
@@ -598,14 +601,32 @@ div.logo-part {
     font-size: 33px;
 }
 
-div.left {
-    float: left;
-    background: rgb(136, 136, 236, 0.5);
+div.right p {
+    background: rgba(122, 16, 28, 0.5);
+    float: right;
+    border-radius: 10px;
+    padding-left: 40px;
+    padding-right: 10px;
 }
 
-div.right {
+div.left p {
+    background: rgb(136, 136, 236, 0.5);
+    float: left;
+    border-radius: 10px;
+    padding-right: 40px;
+    padding-left: 10px;
+}
+
+div.name-time-left {
+    float: left;
+    display: flex;
+    justify-content: flex-start;
+}
+
+div.name-time-right {
     float: right;
-    background: rgba(122, 16, 28, 0.5);
+    display: flex;
+    justify-content: flex-end;
 }
 
 div.actual-logo {
@@ -665,7 +686,16 @@ img.loading {
     transform: translateX(-50%);
     top: 200px;
 }
-
+div.right img.photo {
+    width: 80px;
+    height: 80px;
+    float: right;
+}
+div.left img.photo {
+    width: 80px;
+    height: 80px;
+    float: left;
+}
 img.pic,
 div.otherprofile-pic img {
     height: 200px;
@@ -693,7 +723,10 @@ img.choose {
 img.choose:hover {
     box-shadow: 0px 3px 10px rgba(122, 16, 28);
 }
-
+img.info {
+    margin-right: 35%;
+    position: absolute;
+}
 header img.avatar {
     cursor: pointer;
     height: 90px;
@@ -817,6 +850,8 @@ span.app {
 }
 
 .chat-messages {
+    display: flex;
+    flex-direction: column;
     margin: 10px;
     border-radius: 5px;
 }
@@ -840,6 +875,8 @@ span.app {
     box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
     border-radius: 5px;
     width: 50vw;
+    display: flex;
+    flex-direction: column;
 }
 .private-part {
     margin-top: 150px;
@@ -855,14 +892,10 @@ span.app {
     justify-content: center;
 }
 
-.chat-name {
-    font-size: 15px;
-}
 .time {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: lighter;
     font-style: italic;
-    margin-left: 10px;
 }
 
 .small {

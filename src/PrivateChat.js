@@ -36,11 +36,7 @@ export default function Chat(props) {
             e.target.value = "";
             setImage(null);
             setUrl(null);
-        } else if (
-            e.keyCode === 13 &&
-            e.target.value === "" &&
-            imageurl !== null
-        ) {
+        } else if (e.keyCode === 13 && imageurl !== null) {
             socket.emit(
                 "privateMessage",
                 e.target.value,
@@ -79,24 +75,34 @@ export default function Chat(props) {
                 {privateMessages &&
                     privateMessages.map((message) => (
                         <div className="chat-messages" key={message.id}>
-                            <div className="name-time">
-                                {message.own ? (
+                            {message.own ? (
+                                <div className="name-time-right">
                                     <h2 className="chat-own">You</h2>
-                                ) : (
+                                    <p className="time">
+                                        {moment(message.created_at)
+                                            .startOf("minute")
+                                            .fromNow()}
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="name-time-left">
                                     <h2 className="chat-name">
                                         {message.firstname} {message.lastname}
                                     </h2>
-                                )}
-                                <p className="time">
-                                    {moment(message.created_at)
-                                        .startOf("minute")
-                                        .fromNow()}
-                                </p>
-                            </div>
+                                    <p className="time">
+                                        {moment(message.created_at)
+                                            .startOf("minute")
+                                            .fromNow()}
+                                    </p>
+                                </div>
+                            )}
                             {message.own ? (
                                 <div className="right">
                                     {!message.message && message.photo ? (
-                                        <img src={message.photo} />
+                                        <img
+                                            src={message.photo}
+                                            className="photo"
+                                        />
                                     ) : (
                                         <p className="message">
                                             {message.message}
@@ -106,7 +112,10 @@ export default function Chat(props) {
                             ) : (
                                 <div className="left">
                                     {!message.message && message.photo ? (
-                                        <img src={message.photo} />
+                                        <img
+                                            src={message.photo}
+                                            className="photo"
+                                        />
                                     ) : (
                                         <p className="message">
                                             {message.message}
