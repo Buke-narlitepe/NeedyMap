@@ -74,6 +74,7 @@ export default function Contact() {
                 />
                 <textarea
                     value={form.message}
+                    className="contact"
                     name="message"
                     onChange={handleChange}
                     placeholder="Message"

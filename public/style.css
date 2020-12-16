@@ -68,9 +68,6 @@ textarea {
     border-radius: 5px;
     outline: 0;
     width: 40%;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
     margin-bottom: 20px;
     background: transparent;
     color: rgb(85, 82, 82);
@@ -79,7 +76,13 @@ textarea {
     font-size: 23px;
 }
 
-textarea.message-area {
+textarea.contact {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+textarea.messagearea {
     margin-top: 10px;
     width: 50vw;
     height: 100px;
@@ -357,6 +360,14 @@ div.copyright-icons-contact {
 div.copyright-icons-home {
     display: flex;
     margin-top: 400px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+div.copyright-icons-chat {
+    display: flex;
+    margin-top: 100px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;

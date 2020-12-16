@@ -21,7 +21,7 @@ import {
     ComboboxOption,
 } from "@reach/combobox";
 
-// import "@reach/combobox/styles.css";
+import "@reach/combobox/styles.css";
 
 import mapStyles from "./mapStyles";
 import axios from "./axios.js";

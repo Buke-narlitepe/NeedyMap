@@ -160,20 +160,12 @@ module.exports.getTenPrivateMessages = function getTenPrivateMessages(
 
 module.exports.sendPrivateMessage = function sendPrivateMessage(
     message,
+    photo,
     sender_id,
     recipient_id
 ) {
     return db.query(
-        `INSERT INTO privatemessage ( message, sender_id, recipient_id) VALUES ($1, $2, $3) RETURNING *`,
-        [message, sender_id, recipient_id]
+        `INSERT INTO privatemessage ( message, photo, sender_id, recipient_id) VALUES ($1, $2, $3, $4) RETURNING *`,
+        [message, photo, sender_id, recipient_id]
     );
 };
-
-/*
-module.exports.sendPrivateImage = function sendPrivateImage(image, id) {
-    return db.query("UPDATE privatemessage SET image=$1 WHERE id=$2", [
-        image,
-        id,
-    ]);
-};
-*/

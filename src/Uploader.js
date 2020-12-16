@@ -8,31 +8,8 @@ export default class Uploader extends React.Component {
         this.state = {
             image: null,
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleAnotherClick = this.handleAnotherClick.bind(this);
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append("file", this.state.image);
-        axios
-            .post("/api/upload", formData)
-            .then((res) => {
-                console.log(res);
-                this.props.setImage(res.data);
-            })
-            .catch((err) => {
-                console.log("error on uploading image", err);
-            });
-    }
-
-    handleChange(e) {
-        this.setState({
-            image: e.target.files[0],
-        });
     }
 
     handleClick() {
@@ -63,25 +40,6 @@ export default class Uploader extends React.Component {
                     <a id="nav-link" onClick={this.handleAnotherClick}>
                         Delete Account
                     </a>
-                    <form onSubmit={this.handleSubmit}>
-                        <h3 className="change">
-                            Do you want to
-                            <label className="change" htmlFor="upload">
-                                change
-                            </label>
-                            your profile picture?
-                        </h3>
-                        <input
-                            type="file"
-                            name="file"
-                            id="upload"
-                            accept="image/*"
-                            onChange={this.handleChange}
-                        />
-                        <button className="upload" type="submit">
-                            Upload
-                        </button>
-                    </form>
                 </div>
             </div>
         );

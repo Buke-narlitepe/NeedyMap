@@ -46,6 +46,7 @@ CREATE TABLE contact (
     sender_id INT NOT NULL REFERENCES users(id),
     recipient_id INT NOT NULL REFERENCES users(id),
     message TEXT,
+    photo TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
  );
 

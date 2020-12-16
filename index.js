@@ -334,6 +334,13 @@ app.post("/api/upload", uploader.single("file"), s3, (req, res) => {
         });
 });
 
+// upload an image
+app.post("/api/upload-image", uploader.single("file"), s3, (req, res) => {
+    if (!req.session.userId) return res.sendStatus(401);
+    res.json(req.body.url);
+    console.log(req.body.url);
+});
+
 //other profiles
 app.get("/api/user/:id", (req, res) => {
     // TODO: first check if user is logged in, if not send 401
@@ -399,50 +406,48 @@ io.on("connection", async function (socket) {
 
     socket.on("privateMessages", async function (otherId) {
         const data = await db.getTenPrivateMessages(userId, otherId);
-        io.emit("privateMessages", data.rows.reverse());
+        const arr = data.rows;
+        arr.forEach((element) => {
+            if (element.sender_id === userId) {
+                element.own = true;
+            } else {
+                element.own = false;
+            }
+        });
+        io.emit("privateMessages", arr.reverse());
         console.log(data.rows);
     });
 
-    socket.on("privateMessage", async function (privatemsg, otherId) {
-        const text = await db.sendPrivateMessage(privatemsg, userId, otherId);
-        const userInfo = await db.getUserById(userId);
-        console.log(privatemsg);
-        console.log(text.rows);
+    socket.on(
+        "privateMessage",
+        async function (privatemsg, privateimg, otherId) {
+            const text = await db.sendPrivateMessage(
+                privatemsg,
+                privateimg,
+                userId,
+                otherId
+            );
+            const userInfo = await db.getUserById(userId);
+            console.log(privatemsg);
+            console.log(text.rows);
 
-        io.to(socket.id).emit("privateMessage", {
-            ...text.rows[0],
-            ...userInfo.rows[0],
-        });
-        console.log(otherId, connectedOnes);
-        connectedOnes[otherId].forEach((element) => {
-            io.to(element).emit("privateMessage", {
+            io.to(socket.id).emit("privateMessage", {
                 ...text.rows[0],
                 ...userInfo.rows[0],
-                notification: true,
+                own: true,
             });
-        });
-    });
-    /*
-    socket.on("privateImage", async function (privateimg, otherId) {
-        const text = await db.sendPrivateMessage(privateimg, userId, otherId);
-        const userInfo = await db.getUserById(userId);
-        console.log(privateimg);
-        console.log(text.rows);
+            console.log(otherId, connectedOnes);
+            connectedOnes[otherId].forEach((element) => {
+                io.to(element).emit("privateMessage", {
+                    ...text.rows[0],
+                    ...userInfo.rows[0],
+                    notification: true,
+                    own: false,
+                });
+            });
+        }
+    );
 
-        io.to(socket.id).emit("privateImage", {
-            ...text.rows[0],
-            ...userInfo.rows[0],
-        });
-        console.log(otherId, connectedOnes);
-        connectedOnes[otherId].forEach((element) => {
-            io.to(element).emit("privateMessage", {
-                ...text.rows[0],
-                ...userInfo.rows[0],
-                notification: true,
-            });
-        });
-    });
-    */
     socket.on("disconnected", function () {
         connectedOnes[userId] = connectedOnes[userId].filter(
             (i) => i !== socket.id

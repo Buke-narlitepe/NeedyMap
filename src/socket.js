@@ -12,11 +12,15 @@ import { Link } from "react-router-dom";
 
 const Msg = ({ toastProps, privatemsg }) => (
     <div>
-        Lorem ipsum dolor {toastProps.position}
+        You have a new message!
         <Link to={`/chat/${privatemsg.sender_id}`}>
-            <img src="/chat.png" className="chat"></img>
+            <img
+                src="/chat.png"
+                className="chat"
+                alt="Contact"
+                title="Contact"
+            ></img>
         </Link>
-        Contact
     </div>
 );
 // dependenxy injection ( IoC - Inversion of Control )
