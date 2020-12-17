@@ -137,7 +137,7 @@ export default class App extends React.Component {
                                 component={Donations}
                             />
                         </React.Fragment>
-                        <ToastContainer />
+                        <ToastContainer autoClose={7000} />
                     </div>
                 </BrowserRouter>
             </React.Fragment>

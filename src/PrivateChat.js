@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 
 export default function Chat(props) {
     const privateMessages = useSelector((store) => store.privateMessages);
-    const [image, setImage] = useState(null);
     const [imageurl, setUrl] = useState(null);
 
     const privateContainer = useRef();
+    const privateText = useRef();
 
     useEffect(() => {
         privateContainer.current.scrollTop =
@@ -23,10 +23,8 @@ export default function Chat(props) {
     }, []);
 
     const onEnterPress = (e) => {
-        if (e.keyCode === 13 && e.target.value !== "") {
+        if (e.keyCode === 13 ) {
             e.preventDefault();
-            // setTyping(false);
-
             socket.emit(
                 "privateMessage",
                 e.target.value,
@@ -34,30 +32,15 @@ export default function Chat(props) {
                 props.match.params.id
             );
             e.target.value = "";
-            setImage(null);
             setUrl(null);
-        } else if (e.keyCode === 13 && imageurl !== null) {
-            socket.emit(
-                "privateMessage",
-                e.target.value,
-                imageurl,
-                props.match.params.id
-            );
-            e.target.value = "";
-            setImage(null);
-            setUrl(null);
-        }
+        } 
     };
+    
 
     const handleChange = (e) => {
         e.preventDefault();
-        setImage(e.target.files[0]);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
         const formData = new FormData();
-        formData.append("file", image);
+        formData.append("file", e.target.files[0]);
         axios
             .post("/api/upload-image", formData)
             .then((res) => {
@@ -67,6 +50,19 @@ export default function Chat(props) {
             .catch((err) => {
                 console.log("error on uploading image to chat", err);
             });
+            e.target.value = null;
+    };
+
+    const handleSubmit = (e) => {
+         e.preventDefault();
+            socket.emit(
+                "privateMessage",
+                privateText.current.value,
+                imageurl,
+                props.match.params.id
+            );
+            privateText.current.value = "";
+            setUrl(null);
     };
 
     return (
@@ -98,29 +94,25 @@ export default function Chat(props) {
                             )}
                             {message.own ? (
                                 <div className="right">
-                                    {!message.message && message.photo ? (
-                                        <img
+                                    {message.message && 
+                                        (<p className="message">
+                                            {message.message}
+                                        </p>)}
+                                    {message.photo && (<img
                                             src={message.photo}
                                             className="photo"
-                                        />
-                                    ) : (
-                                        <p className="message">
-                                            {message.message}
-                                        </p>
-                                    )}
+                                        />)}
                                 </div>
                             ) : (
                                 <div className="left">
-                                    {!message.message && message.photo ? (
-                                        <img
+                                   {message.message && 
+                                        (<p className="message">
+                                            {message.message}
+                                        </p>)}
+                                    {message.photo && (<img
                                             src={message.photo}
                                             className="photo"
-                                        />
-                                    ) : (
-                                        <p className="message">
-                                            {message.message}
-                                        </p>
-                                    )}
+                                        />)}
                                 </div>
                             )}
                         </div>
@@ -131,8 +123,15 @@ export default function Chat(props) {
                     className="messagearea"
                     placeholder="Typing..."
                     onKeyDown={onEnterPress}
+                    ref={privateText}
                 />
-                <form onSubmit={handleSubmit} className="send-image">
+                <button
+                    className="chat-button"
+                    onClick={handleSubmit}
+                    >
+                        SEND MESSAGE
+                    </button>
+                <form className="send-image">
                     <label className="choose" htmlFor="upload">
                         <img
                             src="/choose.png"
@@ -148,13 +147,6 @@ export default function Chat(props) {
                         accept="image/*"
                         onChange={handleChange}
                     />
-                    <button className="upload-image" type="submit">
-                        <img
-                            src="/upload.png"
-                            alt="Upload"
-                            title="Upload"
-                        ></img>
-                    </button>
                 </form>
             </div>
             <div className="copyright-icons-chat">

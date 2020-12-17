@@ -432,15 +432,15 @@ io.on("connection", async function (socket) {
             console.log(text.rows);
 
             io.to(socket.id).emit("privateMessage", {
+                 ...userInfo.rows[0],
                 ...text.rows[0],
-                ...userInfo.rows[0],
                 own: true,
             });
             console.log(otherId, connectedOnes);
             connectedOnes[otherId].forEach((element) => {
                 io.to(element).emit("privateMessage", {
-                    ...text.rows[0],
                     ...userInfo.rows[0],
+                    ...text.rows[0],
                     notification: true,
                     own: false,
                 });

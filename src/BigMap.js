@@ -133,7 +133,6 @@ export default function SimpleMap(props) {
             <Locate panTo={panTo} />
             <Search panTo={panTo} />
             <div className="map-part">
-                <InfoModal closeModal={closeModal} upload={upload} />
                 <GoogleMap
                     id="map"
                     mapContainerStyle={mapContainerStyle}
@@ -142,12 +141,12 @@ export default function SimpleMap(props) {
                     options={options}
                     onLoad={onMapLoad}
                 >
-                    <img
+                    {/* <img
                         src="/info.png"
                         className="info"
                         onClick={toggleUpload}
-                    ></img>
-
+                    />
+                    <InfoModal closeModal={closeModal} upload={upload} /> */}
                     {markers.map((marker) => (
                         <Marker
                             key={`${marker.lat}-${marker.lng}`}

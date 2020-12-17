@@ -8,8 +8,12 @@ export default function InfoModal(props) {
                 <p className="x" onClick={props.closeModal}>
                     X
                 </p>
-                <img src="/needy-pin.png"></img>
-                <img src="/donator-pin.png"></img>
+                <img src="/needy-pin.png" className="pin">
+                    Needs
+                </img>
+                <img src="/donator-pin.png" className="pin">
+                    Donations
+                </img>
             </div>
         </div>
     );

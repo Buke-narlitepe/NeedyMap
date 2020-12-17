@@ -48,18 +48,22 @@ export default function SimpleMap(props) {
     const [markers, setMarkers] = useState([]);
     const [selected, setSelected] = useState(null);
 
-    const onMapClick = useCallback((e) => {
+    const onMapClick = (e) => {
+        const latitude = e.latLng.lat();
+        const longitude = e.latLng.lng();
+        console.log(latitude, longitude);
         setMarkers((current) => [
             ...current,
             {
-                lat: e.latLng.lat(),
-                lng: e.latLng.lng(),
+                lat: latitude,
+                lng: longitude,
             },
         ]);
+        console.log(props.handleClick);
         if (props.handleClick) {
-            props.handleClick(e.latLng.lat(), e.latLng.lng());
+            props.handleClick(latitude, longitude);
         }
-    }, []);
+    };
 
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {

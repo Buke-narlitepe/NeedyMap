@@ -691,6 +691,9 @@ div.right img.photo {
     height: 80px;
     float: right;
 }
+div.toast {
+    font-family: "MyFont";
+}
 div.left img.photo {
     width: 80px;
     height: 80px;

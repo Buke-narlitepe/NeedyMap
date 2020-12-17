@@ -11,7 +11,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Msg = ({ toastProps, privatemsg }) => (
-    <div>
+    <div className="toast">
         You have a new message!
         <Link to={`/chat/${privatemsg.sender_id}`}>
             <img

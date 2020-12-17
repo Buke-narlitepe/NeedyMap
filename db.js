@@ -150,7 +150,7 @@ module.exports.getTenPrivateMessages = function getTenPrivateMessages(
 ) {
     return db.query(
         `SELECT privatemessage.id, privatemessage.sender_id, 
-        privatemessage.recipient_id, privatemessage.message, privatemessage.created_at,
+        privatemessage.recipient_id, privatemessage.message, privatemessage.photo, privatemessage.created_at,
         users.firstname, users.lastname, users.image FROM privatemessage LEFT JOIN users 
         ON users.id = privatemessage.sender_id WHERE (sender_id = $2 AND recipient_id = $1) 
         OR (sender_id = $1 AND recipient_id = $2) ORDER BY privatemessage.created_at DESC LIMIT 10`,
