@@ -1,131 +1,104 @@
 export default [
     {
-        featureType: "water",
-        stylers: [
+        "featureType": "landscape",
+        "stylers": [
             {
-                saturation: 43,
+                "hue": "#FFBB00"
             },
             {
-                lightness: -11,
+                "saturation": 43.400000000000006
             },
             {
-                hue: "#0088ff",
+                "lightness": 37.599999999999994
             },
-        ],
+            {
+                "gamma": 1
+            }
+        ]
     },
     {
-        featureType: "road",
-        elementType: "geometry.fill",
-        stylers: [
+        "featureType": "road.highway",
+        "stylers": [
             {
-                hue: "#ff0000",
+                "hue": "#FFC200"
             },
             {
-                saturation: -100,
+                "saturation": -61.8
             },
             {
-                lightness: 99,
+                "lightness": 45.599999999999994
             },
-        ],
+            {
+                "gamma": 1
+            }
+        ]
     },
     {
-        featureType: "road",
-        elementType: "geometry.stroke",
-        stylers: [
+        "featureType": "road.arterial",
+        "stylers": [
             {
-                color: "#808080",
+                "hue": "#FF0300"
             },
             {
-                lightness: 54,
+                "saturation": -100
             },
-        ],
+            {
+                "lightness": 51.19999999999999
+            },
+            {
+                "gamma": 1
+            }
+        ]
     },
     {
-        featureType: "landscape.man_made",
-        elementType: "geometry.fill",
-        stylers: [
+        "featureType": "road.local",
+        "stylers": [
             {
-                color: "#ece2d9",
+                "hue": "#FF0300"
             },
-        ],
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 52
+            },
+            {
+                "gamma": 1
+            }
+        ]
     },
     {
-        featureType: "poi.park",
-        elementType: "geometry.fill",
-        stylers: [
+        "featureType": "water",
+        "stylers": [
             {
-                color: "#ccdca1",
+                "hue": "#0078FF"
             },
-        ],
+            {
+                "saturation": -13.200000000000003
+            },
+            {
+                "lightness": 2.4000000000000057
+            },
+            {
+                "gamma": 1
+            }
+        ]
     },
     {
-        featureType: "road",
-        elementType: "labels.text.fill",
-        stylers: [
+        "featureType": "poi",
+        "stylers": [
             {
-                color: "#767676",
-            },
-        ],
-    },
-    {
-        featureType: "road",
-        elementType: "labels.text.stroke",
-        stylers: [
-            {
-                color: "#ffffff",
-            },
-        ],
-    },
-    {
-        featureType: "poi",
-        stylers: [
-            {
-                visibility: "off",
-            },
-        ],
-    },
-    {
-        featureType: "landscape.natural",
-        elementType: "geometry.fill",
-        stylers: [
-            {
-                visibility: "on",
+                "hue": "#00FF6A"
             },
             {
-                color: "#b8cb93",
+                "saturation": -1.0989010989011234
             },
-        ],
-    },
-    {
-        featureType: "poi.park",
-        stylers: [
             {
-                visibility: "on",
+                "lightness": 11.200000000000017
             },
-        ],
-    },
-    {
-        featureType: "poi.sports_complex",
-        stylers: [
             {
-                visibility: "on",
-            },
-        ],
-    },
-    {
-        featureType: "poi.medical",
-        stylers: [
-            {
-                visibility: "on",
-            },
-        ],
-    },
-    {
-        featureType: "poi.business",
-        stylers: [
-            {
-                visibility: "simplified",
-            },
-        ],
-    },
-];
+                "gamma": 1
+            }
+        ]
+    }
+]
