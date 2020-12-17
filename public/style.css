@@ -91,7 +91,7 @@ textarea.contact {
 
 textarea.messagearea {
     margin-top: 10px;
-    width: 50vw;
+    width: 80vw;
     height: 100px;
 }
 
@@ -139,6 +139,11 @@ h2.chat-name {
     font-size: 19px;
 }
 
+h2.register {
+    font-size: 35px;
+    margin-top:20px;
+}
+
 p.biotext,
 p.score,
 p.title {
@@ -161,6 +166,10 @@ p.prof-welcome {
 h3.change {
     text-align: center;
     font-size: 15px;
+}
+
+h3.private{
+    margin-bottom:0;
 }
 p.x {
     text-align: right;
@@ -320,10 +329,18 @@ div.map {
     left: 50%;
     transform: translateX(-50%);
 }
+div.send-choose{
+    display:flex;
+    flex-direction:column;
+    height:106px;
+    margin-top:10px;
+
+}
 
 div.send-part {
     display: flex;
     flex-direction: row;
+    width: 50vw;
 }
 
 div.search {
@@ -641,6 +658,17 @@ img.logo {
     height: 150px;
     width: 150px;
 }
+
+img.send{
+    width:55px;
+    height:55px;
+    cursor:pointer;
+}
+
+img.send:hover {
+    box-shadow: 0px 3px 10px rgba(122, 16, 28);
+    border-radius:10px;
+}
 img.donation,
 img.needy {
     width: 190px;
@@ -687,17 +715,19 @@ img.loading {
     top: 200px;
 }
 div.right img.photo {
-    width: 80px;
-    height: 80px;
+    width: 200px;
+    height: 200px;
     float: right;
+    border-radius: 10px;
 }
 div.toast {
     font-family: "MyFont";
 }
 div.left img.photo {
-    width: 80px;
-    height: 80px;
+    width: 200px;
+    height: 200px;
     float: left;
+    border-radius: 10px;
 }
 img.pic,
 div.otherprofile-pic img {
@@ -719,12 +749,13 @@ img.avatar {
 }
 
 img.choose {
-    width: 75px;
-    height: 75px;
+    width: 55px;
+    height: 55px;
     cursor: pointer;
 }
 img.choose:hover {
     box-shadow: 0px 3px 10px rgba(122, 16, 28);
+    border-radius:10px;
 }
 img.info {
     margin-right: 35%;
@@ -870,9 +901,9 @@ span.app {
     flex-direction: column;
 }
 .private-box {
-    margin-top: 30px;
-    max-height: 500px;
-    height: 300px;
+    margin-top: 10px;
+    max-height: 400px;
+    /* height: 30px; */
     overflow-y: auto;
     border: 1px solid transparent;
     box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
@@ -881,12 +912,24 @@ span.app {
     display: flex;
     flex-direction: column;
 }
+.main-box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    
+}
 .private-part {
     margin-top: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    border: 1px solid transparent;
+    box-shadow: 0px 3px 10px rgba(122, 16, 28, 0.5);
+    border-radius: 5px;
+    width:55vw;
+    background: rgba(255, 255,255, 0.5);
 }
 .name-time {
     display: flex;

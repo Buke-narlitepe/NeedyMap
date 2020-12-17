@@ -1,5 +1,5 @@
 {
-    "name": "spiced-social-network",
+    "name": "spiced-needymap",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -9,7 +9,7 @@
         "test": "jest"
     },
     "engines": {
-        "node": "10.15.1"
+        "node": "14"
     },
     "dependencies": {
         "@babel/cli": "^7.4.3",

@@ -49,40 +49,40 @@ export default class Registration extends React.Component {
             <div>
                 <Logo />
                 {this.state.error && (
-                    <p>Ooopss! Something missing, please try agin.</p>
+                    <p>Please fill the required fields.</p>
                 )}
-                <p>Please create your account</p>
+                <h2 className="register">Please create your account</h2>
                 <form className="register-form" onSubmit={this.handleSubmit}>
                     <input
                         type="text"
                         name="firstname"
                         onChange={this.handleChange}
                         value={this.state.firstname}
-                        placeholder="Firstname"
+                        placeholder="Firstname*"
                     />
                     <input
                         type="text"
                         name="lastname"
                         onChange={this.handleChange}
                         value={this.state.lastname}
-                        placeholder="Lastname"
+                        placeholder="Lastname*"
                     />
                     <input
                         type="email"
                         name="email"
                         onChange={this.handleChange}
                         value={this.state.email}
-                        placeholder="E-mail"
+                        placeholder="E-mail*"
                     />
                     <input
                         type="password"
                         name="password"
                         onChange={this.handleChange}
                         value={this.state.password}
-                        placeholder="Password"
+                        placeholder="Password*"
                     />
                     <button className="create" type="submit">
-                        Create Account
+                        Register now
                     </button>
                 </form>
                 <Link to="/login">

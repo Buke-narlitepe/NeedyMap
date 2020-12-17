@@ -66,7 +66,9 @@ export default function Chat(props) {
     };
 
     return (
+        <div className="main-box">
         <div className="private-part">
+        <h3 className="private">Welcome to our <span className="app">NeedyMap</span> Chat!</h3>
             <div className="private-box" ref={privateContainer}>
                 {privateMessages &&
                     privateMessages.map((message) => (
@@ -121,23 +123,18 @@ export default function Chat(props) {
             <div className="send-part">
                 <textarea
                     className="messagearea"
-                    placeholder="Typing..."
+                    placeholder="Write your message..."
                     onKeyDown={onEnterPress}
                     ref={privateText}
                 />
-                <button
-                    className="chat-button"
-                    onClick={handleSubmit}
-                    >
-                        SEND MESSAGE
-                    </button>
-                <form className="send-image">
+                <div className="send-choose">
+                                <form className="send-image">
                     <label className="choose" htmlFor="upload">
                         <img
                             src="/choose.png"
                             className="choose"
-                            alt="Choose a file"
-                            title="Choose a file"
+                            alt="Choose an image"
+                            title="Choose an image"
                         ></img>
                     </label>
                     <input
@@ -148,7 +145,10 @@ export default function Chat(props) {
                         onChange={handleChange}
                     />
                 </form>
+                <img src="/send.png" className="send" title="Send a message" onClick={handleSubmit}/>
+                </div>
             </div>
+                    </div>
             <div className="copyright-icons-chat">
                 <div className="copyright">
                     Copyright 2020 <span className="app">NeedyMap</span>.

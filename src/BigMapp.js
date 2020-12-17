@@ -6,6 +6,7 @@ import {
     useLoadScript,
     Marker,
     InfoWindow,
+    DistanceMatrixService,
 } from "@react-google-maps/api";
 
 import usePlacesAutocomplete, {
@@ -50,11 +51,42 @@ export default function SimpleMap(props) {
     const [markers, setMarkers] = useState([]);
     const [selected, setSelected] = useState(null);
     const [upload, setUpload] = useState(false);
+    const [response, setResponse] = useState(null);
+    const [travelMode, setMode] =useState("DRIVING");
+    const [origin, setOrigin] = useState([]);
+    const [destination, setDestination] = useState([]); 
+    const [totalTime, setTime] = useState(null);
+    const [totalDistance, setDistance] = useState(null); 
 
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
     }, []);
+
+
+  const checkDriving = ({ target: { checked } }) => {
+    checked &&
+      setMode("DRIVING");
+  };
+  
+  const getOrigin = (ref) => {
+    this.origin = ref;
+  };
+
+ const getDestination = (ref) => {
+    this.destination = ref;
+  };
+
+  const getOrigin = useRef();
+  const getDestination = useRef();
+
+  const onClick = () => {
+    if (origin.value !== "" && destination.value !== "") {
+        setOrigin(origin.value);
+        setDestination(destination.value);
+    }
+  };
+
 
     const toggleUpload = () => {
         setUpload(true);
@@ -129,6 +161,56 @@ export default function SimpleMap(props) {
                     </div>
                 </Link>
             </div>
+            <div className="form-group">
+              <label htmlFor="ORIGIN">Origin</label>
+              <br />
+              <input
+                id="ORIGIN"
+                className="form-control"
+                type="text"
+                ref={getOrigin}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="DESTINATION">Destination</label>
+              <br />
+              <input
+                id="DESTINATION"
+                className="form-control"
+                type="text"
+                ref={getDestination}
+              />
+            </div>
+            <input
+              id="DRIVING"
+              className="custom-control-input"
+              name="travelMode"
+              type="radio"
+              checked={travelMode === "DRIVING"}
+              onChange={checkDriving}
+            />
+            <label className="custom-control-label" htmlFor="DRIVING">
+              Driving
+            </label>
+                    <button
+          className="btn btn-primary"
+          type="button"
+          onClick={onClick}
+        >
+          Build Route
+        </button>
+        <DistanceMatrixService
+            options={{
+              destinations: [{ lat: 1.296788, lng: 103.778961 }],
+              origins: [{ lng: 72.89216, lat: 19.12092 }],
+              travelMode: "DRIVING",
+            }}
+            callback={(res) => {
+              console.log("RESPONSE", res.rows);
+              setTime(res.rows[0].elements[0].duration.text);
+              setDistance(res.rows[0].elements[0].distance.text); 
+            }}
+          />
             <Locate panTo={panTo} />
             <Search panTo={panTo} />
             <div className="map-part">

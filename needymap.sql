@@ -30,7 +30,7 @@ CREATE TABLE contact (
     firstname VARCHAR(100) NOT NULL,
     lastname VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    phone VARCHAR(100) NOT NULL,
+    phone VARCHAR(100),
     message TEXT
 );
 

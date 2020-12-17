@@ -39,7 +39,6 @@ export default function Contact() {
                 <Logo />
                 <div className="uplink">
                     <Link to="/about-us"> About Us</Link>
-                    <Link to="/registration"> Register</Link>
                 </div>
             </div>
             <div className="contact-part">
@@ -48,28 +47,28 @@ export default function Contact() {
                     <input
                         type="text"
                         name="firstname"
-                        placeholder="Firstname"
+                        placeholder="Firstname*"
                         onChange={handleChange}
                         value={form.firstname}
                     />
                     <input
                         type="text"
                         name="lastname"
-                        placeholder="Lastname"
+                        placeholder="Lastname*"
                         onChange={handleChange}
                         value={form.lastname}
                     />
                     <input
                         type="email"
                         name="email"
-                        placeholder="Email"
+                        placeholder="Email*"
                         onChange={handleChange}
                         value={form.email}
                     />
                     <input
                         type="text"
                         name="phone"
-                        placeholder="Phone"
+                        placeholder="Phone(optional)"
                         onChange={handleChange}
                         value={form.phone}
                     />
@@ -78,7 +77,7 @@ export default function Contact() {
                         className="contact"
                         name="message"
                         onChange={handleChange}
-                        placeholder="Message"
+                        placeholder="Message*"
                     />
                     <button type="submit" className="contact">
                         Submit

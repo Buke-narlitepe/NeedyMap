@@ -40,7 +40,7 @@ export default class Login extends React.Component {
         return (
             <React.Fragment>
                 <Logo />
-                <h2>Login to your account</h2>
+                <h2 className="register">Login</h2>
                 {this.state.error && (
                     <p>
                         Ooopss! Your password and e-mail address does not match,

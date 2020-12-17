@@ -13,9 +13,9 @@ export default function Home() {
                 </div>
             </header>
             <div className="slogan">
-                Wondering where to donate gently used baby items?{" "}
+                Wondering where to donate gently used baby products?{" "}
                 <span className="app">NeedyMap</span> is the perfect place to
-                begin! Your baby item donations can help parents make a safer,
+                begin! They can help parents make a safer,
                 easier and more comfortable welcome to their precious little
                 one.
             </div>

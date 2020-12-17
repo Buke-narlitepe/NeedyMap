@@ -8,6 +8,7 @@ import Profile from "./Profile.js";
 import Chat from "./Chat";
 import PrivateChat from "./PrivateChat";
 import BigMap from "./BigMap";
+// import BigMapp from "./BigMapp";
 import NeedyForm from "./NeedyForm";
 import DonateForm from "./DonateForm";
 import AboutUs from "./AboutUs";
