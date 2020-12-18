@@ -414,7 +414,7 @@ io.on("connection", async function (socket) {
                 element.own = false;
             }
         });
-        io.emit("privateMessages", arr.reverse());
+        socket.emit("privateMessages", arr.reverse());
         console.log(data.rows);
     });
 
