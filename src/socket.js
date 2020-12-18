@@ -15,7 +15,7 @@ const Msg = ({ toastProps, privatemsg }) => {
     console.log(toastProps);
     useEffect(()=> {
       if(location.pathname.startsWith("/chat")) {
-          toastProps.closeToast();
+          toastProps.deleteToast();
     }
      }, [location.pathname]);
 
