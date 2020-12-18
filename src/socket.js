@@ -7,11 +7,23 @@ import {
 } from "./actions";
 import { toast } from "react-toastify";
 export let socket;
-import React from "react";
-import { Link } from "react-router-dom";
+import React ,{useEffect} from "react";
+import { Link, useLocation } from "react-router-dom";
 
-const Msg = ({ toastProps, privatemsg }) => (
-    <div className="toast">
+const Msg = ({ toastProps, privatemsg }) => {
+    const location = useLocation();
+    console.log(toastProps);
+    useEffect(()=> {
+      if(location.pathname.startsWith("/chat")) {
+          toastProps.closeToast();
+    }
+     }, [location.pathname]);
+
+    console.log(location.pathname);
+
+    if(location.pathname.startsWith("/chat")) return null;
+   return (
+       <div className="toast">
         You have a new message!
         <Link to={`/chat/${privatemsg.sender_id}`}>
             <img
@@ -22,7 +34,8 @@ const Msg = ({ toastProps, privatemsg }) => (
             ></img>
         </Link>
     </div>
-);
+    );
+};
 // dependenxy injection ( IoC - Inversion of Control )
 export function init(store) {
     socket = connect();
