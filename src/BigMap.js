@@ -22,7 +22,7 @@ import {
 } from "@reach/combobox";
 
 // import "@reach/combobox/styles.css";
-const credentials = require("./credentials.json");
+const secrets = require("./secrets.json");
 
 import mapStyles from "./mapStyles";
 import axios from "./axios.js";
@@ -44,7 +44,7 @@ const center = {
 
 export default function SimpleMap(props) {
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: credentials.Key,
+        googleMapsApiKey: secrets.GOOGLE_API_KEY,
         libraries,
     });
 
