@@ -432,7 +432,7 @@ io.on("connection", async function (socket) {
             console.log(text.rows);
 
             io.to(socket.id).emit("privateMessage", {
-                 ...userInfo.rows[0],
+                ...userInfo.rows[0],
                 ...text.rows[0],
                 own: true,
             });

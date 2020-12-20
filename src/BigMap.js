@@ -22,6 +22,7 @@ import {
 } from "@reach/combobox";
 
 // import "@reach/combobox/styles.css";
+const credentials = require("./credentials.json");
 
 import mapStyles from "./mapStyles";
 import axios from "./axios.js";
@@ -43,26 +44,17 @@ const center = {
 
 export default function SimpleMap(props) {
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: "AIzaSyCctLDWpNtuKU8O-9POBCAVUXgzowa_ZZY",
+        googleMapsApiKey: credentials.Key,
         libraries,
     });
 
     const [markers, setMarkers] = useState([]);
     const [selected, setSelected] = useState(null);
-    const [upload, setUpload] = useState(false);
 
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
     }, []);
-
-    const toggleUpload = () => {
-        setUpload(true);
-    };
-
-    const closeModal = () => {
-        setUpload(false);
-    };
 
     useEffect(() => {
         const promise1 = axios.get("/api/needsform");
