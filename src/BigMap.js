@@ -22,7 +22,7 @@ import {
 } from "@reach/combobox";
 
 // import "@reach/combobox/styles.css";
-const secrets = require("./secrets.json");
+const secrets = require("../secrets.json");
 
 import mapStyles from "./mapStyles";
 import axios from "./axios.js";
